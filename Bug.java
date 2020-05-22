@@ -30,4 +30,9 @@ class Bug{
         isClosed = true;
     }
 
+    @Override
+    public String toString(){
+        return "(" + bugId + "," + title + ")";
+    }
+
 }
