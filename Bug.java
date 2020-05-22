@@ -1,0 +1,33 @@
+class Bug{
+    final private String title;
+    final private String description;
+    private boolean isClosed = false;
+    final private int bugId;
+
+    Bug(String _title, String _desc, int _id){
+        title = _title;
+        description = _desc;
+        bugId = _id;
+    }
+
+    String getTitle(){
+        return title;
+    }
+
+    String getDescription(){
+        return description;
+    }
+
+    int getId(){
+        return bugId;
+    }
+
+    boolean isResolved(){
+        return isClosed;
+    }
+
+    void resolved(){
+        isClosed = true;
+    }
+
+}
