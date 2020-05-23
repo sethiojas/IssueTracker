@@ -46,4 +46,13 @@ class Project{
         }
         return list;
     }
+
+    boolean equals(Project proj){
+        return projectName.equals(proj.getProjectName());
+    }
+
+    @Override
+    public toString(){
+        return "Project: " + projectName;
+    }
 }
