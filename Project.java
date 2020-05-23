@@ -1,23 +1,24 @@
 import java.util.HashMap;
-// import java.util.HashSet;
+import java.util.HashSet;
 import java.util.ArrayList;
+// import java.util.Iterator;
 
 class Project{
-    private static int totalBugs = 0;
+    static int totalBugs = 0;
+    private static int bugId = 0;
     final private String projectName;
     private HashMap<Integer, Bug> bugs = new HashMap<>();
-    // private HashSet<Maintainer> maintainers = new HashSet<>();
-    //implement return maintainers
+    // private HashSet<String> maintainers = new HashSet<>();
 
     Project(String title){
         projectName = title;
     }
 
     int createNewBug(String title, String desc){
-        //totalBugs is being used as a unique ID for a bug
         totalBugs += 1;
-        bugs.put(totalBugs, new Bug(title, desc, totalBugs));
-        return totalBugs;
+        bugId += 1;
+        bugs.put(bugId, new Bug(title, desc, bugId));
+        return bugId;
     }
     
     String getProjectName(){
@@ -37,7 +38,12 @@ class Project{
         return new ArrayList<Bug>(bugs.values());
     }
 
-    int getTotalBugs(){
-        return totalBugs;
-    }
+    // ArrayList<String> getMaintainers(){
+    //     ArrayList<String> list = new ArrayList<>();
+    //     Iterator<String> iterMaintainers = maintainers.iterator();
+    //     while(iterMaintainers.hasNext()){
+    //         list.add(iterMaintainers.next());
+    //     }
+    //     return list;
+    // }
 }
