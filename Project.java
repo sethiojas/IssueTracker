@@ -1,14 +1,14 @@
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
-// import java.util.Iterator;
+import java.util.Iterator;
 
 class Project{
     static int totalBugs = 0;
     private static int bugId = 0;
     final private String projectName;
     private HashMap<Integer, Bug> bugs = new HashMap<>();
-    // private HashSet<String> maintainers = new HashSet<>();
+    protected HashSet<String> maintainers = new HashSet<>();
 
     Project(String title){
         projectName = title;
@@ -38,12 +38,12 @@ class Project{
         return new ArrayList<Bug>(bugs.values());
     }
 
-    // ArrayList<String> getMaintainers(){
-    //     ArrayList<String> list = new ArrayList<>();
-    //     Iterator<String> iterMaintainers = maintainers.iterator();
-    //     while(iterMaintainers.hasNext()){
-    //         list.add(iterMaintainers.next());
-    //     }
-    //     return list;
-    // }
+    ArrayList<String> getMaintainers(){
+        ArrayList<String> list = new ArrayList<>();
+        Iterator<String> iterMaintainers = maintainers.iterator();
+        while(iterMaintainers.hasNext()){
+            list.add(iterMaintainers.next());
+        }
+        return list;
+    }
 }
