@@ -10,13 +10,6 @@ class Manager extends Maintainer{
 
     Manager(String _uName){
         super(_uName);
-        maintainer.put("darren", new Maintainer("darren"));
-        maintainer.put("loony", new Maintainer("loony"));
-        maintainer.put("bard", new Maintainer("bard"));
-    }
-
-    void test(){
-        System.out.println(projects);
     }
 
     void createProject(String title){
@@ -31,10 +24,6 @@ class Manager extends Maintainer{
         for (String item : uNameList){
             maintainer.get(item).addProject(proj);
         }
-    }
-
-    Maintainer getM(){
-        return maintainer.get("darren");
     }
 
     ManageProject getProjectByTitle(String title){

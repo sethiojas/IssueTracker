@@ -10,10 +10,6 @@ class Maintainer{
         uName = _uName;
     }
 
-    void test(){
-        System.out.println(projects);
-    }
-
     String getUName(){
         return uName;
     }
