@@ -52,7 +52,7 @@ class Project{
     }
 
     @Override
-    public toString(){
+    public String toString(){
         return "Project: " + projectName;
     }
 }
