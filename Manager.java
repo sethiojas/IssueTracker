@@ -40,8 +40,8 @@ class Manager extends Maintainer{
         removedMaintainer.removeProject(removedMaintainer.getProjectByTitle(projTitle));
     }
 
-    void addMaintainer(Maintainer maintainer){
-        maintainer.put(maintainer.getUName(), maintainer);
+    void addMaintainer(Maintainer addMe){
+        maintainer.put(addMe.getUName(), addMe);
     }
 
     ArrayList<Maintainer> getAllMaintainers(){
