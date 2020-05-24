@@ -47,4 +47,9 @@ class Manager extends Maintainer{
     ArrayList<Maintainer> getAllMaintainers(){
         return new ArrayList<Maintainer>(maintainer.values());
     }
+
+    @Override
+    public String toString(){
+        return "Manager: " + uName;
+    }
 }
