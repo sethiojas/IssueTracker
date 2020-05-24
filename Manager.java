@@ -29,4 +29,14 @@ class Manager extends Maintainer{
     ManageProject getProjectByTitle(String title){
         return projects.get(title);
     }
+
+    void removeMaintainer(String uName){
+        Maintainer removedMaintainer = maintainer.get(uName);
+        removedMaintainer.projects.clear();
+        maintainer.remove(uName);
+    }
+
+    void addMaintainer(Maintainer maintainer){
+        maintainer.put(maintainer.getUName(), maintainer);
+    }
 }
