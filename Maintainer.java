@@ -32,6 +32,10 @@ class Maintainer{
         return false;
     }
 
+    void removeAllProjects(){
+        projects.clear();
+    }
+
     @Override
     public String toString(){
         return "Maintainer: " + uName;
