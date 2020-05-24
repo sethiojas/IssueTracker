@@ -5,8 +5,6 @@ class Manager extends Maintainer{
     
     private HashMap<String, Maintainer> maintainer = new HashMap<>();
     private HashMap<String, ManageProject> projects = new HashMap<>();
-    
-
 
     Manager(String _uName){
         super(_uName);
@@ -30,10 +28,16 @@ class Manager extends Maintainer{
         return projects.get(title);
     }
 
-    void removeMaintainer(String uName){
+    Maintainer removeMaintainer(String uName){
         Maintainer removedMaintainer = maintainer.get(uName);
-        removedMaintainer.projects.clear();
+        removedMaintainer.removeAllProjects();
         maintainer.remove(uName);
+        return removedMaintainer;
+    }
+
+    void removeMaintainerFromProject(String uName, String projTitle){
+        Maintainer removedMaintainer = maintainer.get(uName);
+        removedMaintainer.removeProject(removedMaintainer.getProjectByTitle(projTitle));
     }
 
     void addMaintainer(Maintainer maintainer){
