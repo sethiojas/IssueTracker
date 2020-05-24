@@ -43,4 +43,8 @@ class Manager extends Maintainer{
     void addMaintainer(Maintainer maintainer){
         maintainer.put(maintainer.getUName(), maintainer);
     }
+
+    ArrayList<Maintainer> getAllMaintainers(){
+        return new ArrayList<Maintainer>(maintainer.values());
+    }
 }
