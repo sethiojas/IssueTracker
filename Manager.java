@@ -31,6 +31,7 @@ class Manager extends Maintainer{
     Maintainer removeMaintainer(String uName){
         Maintainer removedMaintainer = maintainer.get(uName);
         removedMaintainer.removeAllProjects();
+        removedMaintainer.setManager(""); 
         maintainer.remove(uName);
         return removedMaintainer;
     }
