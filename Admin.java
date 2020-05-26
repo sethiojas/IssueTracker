@@ -14,6 +14,7 @@ class Admin{
     private Connection conn;
     private PreparedStatement pstm;
     private String insertNew = "insert into test values(?, ?, ?)";
+    private String deleteContributor = "delete from test where uname=?";
     private String dbPath = "jdbc:sqlite:test.db";
 
     Admin(String _name, String passwd){
@@ -53,6 +54,7 @@ class Admin{
     }
     
     void removeManager(String uName){
+        removeCredential(uName);
         Manager rManager = managers.get(uName);
         for (Maintainer m : rManager.getAllMaintainers()){
             putMaintainerOnBench(uName, m.getUName());
@@ -61,6 +63,7 @@ class Admin{
     }
     
     void removeMaintainer(String uName){
+        removeCredential(uName);
         onBench.remove(uName);
     }
 
@@ -75,6 +78,20 @@ class Admin{
     @Override
     public String toString(){
         return "Admin: " + adminUName;
+    }
+
+    void removeCredential(String uName){
+        try{
+            conn = DriverManager.getConnection(dbPath);
+            pstm = conn.prepareStatement(deleteContributor);
+            pstm.setString(1, uName);
+            pstm.executeUpdate();
+            conn.close();
+        }
+        catch(SQLException e){
+            System.out.println("Error connecting to Database");
+            System.out.println(e.getMessage());
+        }
     }
 
     void insertNewCredentials(String uName, String passwd, String isAdmin){
