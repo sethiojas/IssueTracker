@@ -37,7 +37,7 @@ class Maintainer{
         projects.clear();
     }
 
-    void getManager(String uNameManager){
+    void setManager(String uNameManager){
         manager = uNameManager;
     }
 
