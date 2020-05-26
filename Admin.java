@@ -5,16 +5,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.*;
+import java.io.Serializable;
 
-class Admin{
+class Admin implements Serializable{
     
     private static HashMap<String, Manager> managers = new HashMap<>();
     private static HashMap<String, Maintainer> onBench = new HashMap<>();
     private final String adminUName;
-    private Connection conn;
-    private PreparedStatement pstm;
+    private transient Connection conn;
+    private transient PreparedStatement pstm;
     private String insertNew = "insert into test values(?, ?, ?)";
     private String deleteContributor = "delete from test where uname=?";
+    private String saveObject = "insert into test_two values(?, ?)";
     private String dbPath = "jdbc:sqlite:test.db";
 
     Admin(String _name, String passwd){
@@ -107,6 +109,33 @@ class Admin{
         catch (SQLException e){
             System.out.println("Error connecting to Database");
             System.out.println(e.getMessage());
+        }
+    }
+
+    void saveThisObject(){
+        try{
+            conn = DriverManager.getConnection(dbPath);
+            pstm = conn.prepareStatement(saveObject);
+            pstm.setString(1, adminUName);
+            
+            ConvertObject<Admin> obj = new ConvertObject<>();
+            // https://www.tutorialspoint.com/How-to-convert-Byte-Array-to-BLOB-in-java
+            // Blob blob = new SerialBlob(obj.getByteArrayObject(this));
+           
+            byte[] arr = obj.getByteArrayObject(this);
+            if(arr == null) throw new Exception("Cannot save object to database");
+            
+            // https://www.sqlitetutorial.net/sqlite-java/jdbc-read-write-blob/
+            pstm.setBytes(2, arr);
+            pstm.executeUpdate();
+            conn.close();
+        }
+        catch(SQLException e){
+            System.out.println("Database Error");
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
