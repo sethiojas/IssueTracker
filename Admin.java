@@ -16,16 +16,19 @@ class Admin{
     private String insertNew = "insert into test values(?, ?, ?)";
     private String dbPath = "jdbc:sqlite:test.db";
 
-    Admin(String _name){
+    Admin(String _name, String passwd){
         adminUName = _name;
+        insertNewCredentials(_name, passwd, "true");
     }
 
-    void createNewManager(String uName){
+    void createNewManager(String uName, String passwd){
+        insertNewCredentials(uName, passwd, "false");
         Manager newManager = new Manager(uName);
         managers.put(uName, newManager);
     }
 
-    void createNewMaintainer(String uName){
+    void createNewMaintainer(String uName, String passwd){
+        insertNewCredentials(uName, passwd, "false");
         Maintainer newMaintainer = new Maintainer(uName);
         onBench.put(uName, newMaintainer);
     }
