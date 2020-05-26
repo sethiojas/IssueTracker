@@ -73,13 +73,19 @@ class Admin{
         return "Admin: " + adminUName;
     }
 
-    void insertNewCredentials(String uname, String passwd, boolean isAdmin){
-        conn = DriverManager.getConnection(dbPath);
-        pstm = conn.prepareStatement(insertNew);
-        pstm.setString(1, uName);
-        pstm.setString(2, passwd);
-        pstm.setString(3, isAdmin);
-        pstm.executeUpdate();
-        conn.close();
+    void insertNewCredentials(String uName, String passwd, String isAdmin){
+        try{
+            conn = DriverManager.getConnection(dbPath);
+            pstm = conn.prepareStatement(insertNew);
+            pstm.setString(1, uName);
+            pstm.setString(2, passwd);
+            pstm.setString(3, isAdmin);
+            pstm.executeUpdate();
+            conn.close();
+        }
+        catch (SQLException e){
+            System.out.println("Error connecting to Database");
+            System.out.println(e.getMessage());
+        }
     }
 }
