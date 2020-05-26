@@ -5,6 +5,7 @@ class Maintainer{
     
     protected String uName;
     private HashMap<String, Project> projects = new HashMap<>();
+    private String manager;
 
     Maintainer(String _uName){
         uName = _uName;
@@ -34,6 +35,14 @@ class Maintainer{
 
     void removeAllProjects(){
         projects.clear();
+    }
+
+    void getManager(String uNameManager){
+        manager = uNameManager;
+    }
+
+    String getManager(){
+        return manager;
     }
 
     @Override
