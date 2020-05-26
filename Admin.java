@@ -42,6 +42,7 @@ class Admin{
     void assignManager(String uNameManager, String uNameMaintainer){
         Manager manager = managers.get(uNameManager);
         Maintainer maintainer = onBench.remove(uNameMaintainer);
+        maintainer.setManager(uNameManager);
         manager.addMaintainer(maintainer);
     }
 
