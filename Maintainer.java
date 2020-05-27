@@ -15,8 +15,6 @@ class Maintainer implements Serializable, Saveable{
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757692L;
-
-    private String saveObject = "insert into test_two values(?, ?)";
     private String dbPath = "jdbc:sqlite:test.db";
 
     Maintainer(String _uName){
@@ -65,6 +63,7 @@ class Maintainer implements Serializable, Saveable{
     @Override
     public void saveThisObject(){
         try{
+            String saveObject = "insert into test_two values(?, ?)";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(saveObject);
             pstm.setString(1, uName);

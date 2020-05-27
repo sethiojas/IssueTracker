@@ -21,7 +21,6 @@ class Admin implements Serializable, Saveable{
     // https://www.baeldung.com/java-jdbc
     private String insertNew = "insert into test values(?, ?, ?)";
     private String deleteContributor = "delete from test where uname=?";
-    private String saveObject = "insert into test_two values(?, ?)";
     private String dbPath = "jdbc:sqlite:test.db";
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
@@ -123,6 +122,7 @@ class Admin implements Serializable, Saveable{
     @Override
     public void saveThisObject(){
         try{
+            String saveObject = "insert into test_two values(?, ?)";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(saveObject);
             pstm.setString(1, adminUName);
