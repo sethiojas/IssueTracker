@@ -91,13 +91,13 @@ class Manager extends Maintainer implements Serializable, Saveable{
     }
 
     @Override
-    public Manager retrieveThisObject(String name){
+    public Manager retrieveThisObject(){
         Manager a = null;
         try{
             String retrival = "select obj from test_two where uname=?";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(retrival);
-            pstm.setString(1, name);
+            pstm.setString(1, uName);
             ResultSet s = pstm.executeQuery();
             
             byte[] arr = s.getBytes("obj");

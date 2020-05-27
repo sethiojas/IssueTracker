@@ -145,13 +145,13 @@ class Admin implements Serializable, Saveable{
     }
 
     @Override
-    public Admin retrieveThisObject(String name){
+    public Admin retrieveThisObject(){
         Admin a = null;
         try{
             String retrival = "select obj from test_two where uname=?";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(retrival);
-            pstm.setString(1, name);
+            pstm.setString(1, adminUName);
             ResultSet s = pstm.executeQuery();
             
             byte[] arr = s.getBytes("obj");
