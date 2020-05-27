@@ -38,7 +38,7 @@ public class ConvertObject<T> implements Serializable{
             byteArr.close();
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         finally{
             return javaObject;
