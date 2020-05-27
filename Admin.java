@@ -4,20 +4,28 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.DriverManager;
 import java.io.Serializable;
 
-class Admin implements Serializable{
-    
+class Admin implements Serializable, Saveable{
+    // all static and transient variables are null after deserialization
+
     private static HashMap<String, Manager> managers = new HashMap<>();
     private static HashMap<String, Maintainer> onBench = new HashMap<>();
     private final String adminUName;
-    private transient Connection conn;
-    private transient PreparedStatement pstm;
+
+    // https://www.baeldung.com/java-jdbc
     private String insertNew = "insert into test values(?, ?, ?)";
     private String deleteContributor = "delete from test where uname=?";
     private String saveObject = "insert into test_two values(?, ?)";
     private String dbPath = "jdbc:sqlite:test.db";
+
+    // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    private static final long serialVersionUID = 6529685098267757690L;
 
     Admin(String _name, String passwd){
         adminUName = _name;
@@ -84,8 +92,8 @@ class Admin implements Serializable{
 
     void removeCredential(String uName){
         try{
-            conn = DriverManager.getConnection(dbPath);
-            pstm = conn.prepareStatement(deleteContributor);
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(deleteContributor);
             pstm.setString(1, uName);
             pstm.executeUpdate();
             conn.close();
@@ -98,8 +106,8 @@ class Admin implements Serializable{
 
     void insertNewCredentials(String uName, String passwd, String isAdmin){
         try{
-            conn = DriverManager.getConnection(dbPath);
-            pstm = conn.prepareStatement(insertNew);
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(insertNew);
             pstm.setString(1, uName);
             pstm.setString(2, passwd);
             pstm.setString(3, isAdmin);
@@ -112,20 +120,17 @@ class Admin implements Serializable{
         }
     }
 
-    void saveThisObject(){
+    @Override
+    public void saveThisObject(){
         try{
-            conn = DriverManager.getConnection(dbPath);
-            pstm = conn.prepareStatement(saveObject);
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(saveObject);
             pstm.setString(1, adminUName);
             
             ConvertObject<Admin> obj = new ConvertObject<>();
-            // https://www.tutorialspoint.com/How-to-convert-Byte-Array-to-BLOB-in-java
-            // Blob blob = new SerialBlob(obj.getByteArrayObject(this));
-           
             byte[] arr = obj.getByteArrayObject(this);
             if(arr == null) throw new Exception("Cannot save object to database");
             
-            // https://www.sqlitetutorial.net/sqlite-java/jdbc-read-write-blob/
             pstm.setBytes(2, arr);
             pstm.executeUpdate();
             conn.close();
@@ -136,6 +141,32 @@ class Admin implements Serializable{
         }
         catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Admin retrieveThisObject(String name){
+        Admin a = null;
+        try{
+            String retrival = "select obj from test_two where uname=?";
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(retrival);
+            pstm.setString(1, name);
+            ResultSet s = pstm.executeQuery();
+            
+            byte[] arr = s.getBytes("obj");
+            ConvertObject<Admin> con = new ConvertObject<>();
+            a = con.getJavaObject(arr);
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            return a;
         }
     }
 }
