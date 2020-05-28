@@ -34,7 +34,6 @@ class Admin implements Serializable, Saveable{
     void createNewManager(String uName, String passwd){
         insertNewCredentials(uName, passwd, "manager");
         Manager newManager = new Manager(uName);
-        // managers.put(uName, newManager);
         SaveOrRetrieve<Manager> saver = new SaveOrRetrieve<>();
         saver.saveThisObject(newManager, "false");
     }
@@ -94,13 +93,47 @@ class Admin implements Serializable, Saveable{
         srMaintainer.deleteThisObject(uName);
     }
 
-    // ArrayList<Manager> getAllManagers(){
-    //     return new ArrayList<Manager>(managers.values());
-    // }
+    ArrayList<String> getAllManagers(){
+        ArrayList<String> listManagers = new ArrayList<>();
 
-    // ArrayList<Maintainer> getAllOnBench(){
-    //     return new ArrayList<Maintainer>(onBench.values());
-    // }
+        try{
+            String stm = "select uname from test where role=\"manager\"";
+            Connection conn = DriverManager.getConnection(dbPath);
+            Statement pstm = conn.createStatement();
+            ResultSet r = pstm.executeQuery(stm);
+            while(r.next()){
+                listManagers.add(r.getString("uname"));
+            }
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            return listManagers
+        }
+    }
+
+    ArrayList<String> getAllOnBench(){
+        ArrayList<String> listOnBench = new ArrayList<>();
+
+        try{
+            String stm = "select uname from test_two where on_bench=\"true\"";
+            Connection conn = DriverManager.getConnection(dbPath);
+            Statement pstm = conn.createStatement();
+            ResultSet r = pstm.executeQuery(stm);
+            while(r.next()){
+                listOnBench.add(r.getString("uname"));
+            }
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            return listOnBench;
+        }
+    }
 
     @Override
     public String getUName(){
@@ -152,7 +185,7 @@ class Admin implements Serializable, Saveable{
             pstm.setString(1, role);
             pstm.setString(2, uName);
             pstm.executeUpdate();
-            conn.close()
+            conn.close();
         }
         catch(SQLException e){
             e.printStackTrace();
