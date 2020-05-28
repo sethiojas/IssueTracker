@@ -61,7 +61,7 @@ public class SaveOrRetrieve<T extends Saveable>{
     public void saveThisObject(T saveObj){
         try{
             String uname = saveObj.getUName();
-            String save = "insert into test_two values(?, ?)";
+            String save = "insert into test_two values(?, ?, \"NA\")";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(save);
             pstm.setString(1, uname);
@@ -93,7 +93,7 @@ public class SaveOrRetrieve<T extends Saveable>{
             
             byte[] arr = s.getBytes("obj");
             a = getJavaObject(arr);
-
+            conn.close();
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -106,17 +106,27 @@ public class SaveOrRetrieve<T extends Saveable>{
         }
     }
 
-    public void updateThisObject(T obj){
+    public void updateThisObject(T obj, String onBench){
         try{
-            String updateObject = "update test_two set obj=? where uname=?";
+            String updateObject;
             String uname = obj.getUName();
+            PreparedStatement pstm;
             Connection conn = DriverManager.getConnection(dbPath);
-            PreparedStatement pst = conn.prepareStatement(updateObject);
-            byte[] arr = getByteArrayObject(obj)
+            if(onBench != null){
+                updateObject = "update test_two set obj=?, on_bench=? where uname=?";
+                pstm = conn.prepareStatement(updateObject);
+                pstm.setString(3, uname);
+                pstm.setString(2, onBench);
+            }
+            else{
+                updateObject = "update test_two set obj=? where uname=?";
+                pstm = conn.prepareStatement(updateObject);
+                pstm.setString(2, uname);
+            }
+            byte[] arr = getByteArrayObject(obj);
             if (arr == null) throw new Exception("Cannot get ByteArray");
 
             pstm.setBytes(1, arr);
-            pstm.setString(2, uname);
             pstm.executeUpdate();
             conn.close();
         }
@@ -127,5 +137,10 @@ public class SaveOrRetrieve<T extends Saveable>{
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    // Java does not allow default params
+    public void updateThisObject(T obj){
+        updateThisObject(obj, null);
     }
 }
