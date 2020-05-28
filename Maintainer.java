@@ -15,7 +15,8 @@ class Maintainer implements Serializable, Saveable{
         uName = _uName;
     }
 
-    String getUName(){
+    @Override
+    public String getUName(){
         return uName;
     }
 

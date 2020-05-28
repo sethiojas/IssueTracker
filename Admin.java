@@ -35,12 +35,16 @@ class Admin implements Serializable, Saveable{
         insertNewCredentials(uName, passwd, "manager");
         Manager newManager = new Manager(uName);
         managers.put(uName, newManager);
+        // SaveOrRetrieve<Manager> m = new SaveOrRetrieve<>();
+        // m.saveThisObject(newManager);
     }
 
     void createNewMaintainer(String uName, String passwd){
         insertNewCredentials(uName, passwd, "maintainer");
         Maintainer newMaintainer = new Maintainer(uName);
         onBench.put(uName, newMaintainer);
+        // SaveOrRetrieve<Maintainer> m = new SaveOrRetrieve<>();
+        // m.saveThisObject(newMaintainer);
     }
 
     void promoteToManager(String uName){
@@ -54,6 +58,10 @@ class Admin implements Serializable, Saveable{
         Maintainer maintainer = onBench.remove(uNameMaintainer);
         maintainer.setManager(uNameManager);
         manager.addMaintainer(maintainer);
+        SaveOrRetrieve<Maintainer> m = new SaveOrRetrieve<>();
+        m.saveThisObject(maintainer);
+        SaveOrRetrieve<Manager> m2 = new SaveOrRetrieve<>();
+        m.saveThisObject(manager);
     }
 
     void putMaintainerOnBench(String uNameManager, String uNameMaintainer){
@@ -84,7 +92,8 @@ class Admin implements Serializable, Saveable{
         return new ArrayList<Maintainer>(onBench.values());
     }
 
-    String getUname(){
+    @Override
+    public String getUName(){
         return adminUName;
     }
 
