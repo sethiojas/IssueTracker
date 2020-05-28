@@ -1,11 +1,7 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
@@ -14,8 +10,6 @@ import java.io.Serializable;
 class Admin implements Serializable, Saveable{
     // all static and transient variables are null after deserialization
 
-    // private static HashMap<String, Manager> managers = new HashMap<>();
-    // private static HashMap<String, Maintainer> onBench = new HashMap<>();
     private final String adminUName;
 
     // https://www.baeldung.com/java-jdbc
@@ -97,12 +91,12 @@ class Admin implements Serializable, Saveable{
         ArrayList<String> listManagers = new ArrayList<>();
 
         try{
-            String stm = "select uname from test where role=\"manager\"";
+            String getManagers = "select uname from test where role=\"manager\"";
             Connection conn = DriverManager.getConnection(dbPath);
-            Statement pstm = conn.createStatement();
-            ResultSet r = pstm.executeQuery(stm);
-            while(r.next()){
-                listManagers.add(r.getString("uname"));
+            Statement stm = conn.createStatement();
+            ResultSet res = stm.executeQuery(getManagers);
+            while(res.next()){
+                listManagers.add(res.getString("uname"));
             }
             conn.close();
         }
@@ -118,12 +112,12 @@ class Admin implements Serializable, Saveable{
         ArrayList<String> listOnBench = new ArrayList<>();
 
         try{
-            String stm = "select uname from test_two where on_bench=\"true\"";
+            String getOnBench = "select uname from test_two where on_bench=\"true\"";
             Connection conn = DriverManager.getConnection(dbPath);
-            Statement pstm = conn.createStatement();
-            ResultSet r = pstm.executeQuery(stm);
-            while(r.next()){
-                listOnBench.add(r.getString("uname"));
+            Statement stm = conn.createStatement();
+            ResultSet res = stm.executeQuery(getOnBench);
+            while(res.next()){
+                listOnBench.add(res.getString("uname"));
             }
             conn.close();
         }
