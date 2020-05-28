@@ -148,4 +148,22 @@ public class SaveOrRetrieve<T extends Saveable>{
     public void updateThisObject(T obj){
         updateThisObject(obj, null);
     }
+
+    public void deleteThisObject(String uName){
+        try{
+            String deleteObject = "delete from test_two where uname=?";
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(deleteObject);
+            pstm.setString(1, uName);
+            pstm.executeUpdate();
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteThisObject(T obj){
+        deleteThisObject(obj.getUName());
+    }
 }
