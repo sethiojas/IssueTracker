@@ -58,10 +58,10 @@ public class SaveOrRetrieve<T extends Saveable>{
         }
     }
 
-    public void saveThisObject(T saveObj){
+    public void saveThisObject(T saveObj, String onBench){
         try{
             String uname = saveObj.getUName();
-            String save = "insert into test_two values(?, ?, \"NA\")";
+            String save = "insert into test_two values(?, ?, ?)";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(save);
             pstm.setString(1, uname);
@@ -70,6 +70,7 @@ public class SaveOrRetrieve<T extends Saveable>{
             if(arr == null) throw new Exception("Cannot get ByteArray");
             
             pstm.setBytes(2, arr);
+            pstm.setString(3, onBench);
             pstm.executeUpdate();
             conn.close();
         }
@@ -80,6 +81,10 @@ public class SaveOrRetrieve<T extends Saveable>{
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void saveThisObject(T obj){
+        saveThisObject(obj, "NA")
     }
 
     public T retrieveThisObject(String uname){
