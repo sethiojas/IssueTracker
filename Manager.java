@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.Serializable;
 
-class Manager extends Maintainer{
+class Manager extends Maintainer implements Serializable, Saveable{
     
     private HashMap<String, Maintainer> maintainer = new HashMap<>();
     private HashMap<String, ManageProject> projects = new HashMap<>();
+
+    // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    private static final long serialVersionUID = 6529685098267757691L;
 
     Manager(String _uName){
         super(_uName);

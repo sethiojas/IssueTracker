@@ -1,11 +1,15 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-class Maintainer{
+class Maintainer implements Serializable, Saveable{
     
     protected String uName;
     private HashMap<String, Project> projects = new HashMap<>();
     private String manager;
+
+    // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    private static final long serialVersionUID = 6529685098267757692L;
 
     Maintainer(String _uName){
         uName = _uName;
