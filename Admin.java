@@ -14,13 +14,11 @@ import java.io.Serializable;
 class Admin implements Serializable, Saveable{
     // all static and transient variables are null after deserialization
 
-    private static HashMap<String, Manager> managers = new HashMap<>();
-    private static HashMap<String, Maintainer> onBench = new HashMap<>();
+    // private static HashMap<String, Manager> managers = new HashMap<>();
+    // private static HashMap<String, Maintainer> onBench = new HashMap<>();
     private final String adminUName;
 
     // https://www.baeldung.com/java-jdbc
-    private String insertNew = "insert into test values(?, ?, ?)";
-    private String deleteContributor = "delete from test where uname=?";
     private String dbPath = "jdbc:sqlite:test.db";
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
@@ -29,68 +27,80 @@ class Admin implements Serializable, Saveable{
     Admin(String _name, String passwd){
         adminUName = _name;
         insertNewCredentials(_name, passwd, "admin");
+        SaveOrRetrieve<Admin> saver = new SaveOrRetrieve<>();
+        saver.saveThisObject(this, "false");
     }
 
     void createNewManager(String uName, String passwd){
         insertNewCredentials(uName, passwd, "manager");
         Manager newManager = new Manager(uName);
-        managers.put(uName, newManager);
-        // SaveOrRetrieve<Manager> m = new SaveOrRetrieve<>();
-        // m.saveThisObject(newManager);
+        // managers.put(uName, newManager);
+        SaveOrRetrieve<Manager> saver = new SaveOrRetrieve<>();
+        saver.saveThisObject(newManager, "false");
     }
 
     void createNewMaintainer(String uName, String passwd){
         insertNewCredentials(uName, passwd, "maintainer");
         Maintainer newMaintainer = new Maintainer(uName);
-        onBench.put(uName, newMaintainer);
-        // SaveOrRetrieve<Maintainer> m = new SaveOrRetrieve<>();
-        // m.saveThisObject(newMaintainer);
+        SaveOrRetrieve<Maintainer> saver = new SaveOrRetrieve<>();
+        saver.saveThisObject(newMaintainer, "true");
     }
 
     void promoteToManager(String uName){
-        Maintainer thisMaintainer = onBench.remove(uName);
+        SaveOrRetrieve<Maintainer> srMaintainer = new SaveOrRetrieve<>();
+        SaveOrRetrieve<Manager> srManager = new SaveOrRetrieve<>();
+        Maintainer thisMaintainer = srMaintainer.retrieveThisObject(uName);
+        updateRole(uName, "manager");
         Manager promoted = new Manager(thisMaintainer.getUName());
-        managers.put(uName, promoted);
+        srManager.updateThisObject(promoted, "false");
     }
-
+    
     void assignManager(String uNameManager, String uNameMaintainer){
-        Manager manager = managers.get(uNameManager);
-        Maintainer maintainer = onBench.remove(uNameMaintainer);
+        SaveOrRetrieve<Manager> srManager = new SaveOrRetrieve<>();
+        SaveOrRetrieve<Maintainer> srMaintainer = new SaveOrRetrieve<>();
+
+        Manager manager = srManager.retrieveThisObject(uNameManager);
+        Maintainer maintainer = srMaintainer.retrieveThisObject(uNameMaintainer);
         maintainer.setManager(uNameManager);
         manager.addMaintainer(maintainer);
-        SaveOrRetrieve<Maintainer> m = new SaveOrRetrieve<>();
-        m.saveThisObject(maintainer);
-        SaveOrRetrieve<Manager> m2 = new SaveOrRetrieve<>();
-        m.saveThisObject(manager);
+
+        srManager.updateThisObject(manager);
+        srMaintainer.updateThisObject(maintainer);
     }
 
     void putMaintainerOnBench(String uNameManager, String uNameMaintainer){
-        Manager manager = managers.get(uNameManager);
+        SaveOrRetrieve<Manager> srManager = new SaveOrRetrieve<>();
+        SaveOrRetrieve<Maintainer> srMaintainer = new SaveOrRetrieve<>();
+
+        Manager manager = srManager.retrieveThisObject(uNameManager);
         Maintainer benchMaintainer = manager.removeMaintainer(uNameMaintainer);
-        onBench.put(benchMaintainer.getUName(), benchMaintainer);
+
+        srMaintainer.updateThisObject(benchMaintainer, "true");
     }
-    
+
     void removeManager(String uName){
         removeCredential(uName);
-        Manager rManager = managers.get(uName);
+        SaveOrRetrieve<Manager> srManager = new SaveOrRetrieve<>();
+        Manager rManager = srManager.retrieveThisObject(uName);
         for (Maintainer m : rManager.getAllMaintainers()){
             putMaintainerOnBench(uName, m.getUName());
         }
-        managers.remove(uName);
+        srManager.deleteThisObject(uName);
     }
     
     void removeMaintainer(String uName){
         removeCredential(uName);
-        onBench.remove(uName);
+        SaveOrRetrieve<Maintainer> srMaintainer = new SaveOrRetrieve<>();
+        srMaintainer.deleteThisObject(uName);
     }
 
-    ArrayList<Manager> getAllManagers(){
-        return new ArrayList<Manager>(managers.values());
-    }
+    // ArrayList<Manager> getAllManagers(){
+    //     return new ArrayList<Manager>(managers.values());
+    // }
 
-    ArrayList<Maintainer> getAllOnBench(){
-        return new ArrayList<Maintainer>(onBench.values());
-    }
+    // ArrayList<Maintainer> getAllOnBench(){
+    //     return new ArrayList<Maintainer>(onBench.values());
+    // }
 
     @Override
     public String getUName(){
@@ -104,6 +114,7 @@ class Admin implements Serializable, Saveable{
 
     void removeCredential(String uName){
         try{
+            String deleteContributor = "delete from test where uname=?";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(deleteContributor);
             pstm.setString(1, uName);
@@ -116,8 +127,9 @@ class Admin implements Serializable, Saveable{
         }
     }
 
-    void insertNewCredentials(String uName, String passwd, String isAdmin){
+    void insertNewCredentials(String uName, String passwd, String role){
         try{
+            String insertNew = "insert into test values(?, ?, ?)";
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(insertNew);
             pstm.setString(1, uName);
@@ -129,6 +141,21 @@ class Admin implements Serializable, Saveable{
         catch (SQLException e){
             System.out.println("Error connecting to Database");
             System.out.println(e.getMessage());
+        }
+    }
+
+    void updateRole(String uName, String role){
+        try{
+            String updateRoleStr = "update test set role=? where uname=?";
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(updateRoleStr);
+            pstm.setString(1, role);
+            pstm.setString(2, uName);
+            pstm.executeUpdate();
+            conn.close()
+        }
+        catch(SQLException e){
+            e.printStackTrace();
         }
     }
 }
