@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
-import java.io.Serializable;
 
 // SOURCE http://burnignorance.com/java-web-development-tips/store-java-class-object-in-database/
 // https://www.tutorialspoint.com/How-to-convert-Byte-Array-to-BLOB-in-java
