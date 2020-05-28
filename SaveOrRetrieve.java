@@ -58,7 +58,7 @@ public class SaveOrRetrieve<T extends Saveable>{
         }
     }
 
-    void saveThisObject(T saveObj){
+    public void saveThisObject(T saveObj){
         try{
             String uname = saveObj.getUName();
             String save = "insert into test_two values(?, ?)";
@@ -67,7 +67,7 @@ public class SaveOrRetrieve<T extends Saveable>{
             pstm.setString(1, uname);
 
             byte[] arr = getByteArrayObject(saveObj);
-            if(arr == null) throw new Exception("Cannot save object to database");
+            if(arr == null) throw new Exception("Cannot get ByteArray");
             
             pstm.setBytes(2, arr);
             pstm.executeUpdate();
@@ -103,6 +103,29 @@ public class SaveOrRetrieve<T extends Saveable>{
         }
         finally{
             return a;
+        }
+    }
+
+    public void updateThisObject(T obj){
+        try{
+            String updateObject = "update test_two set obj=? where uname=?";
+            String uname = obj.getUName();
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pst = conn.prepareStatement(updateObject);
+            byte[] arr = getByteArrayObject(obj)
+            if (arr == null) throw new Exception("Cannot get ByteArray");
+
+            pstm.setBytes(1, arr);
+            pstm.setString(2, uname);
+            pstm.executeUpdate();
+            conn.close();
+        }
+        catch(SQLException e){
+            System.out.println("Database Error");
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
