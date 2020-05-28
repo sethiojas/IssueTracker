@@ -28,17 +28,17 @@ class Admin implements Serializable, Saveable{
 
     Admin(String _name, String passwd){
         adminUName = _name;
-        insertNewCredentials(_name, passwd, "true");
+        insertNewCredentials(_name, passwd, "admin");
     }
 
     void createNewManager(String uName, String passwd){
-        insertNewCredentials(uName, passwd, "false");
+        insertNewCredentials(uName, passwd, "manager");
         Manager newManager = new Manager(uName);
         managers.put(uName, newManager);
     }
 
     void createNewMaintainer(String uName, String passwd){
-        insertNewCredentials(uName, passwd, "false");
+        insertNewCredentials(uName, passwd, "maintainer");
         Maintainer newMaintainer = new Maintainer(uName);
         onBench.put(uName, newMaintainer);
     }
