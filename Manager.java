@@ -5,7 +5,7 @@ import java.io.Serializable;
 class Manager extends Maintainer implements Serializable, Saveable{
     
     private HashMap<String, Maintainer> maintainer = new HashMap<>();
-    private HashMap<String, ManageProject> projects = new HashMap<>();
+    private HashMap<String, Project> projects = new HashMap<>();
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757691L;
@@ -15,11 +15,11 @@ class Manager extends Maintainer implements Serializable, Saveable{
     }
 
     void createProject(String title){
-        projects.put(title, new ManageProject(title));
+        projects.put(title, new Project(title));
     }
 
     void addMaintainersToProject(String title, ArrayList<String> uNameList){
-        ManageProject proj = projects.get(title);
+        Project proj = projects.get(title);
         proj.addMaintainers(uNameList);
         proj.addMaintainer(uName);
         
@@ -28,7 +28,7 @@ class Manager extends Maintainer implements Serializable, Saveable{
         }
     }
 
-    ManageProject getProjectByTitle(String title){
+    Project getProjectByTitle(String title){
         return projects.get(title);
     }
 
@@ -51,6 +51,10 @@ class Manager extends Maintainer implements Serializable, Saveable{
 
     ArrayList<Maintainer> getAllMaintainers(){
         return new ArrayList<Maintainer>(maintainer.values());
+    }
+
+    ArrayList<Project> getAllProjects(){
+        return new ArrayList<Project>(projects.values());
     }
 
     @Override
