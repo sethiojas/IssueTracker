@@ -39,7 +39,11 @@ class Maintainer implements Serializable, Saveable{
     }
 
     void removeAllProjects(){
+<<<<<<< HEAD
         for (Project proj: projects.values()){
+=======
+        for (Project proj: projects){
+>>>>>>> d7f346127c9605decdafa24fadb3883ba2d520cc
             proj.removeMaintainer(uName);
         }
         projects.clear();
