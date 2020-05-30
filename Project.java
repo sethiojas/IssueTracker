@@ -58,6 +58,10 @@ class Project implements Serializable{
         return maintainers.addAll(uNameList);
     }
 
+    void removeMaintainer(String uname){
+        maintainers.remove(uname);
+    }
+
     @Override
     public String toString(){
         return "Project: " + projectName;
