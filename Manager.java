@@ -42,7 +42,9 @@ class Manager extends Maintainer implements Serializable, Saveable{
 
     void removeMaintainerFromProject(String uName, String projTitle){
         Maintainer removedMaintainer = maintainer.get(uName);
-        removedMaintainer.removeProject(removedMaintainer.getProjectByTitle(projTitle));
+        Project thisProj = removedMaintainer.getProjectByTitle(projTitle)
+        thisProj.removeMaintainer(uName);
+        removedMaintainer.removeProject(thisProj);
     }
 
     void addMaintainer(Maintainer addMe){
