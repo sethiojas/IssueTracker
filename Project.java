@@ -2,8 +2,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.Serializable;
 
-class Project{
+class Project implements Serializable{
+    private static final long serialVersionUID = 6529685098267757694L;
     private static int bugId = 0;
     final private String projectName;
     private HashMap<Integer, Bug> bugs = new HashMap<>();
@@ -46,6 +48,14 @@ class Project{
 
     boolean equals(Project proj){
         return projectName.equals(proj.getProjectName());
+    }
+
+    boolean addMaintainer(String uName){
+        return maintainers.add(uName);
+    }
+
+    boolean addMaintainers(ArrayList<String> uNameList){
+        return maintainers.addAll(uNameList);
     }
 
     @Override

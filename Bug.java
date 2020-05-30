@@ -1,4 +1,7 @@
-class Bug{
+import java.io.Serializable;
+
+class Bug implements Serializable{
+    private static final long serialVersionUID = 6529685098267757695L;
     final private String title;
     final private String description;
     private boolean isClosed = false;
