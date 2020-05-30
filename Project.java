@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 class Project{
-    static int totalBugs = 0;
     private static int bugId = 0;
     final private String projectName;
     private HashMap<Integer, Bug> bugs = new HashMap<>();
@@ -15,7 +14,6 @@ class Project{
     }
 
     int createNewBug(String title, String desc){
-        totalBugs += 1;
         bugId += 1;
         bugs.put(bugId, new Bug(title, desc, bugId));
         return bugId;
@@ -28,7 +26,6 @@ class Project{
     boolean closeBug(int bugId){
         if(bugs.containsKey(bugId)){
             bugs.remove(bugId);
-            totalBugs -=1;
             return true;
         }
         return false;
