@@ -85,7 +85,7 @@ public class SaveOrRetrieve<T extends Saveable>{
     }
 
     public void saveThisObject(T obj){
-        saveThisObject(obj, "NA")
+        saveThisObject(obj, "NA");
     }
 
     public T retrieveThisObject(String uname){
