@@ -104,7 +104,7 @@ class Admin implements Serializable, Saveable{
             e.printStackTrace();
         }
         finally{
-            return listManagers
+            return listManagers;
         }
     }
 
@@ -161,7 +161,7 @@ class Admin implements Serializable, Saveable{
             PreparedStatement pstm = conn.prepareStatement(insertNew);
             pstm.setString(1, uName);
             pstm.setString(2, passwd);
-            pstm.setString(3, isAdmin);
+            pstm.setString(3, role);
             pstm.executeUpdate();
             conn.close();
         }
