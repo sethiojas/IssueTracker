@@ -1,5 +1,5 @@
 package com.issue_tracker;
 
-interface Saveable{
+public interface Saveable{
     String getUName();
 }
