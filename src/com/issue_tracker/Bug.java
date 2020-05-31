@@ -1,3 +1,5 @@
+package com.issue_tracker;
+
 import java.io.Serializable;
 
 class Bug implements Serializable{
