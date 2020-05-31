@@ -39,17 +39,20 @@ public class LoginController {
             return;
         }
         switch(res){
-            // case "admin": sr = new SaveOrRetrieve<Admin>();break;
-            // case "manager": sr = new SaveOrRetrieve<Manager>();
+            // case "admin":
+            // case "manager":
             //                 break
-            // case "maintainer": sr = new SaveOrRetrieve<Maintainer>();
-            //                    GridPane root = FXMLLoader.load(getClass().getResource("maintainer.fxml"));
-            //                 // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
-            //                    Stage stage = (Stage) loginButton.getScene().getWindow();
-            //                    stage.setTitle("Maintainer");
-            //                    stage.setScene(new Scene(root));
-            //                    stage.show();
-            //                    break;
+            case "maintainer": FXMLLoader loader = new FXMLLoader(getClass().getResource("maintainer.fxml"));
+                               GridPane root = loader.load();
+                            //    https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
+                               MaintainerController cont = loader.getController();
+                               cont.initialize(uname);
+                            //    https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
+                               Stage stage = (Stage) loginButton.getScene().getWindow();
+                               stage.setTitle("Maintainer");
+                               stage.setScene(new Scene(root));
+                               stage.show();
+                               break;
         }        
     }
 }
