@@ -41,6 +41,6 @@
          <tooltip>
             <Tooltip text="Enter Password" />
          </tooltip></PasswordField>
-      <Button fx:id="loginButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#checkCredentials" prefHeight="26.0" prefWidth="300.0" text="Login" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+      <Button fx:id="loginButton" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#checkCredentials" prefHeight="26.0" prefWidth="300.0" text="Login" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
    </children>
 </GridPane>
