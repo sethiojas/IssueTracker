@@ -9,7 +9,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
-public class LoginController{
+public class LoginController {
+    // https://stackoverflow.com/questions/44010909/using-initialize-method-in-a-controller-in-fxml
+    // https://stackoverflow.com/a/35300880 <- URL, ResourceBundle
+    // https://stackoverflow.com/questions/14187963/passing-parameters-javafx-fxml
     
     @FXML
     private TextField username;
