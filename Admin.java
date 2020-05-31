@@ -58,7 +58,7 @@ class Admin implements Serializable, Saveable{
         manager.addMaintainer(maintainer);
 
         srManager.updateThisObject(manager);
-        srMaintainer.updateThisObject(maintainer);
+        srMaintainer.updateThisObject(maintainer, "false");
     }
 
     void putMaintainerOnBench(String uNameManager, String uNameMaintainer){
