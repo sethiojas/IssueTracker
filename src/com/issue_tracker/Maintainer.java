@@ -13,7 +13,7 @@ public class Maintainer implements Serializable, Saveable{
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757692L;
 
-    Maintainer(String _uName){
+    public Maintainer(String _uName){
         uName = _uName;
     }
 
@@ -22,36 +22,36 @@ public class Maintainer implements Serializable, Saveable{
         return uName;
     }
 
-    ArrayList<Project> getProjects(){
+    public ArrayList<Project> getProjects(){
         return new ArrayList(projects.values());
     }
 
-    Project getProjectByTitle(String title){
+    public Project getProjectByTitle(String title){
         return projects.get(title);
     }
 
-    void addProject(Project proj){
+    public void addProject(Project proj){
         projects.put(proj.getProjectName(), proj);
     }
 
-    boolean removeProject(Project proj){
+    public boolean removeProject(Project proj){
         Project isRemoved = projects.remove(proj.getProjectName());
         if(proj.equals(isRemoved)) return true;
         return false;
     }
 
-    void removeAllProjects(){
+    public void removeAllProjects(){
         for (Project proj: projects.values()){
             proj.removeMaintainer(uName);
         }
         projects.clear();
     }
 
-    void setManager(String uNameManager){
+    public void setManager(String uNameManager){
         manager = uNameManager;
     }
 
-    String getManager(){
+    public String getManager(){
         return manager;
     }
 
