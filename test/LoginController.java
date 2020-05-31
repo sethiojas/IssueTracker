@@ -1,10 +1,13 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Window;
-// import javafx.fxml.Initializable;
-import com.issue_tracker.*;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
 
 public class LoginController{
     
