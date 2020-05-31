@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.io.Serializable;
 
-class Admin implements Serializable, Saveable{
+public class Admin implements Serializable, Saveable{
     // all static and transient variables are null after deserialization
 
     private final String adminUName;

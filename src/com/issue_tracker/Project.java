@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.Serializable;
 
-class Project implements Serializable{
+public class Project implements Serializable{
     private static final long serialVersionUID = 6529685098267757694L;
     private static int bugId = 0;
     final private String projectName;

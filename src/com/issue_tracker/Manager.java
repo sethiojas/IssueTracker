@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.Serializable;
 
-class Manager extends Maintainer implements Serializable, Saveable{
+public class Manager extends Maintainer implements Serializable, Saveable{
     
     private HashMap<String, Maintainer> maintainer = new HashMap<>();
     private HashMap<String, Project> projects = new HashMap<>();
