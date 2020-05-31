@@ -8,8 +8,6 @@ import com.issue_tracker.*;
 
 public class LoginController{
     
-    SaveOrRetrieve sr;
-
     @FXML
     private TextField username;
 
