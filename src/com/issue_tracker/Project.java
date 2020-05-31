@@ -13,21 +13,21 @@ public class Project implements Serializable{
     private HashMap<Integer, Bug> bugs = new HashMap<>();
     protected HashSet<String> maintainers = new HashSet<>();
 
-    Project(String title){
+    public Project(String title){
         projectName = title;
     }
 
-    int createNewBug(String title, String desc){
+    public int createNewBug(String title, String desc){
         bugId += 1;
         bugs.put(bugId, new Bug(title, desc, bugId));
         return bugId;
     }
     
-    String getProjectName(){
+    public String getProjectName(){
         return projectName;
     }
 
-    boolean closeBug(int bugId){
+    public boolean closeBug(int bugId){
         if(bugs.containsKey(bugId)){
             bugs.remove(bugId);
             return true;
@@ -35,11 +35,11 @@ public class Project implements Serializable{
         return false;
     }
 
-    ArrayList<Bug> getAllBugs(){
+    public ArrayList<Bug> getAllBugs(){
         return new ArrayList<Bug>(bugs.values());
     }
 
-    ArrayList<String> getMaintainers(){
+    public ArrayList<String> getMaintainers(){
         ArrayList<String> list = new ArrayList<>();
         Iterator<String> iterMaintainers = maintainers.iterator();
         while(iterMaintainers.hasNext()){
@@ -48,19 +48,19 @@ public class Project implements Serializable{
         return list;
     }
 
-    boolean equals(Project proj){
+    public boolean equals(Project proj){
         return projectName.equals(proj.getProjectName());
     }
 
-    boolean addMaintainer(String uName){
+    public boolean addMaintainer(String uName){
         return maintainers.add(uName);
     }
 
-    boolean addMaintainers(ArrayList<String> uNameList){
+    public boolean addMaintainers(ArrayList<String> uNameList){
         return maintainers.addAll(uNameList);
     }
 
-    void removeMaintainer(String uname){
+    public void removeMaintainer(String uname){
         maintainers.remove(uname);
     }
 
