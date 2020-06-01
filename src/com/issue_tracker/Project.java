@@ -35,6 +35,10 @@ public class Project implements Serializable{
         return false;
     }
 
+    public Bug getBug(int bugId){
+        return bugs.get(bugId);
+    }
+    
     public ArrayList<Bug> getAllBugs(){
         return new ArrayList<Bug>(bugs.values());
     }
