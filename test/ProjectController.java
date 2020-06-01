@@ -28,11 +28,32 @@ public class ProjectController {
     @FXML
     private Button newBugButton;
 
-    public void initialize(Project proj){
+    @FXML
+    private Button backButton;
+
+    @FXML
+    public void goBack(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("maintainer.fxml"));
+            GridPane root = loader.load();
+            MaintainerController cont = loader.getController();
+            cont.initialize(contributorUName);
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            stage.setTitle("Maintainer");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(IOException excep){
+            excep.printStackTrace();
+        }
+    }
+
+    public void initialize(Project proj, String uname){
+        contributorUName = uname;
         projectTitle.setText(proj.getProjectName());
 
-        for (String uname: proj.getMaintainers()){
-            Label name = new Label(uname);
+        for (String _name: proj.getMaintainers()){
+            Label name = new Label(_name);
             name.setMaxWidth(Double.MAX_VALUE);
             name.setAlignment(Pos.CENTER);
             maintainerVbox.getChildren().add(name);
@@ -52,7 +73,7 @@ public class ProjectController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("bug.fxml"));
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
-                    cont.initialize(thisBug, proj);
+                    cont.initialize(thisBug, proj, contributorUName);
 
                     Stage stage = (Stage) btn.getScene().getWindow();
                     stage.setTitle("Bug");
