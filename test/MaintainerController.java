@@ -36,6 +36,25 @@ public class MaintainerController {
             btn.setAlignment(Pos.BASELINE_LEFT);
             //or btn.setStyle("-fx-alignment: LEFT;");
             btn.setMaxWidth(Double.MAX_VALUE);
+            btn.setOnAction(e -> {
+                try{
+                    String projTitle = btn.getText();
+                    Project proj = me.getProjectByTitle(projTitle);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
+                    BorderPane root = loader.load();
+                    ProjectController cont = loader.getController();
+                    cont.initialize(proj);
+                    Stage stage = (Stage) btn.getScene().getWindow();
+                    stage.setTitle("Project");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                }
+                catch(IOException excep){
+                    // System.out.println("Cannot set project action");
+                    excep.printStackTrace();
+                    return;
+                }
+            });
             projectsVbox.getChildren().add(btn);
         }
     }
