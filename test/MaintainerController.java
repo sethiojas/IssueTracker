@@ -1,10 +1,15 @@
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
+import javafx.scene.layout.BorderPane;
 import com.issue_tracker.*;
+import java.io.IOException;
 
 public class MaintainerController {
     @FXML
