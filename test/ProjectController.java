@@ -26,6 +26,7 @@ public class ProjectController {
         for (String uname: proj.getMaintainers()){
             Label name = new Label(uname);
             name.setMaxWidth(Double.MAX_VALUE);
+            name.setAlignment(Pos.CENTER);
             maintainerVbox.getChildren().add(name);
         }
 
