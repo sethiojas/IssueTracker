@@ -39,6 +39,28 @@ public class ProjectController {
             Button btn = new Button("#" + bug.getId() + " " + bug.getTitle());
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+
+            btn.setOnAction(e -> {
+                try{
+                    String IdNum = btn.getText().split("\\s",2)[0];
+                    int bugId = Integer.parseInt(IdNum.substring(1));
+                    Bug thisBug = proj.getBug(bugId);
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("bug.fxml"));
+                    GridPane root = loader.load();
+                    BugController cont = loader.getController();
+                    cont.initialize(thisBug);
+
+                    Stage stage = (Stage) btn.getScene().getWindow();
+                    stage.setTitle("Bug");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                }
+                catch(IOException excep){
+                    excep.printStackTrace();
+                }
+            });
+
             issueTitleVbox.getChildren().add(btn);
         }
     }
