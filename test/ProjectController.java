@@ -36,7 +36,7 @@ public class ProjectController {
         }
 
         for (Bug bug: proj.getAllBugs()){
-            Button btn = new Button(bug.getTitle());
+            Button btn = new Button("#" + bug.getId() + " " + bug.getTitle());
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
             issueTitleVbox.getChildren().add(btn);
