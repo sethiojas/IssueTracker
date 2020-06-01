@@ -39,6 +39,7 @@ public class ProjectController {
             GridPane root = loader.load();
             MaintainerController cont = loader.getController();
             cont.initialize(contributorUName);
+            cont.saveChangesToProject(project);
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setTitle("Maintainer");
             stage.setScene(new Scene(root));
@@ -50,17 +51,18 @@ public class ProjectController {
     }
 
     public void initialize(Project proj, String uname){
+        project = proj;
         contributorUName = uname;
-        projectTitle.setText(proj.getProjectName());
+        projectTitle.setText(project.getProjectName());
 
-        for (String _name: proj.getMaintainers()){
+        for (String _name: project.getMaintainers()){
             Label name = new Label(_name);
             name.setMaxWidth(Double.MAX_VALUE);
             name.setAlignment(Pos.CENTER);
             maintainerVbox.getChildren().add(name);
         }
 
-        for (Bug bug: proj.getAllBugs()){
+        for (Bug bug: project.getAllBugs()){
             Button btn = new Button("#" + bug.getId() + " " + bug.getTitle());
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
@@ -69,12 +71,12 @@ public class ProjectController {
                 try{
                     String IdNum = btn.getText().split("\\s",2)[0];
                     int bugId = Integer.parseInt(IdNum.substring(1));
-                    Bug thisBug = proj.getBug(bugId);
+                    Bug thisBug = project.getBug(bugId);
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("bug.fxml"));
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
-                    cont.initialize(thisBug, proj, contributorUName);
+                    cont.initialize(thisBug, project, contributorUName);
 
                     Stage stage = (Stage) btn.getScene().getWindow();
                     stage.setTitle("Bug");
