@@ -22,9 +22,11 @@ public class BugController {
     @FXML
     private Button closeBugButton;
 
-    public void initialize(Bug bug){
+    public void initialize(Bug bug, Project proj){
+        this.project = proj;
+        this.thisBugId = bug.getId();
         bugTitle.setText(bug.getTitle());
-        bugId.setText("Issue id #" + bug.getId());
+        bugId.setText("Issue id #" + thisBugId);
         bugDescription.setText(bug.getDescription());
     }
 }
