@@ -40,6 +40,10 @@ public class Maintainer implements Serializable, Saveable{
         return false;
     }
 
+    public void updateProject(Project proj){
+        projects.replace(proj.getProjectName(), proj);
+    }
+
     public void removeAllProjects(){
         for (Project proj: projects.values()){
             proj.removeMaintainer(uName);
