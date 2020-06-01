@@ -36,6 +36,13 @@ public class BugController {
     }
 
     @FXML
+    public void closeBug(ActionEvent event){
+        bugStatus.setText("Closed");
+        closeBugButton.setDisable(true);
+        project.closeBug(thisBugId);
+    }
+
+    @FXML
     public void goBack(ActionEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
