@@ -34,4 +34,21 @@ public class BugController {
         bugId.setText("Issue id #" + thisBugId);
         bugDescription.setText(bug.getDescription());
     }
+
+    @FXML
+    public void goBack(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
+            BorderPane root = loader.load();
+            ProjectController cont = loader.getController();
+            cont.initialize(project);
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            stage.setTitle("Project");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(IOException excep){
+            excep.printStackTrace();
+        }
+    }
 }
