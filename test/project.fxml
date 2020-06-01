@@ -21,9 +21,9 @@
       </Label>
    </top>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="240.0" minWidth="350.0" prefHeight="240.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <content>
-            <VBox fx:id="issueTitleVbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="240.0" minWidth="350.0" prefHeight="281.0" prefWidth="443.0" spacing="2.0">
+            <VBox fx:id="issueTitleVbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0">
                <children>
                   <ButtonBar buttonMinWidth="20.0" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="443.0">
                     <buttons>
@@ -40,7 +40,6 @@
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </padding>
                   </ButtonBar>
-                  <Button alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button" />
                </children>
             </VBox>
          </content>
