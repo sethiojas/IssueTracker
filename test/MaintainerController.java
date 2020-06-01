@@ -43,14 +43,13 @@ public class MaintainerController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
-                    cont.initialize(proj);
+                    cont.initialize(proj, me.getUName());
                     Stage stage = (Stage) btn.getScene().getWindow();
                     stage.setTitle("Project");
                     stage.setScene(new Scene(root));
                     stage.show();
                 }
                 catch(IOException excep){
-                    // System.out.println("Cannot set project action");
                     excep.printStackTrace();
                     return;
                 }
