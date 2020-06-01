@@ -31,7 +31,6 @@ public class MaintainerController {
     @FXML
     public void logout(ActionEvent event){
         try{
-            sr.updateThisObject(me);
             GridPane root = FXMLLoader.load(getClass().getResource("login.fxml"));
             Stage stage = (Stage) logoutButton.getScene().getWindow();
             stage.setTitle("Login");
@@ -42,6 +41,12 @@ public class MaintainerController {
             excep.printStackTrace();
         }
     }
+
+    public void saveChangesToProject(Project project){
+        me.updateProject(project);
+        sr.updateThisObject(me);
+    }
+
 
     public void initialize(String uname){
         me = sr.retrieveThisObject(uname);
