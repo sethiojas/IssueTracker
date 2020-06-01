@@ -85,7 +85,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="80.0" prefWidth="206.0">
                <children>
-                  <Button fx:id="closeBugButton" focusTraversable="false" layoutX="233.0" layoutY="1.0" mnemonicParsing="false" text="Close Issue" translateY="5.0" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="5.0" />
+                  <Button fx:id="closeBugButton" focusTraversable="false" layoutX="233.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeBug" text="Close Issue" translateY="5.0" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="5.0" />
                </children>
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
