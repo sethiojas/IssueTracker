@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
@@ -12,6 +13,9 @@ import com.issue_tracker.*;
 import java.io.IOException;
 
 public class MaintainerController {
+    private SaveOrRetrieve<Maintainer> sr = new SaveOrRetrieve<>();
+    private Maintainer me;
+
     @FXML
     private Label uNameLabel;
     
@@ -24,9 +28,23 @@ public class MaintainerController {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    public void logout(ActionEvent event){
+        try{
+            sr.updateThisObject(me);
+            GridPane root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            stage.setTitle("Login");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(IOException excep){
+            excep.printStackTrace();
+        }
+    }
+
     public void initialize(String uname){
-        SaveOrRetrieve<Maintainer> sr = new SaveOrRetrieve<>();
-        Maintainer me = sr.retrieveThisObject(uname);
+        me = sr.retrieveThisObject(uname);
 
         uNameLabel.setText(uname);
         managerLabel.setText("Manager: " + me.getManager());
