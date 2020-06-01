@@ -48,7 +48,7 @@
    <left>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="280.0" minWidth="80.0" prefHeight="320.0" prefWidth="130.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="maintainerVbox" minWidth="80.0" prefHeight="315.0" prefWidth="110.0">
+            <VBox fx:id="maintainerVbox" minWidth="80.0" prefHeight="315.0" prefWidth="110.0" spacing="3.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="153.0" text="Maintainers" underline="true" />
                </children>
