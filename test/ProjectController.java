@@ -49,7 +49,7 @@ public class ProjectController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("bug.fxml"));
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
-                    cont.initialize(thisBug);
+                    cont.initialize(thisBug, proj);
 
                     Stage stage = (Stage) btn.getScene().getWindow();
                     stage.setTitle("Bug");
