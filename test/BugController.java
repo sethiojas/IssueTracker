@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import com.issue_tracker.*;
 
 public class BugController {
+    Project project;
+    int thisBugId;
     @FXML
     private Label bugTitle;
     @FXML
