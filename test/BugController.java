@@ -13,7 +13,9 @@ import com.issue_tracker.*;
 
 public class BugController {
     Project project;
+    String contributorUName;
     int thisBugId;
+
     @FXML
     private Label bugTitle;
     @FXML
@@ -27,8 +29,9 @@ public class BugController {
     @FXML
     private Button closeBugButton;
 
-    public void initialize(Bug bug, Project proj){
+    public void initialize(Bug bug, Project proj, String uname){
         this.project = proj;
+        this.contributorUName = uname;
         this.thisBugId = bug.getId();
         bugTitle.setText(bug.getTitle());
         bugId.setText("Issue id #" + thisBugId);
@@ -48,7 +51,7 @@ public class BugController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
-            cont.initialize(project);
+            cont.initialize(project, contributorUName);
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setTitle("Project");
             stage.setScene(new Scene(root));
