@@ -15,6 +15,7 @@ import com.issue_tracker.*;
 public class ProjectController {
 
     private String contributorUName;
+    private Project project;
 
     @FXML
     private Label projectTitle;
