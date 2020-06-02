@@ -36,6 +36,7 @@ public class ManagerController extends MaintainerController {
         centerVbox.getChildren().clear();
         Label label = new Label("Projects");
         label.setMaxWidth(Double.MAX_VALUE);
+        label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
         centerVbox.getChildren().add(label);
         for (Project p : me.getAllProjects()) {
             Button btn = new Button(p.getProjectName());
@@ -49,6 +50,7 @@ public class ManagerController extends MaintainerController {
         centerVbox.getChildren().clear();
         Label label = new Label("Maintainers");
         label.setMaxWidth(Double.MAX_VALUE);
+        label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
         centerVbox.getChildren().add(label);
 
         for (Maintainer m : me.getAllMaintainers()) {
