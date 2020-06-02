@@ -33,6 +33,23 @@ public class ProjectController {
     private Button backButton;
 
     @FXML
+    public void addBug(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("add_bug.fxml"));
+            GridPane root = loader.load();
+            AddBugController cont = loader.getController();
+            cont.initialize(project, contributorUName);
+            Stage stage = (Stage) newBugButton.getScene().getWindow();
+            stage.setTitle("Add new bug");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void goBack(ActionEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("maintainer.fxml"));
