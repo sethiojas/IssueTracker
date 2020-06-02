@@ -38,17 +38,26 @@ public class LoginController {
         }
         switch(res){
             // case "admin":
-            // case "manager":
-            //                 break
-            case "maintainer": FXMLLoader loader = new FXMLLoader(getClass().getResource("maintainer.fxml"));
-                               GridPane root = loader.load();
-                            //    https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
-                               MaintainerController cont = loader.getController();
-                               cont.initialize(uname);
-                            // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
-                            // https://stackoverflow.com/questions/39985414/change-scene-without-resize-window-in-javafx
-                               loginButton.getScene().setRoot(root);
-                               break;
+            case "manager": {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("manager.fxml"));
+                BorderPane root = loader.load();
+                ManagerController cont = loader.getController();
+                cont.initialize(uname);
+                loginButton.getScene().setRoot(root);
+                break;
+            }
+
+            case "maintainer":{ 
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("maintainer.fxml"));
+                GridPane root = loader.load();
+                // https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
+                MaintainerController cont = loader.getController();
+                cont.initialize(uname);
+                // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
+                // https://stackoverflow.com/questions/39985414/change-scene-without-resize-window-in-javafx
+                loginButton.getScene().setRoot(root);
+                break;
+            }
         }        
     }
 }
