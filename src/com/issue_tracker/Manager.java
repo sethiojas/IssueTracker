@@ -30,10 +30,6 @@ public class Manager extends Maintainer implements Serializable, Saveable{
         }
     }
 
-    Project getProjectByTitle(String title){
-        return projects.get(title);
-    }
-
     Maintainer removeMaintainer(String uName){
         Maintainer removedMaintainer = maintainer.get(uName);
         removedMaintainer.removeAllProjects();
