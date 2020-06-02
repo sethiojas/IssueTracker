@@ -4,8 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import java.io.IOException;
 import com.issue_tracker.*;
 
 public class ManagerController extends MaintainerController {
@@ -57,6 +59,22 @@ public class ManagerController extends MaintainerController {
             Button btn = new Button(m.getUName());
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+            btn.setOnAction(e -> {
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        // https://stackoverflow.com/questions/17228487/javafx-location-is-not-set-error-message
+                        "manager_selection_maintainers.fxml"
+                        )
+                    );
+                    GridPane root = loader.load();
+                    MaintainerDetailsController cont = loader.getController();
+                    cont.initialize(me.getMaintainer(btn.getText()), contributorUName);
+                    btn.getScene().setRoot(root);
+                }
+                catch(IOException excep) {
+                    excep.printStackTrace();
+                }
+            });
             centerVbox.getChildren().add(btn);
         }
     }
