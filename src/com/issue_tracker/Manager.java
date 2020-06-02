@@ -57,6 +57,10 @@ public class Manager extends Maintainer implements Serializable, Saveable{
         return new ArrayList<Project>(projects.values());
     }
 
+    public Maintainer getMaintainer(String uname) {
+        return maintainer.get(uname);
+    }
+
     @Override
     public String toString(){
         return "Manager: " + uName;
