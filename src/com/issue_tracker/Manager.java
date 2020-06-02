@@ -12,15 +12,15 @@ public class Manager extends Maintainer implements Serializable, Saveable{
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757691L;
 
-    Manager(String _uName){
+    public Manager(String _uName){
         super(_uName);
     }
 
-    void createProject(String title){
+    public void createProject(String title){
         projects.put(title, new Project(title));
     }
 
-    void addMaintainersToProject(String title, ArrayList<String> uNameList){
+    public void addMaintainersToProject(String title, ArrayList<String> uNameList){
         Project proj = projects.get(title);
         proj.addMaintainers(uNameList);
         proj.addMaintainer(uName);
@@ -30,7 +30,7 @@ public class Manager extends Maintainer implements Serializable, Saveable{
         }
     }
 
-    Maintainer removeMaintainer(String uName){
+    public Maintainer removeMaintainer(String uName){
         Maintainer removedMaintainer = maintainer.get(uName);
         removedMaintainer.removeAllProjects();
         removedMaintainer.setManager(""); 
@@ -38,22 +38,22 @@ public class Manager extends Maintainer implements Serializable, Saveable{
         return removedMaintainer;
     }
 
-    void removeMaintainerFromProject(String uName, String projTitle){
+    public void removeMaintainerFromProject(String uName, String projTitle){
         Maintainer removedMaintainer = maintainer.get(uName);
         Project thisProj = removedMaintainer.getProjectByTitle(projTitle);
         thisProj.removeMaintainer(uName);
         removedMaintainer.removeProject(thisProj);
     }
 
-    void addMaintainer(Maintainer addMe){
+    public void addMaintainer(Maintainer addMe){
         maintainer.put(addMe.getUName(), addMe);
     }
 
-    ArrayList<Maintainer> getAllMaintainers(){
+    public ArrayList<Maintainer> getAllMaintainers(){
         return new ArrayList<Maintainer>(maintainer.values());
     }
 
-    ArrayList<Project> getAllProjects(){
+    public ArrayList<Project> getAllProjects(){
         return new ArrayList<Project>(projects.values());
     }
 
