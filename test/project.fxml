@@ -27,7 +27,7 @@
                <children>
                   <ButtonBar buttonMinWidth="20.0" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="443.0">
                     <buttons>
-                      <Button fx:id="newBugButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="+">
+                      <Button fx:id="newBugButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addBug" text="+">
                            <font>
                               <Font name="System Bold" size="10.0" />
                            </font>
