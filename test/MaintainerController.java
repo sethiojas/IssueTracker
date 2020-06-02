@@ -43,7 +43,7 @@ public class MaintainerController {
     }
 
 
-    public void initialize(String uname){
+    protected void initialize(String uname){
         me = sr.retrieveThisObject(uname);
 
         uNameLabel.setText(uname);
