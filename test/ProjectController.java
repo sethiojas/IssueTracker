@@ -1,7 +1,5 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
@@ -39,10 +37,7 @@ public class ProjectController {
             GridPane root = loader.load();
             AddBugController cont = loader.getController();
             cont.initialize(project, contributorUName);
-            Stage stage = (Stage) newBugButton.getScene().getWindow();
-            stage.setTitle("Add new bug");
-            stage.setScene(new Scene(root));
-            stage.show();
+            newBugButton.getScene().setRoot(root);
         }
         catch(IOException e){
             e.printStackTrace();
@@ -57,10 +52,7 @@ public class ProjectController {
             MaintainerController cont = loader.getController();
             cont.initialize(contributorUName);
             cont.saveChangesToProject(project);
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setTitle("Maintainer");
-            stage.setScene(new Scene(root));
-            stage.show();
+            backButton.getScene().setRoot(root);
         }
         catch(IOException excep){
             excep.printStackTrace();
@@ -94,11 +86,7 @@ public class ProjectController {
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
                     cont.initialize(thisBug, project, contributorUName);
-
-                    Stage stage = (Stage) btn.getScene().getWindow();
-                    stage.setTitle("Bug");
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                    btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
                     excep.printStackTrace();

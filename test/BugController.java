@@ -1,7 +1,5 @@
 import javafx.fxml.FXML;
 import java.io.IOException;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
@@ -52,10 +50,7 @@ public class BugController {
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
             cont.initialize(project, contributorUName);
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setTitle("Project");
-            stage.setScene(new Scene(root));
-            stage.show();
+            backButton.getScene().setRoot(root);
         }
         catch(IOException excep){
             excep.printStackTrace();

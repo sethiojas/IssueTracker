@@ -1,7 +1,5 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
@@ -32,10 +30,7 @@ public class MaintainerController {
     public void logout(ActionEvent event){
         try{
             GridPane root = FXMLLoader.load(getClass().getResource("login.fxml"));
-            Stage stage = (Stage) logoutButton.getScene().getWindow();
-            stage.setTitle("Login");
-            stage.setScene(new Scene(root));
-            stage.show();
+            logoutButton.getScene().setRoot(root);
         }
         catch(IOException excep){
             excep.printStackTrace();
@@ -67,10 +62,7 @@ public class MaintainerController {
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
                     cont.initialize(proj, me.getUName());
-                    Stage stage = (Stage) btn.getScene().getWindow();
-                    stage.setTitle("Project");
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                    btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
                     excep.printStackTrace();

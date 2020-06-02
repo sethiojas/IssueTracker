@@ -1,7 +1,5 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
@@ -31,10 +29,7 @@ public class AddBugController {
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
             cont.initialize(project, contributorUName);
-            Stage stage = (Stage) submitButton.getScene().getWindow();
-            stage.setTitle("Project");
-            stage.setScene(new Scene(root));
-            stage.show();
+            submitButton.getScene().setRoot(root);
         }
         catch(IOException e){
             e.printStackTrace();

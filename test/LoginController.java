@@ -5,8 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Window;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
 public class LoginController {
@@ -47,11 +45,9 @@ public class LoginController {
                             //    https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
                                MaintainerController cont = loader.getController();
                                cont.initialize(uname);
-                            //    https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
-                               Stage stage = (Stage) loginButton.getScene().getWindow();
-                               stage.setTitle("Maintainer");
-                               stage.setScene(new Scene(root));
-                               stage.show();
+                            // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
+                            // https://stackoverflow.com/questions/39985414/change-scene-without-resize-window-in-javafx
+                               loginButton.getScene().setRoot(root);
                                break;
         }        
     }
