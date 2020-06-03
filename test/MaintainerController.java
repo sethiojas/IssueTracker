@@ -37,13 +37,14 @@ public class MaintainerController implements Contributor {
         }
     }
 
+    @Override
     public void saveChangesToProject(Project project){
         me.updateProject(project);
         sr.updateThisObject(me);
     }
 
-
-    protected void initialize(String uname){
+    @Override
+    public void initialize(String uname){
         me = sr.retrieveThisObject(uname);
 
         uNameLabel.setText(uname);
