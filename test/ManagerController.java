@@ -98,7 +98,7 @@ public class ManagerController extends MaintainerController implements Contribut
         }
     }
 
-
+    @Override
     public void initialize(String uname) {
         contributorUName = uname;
         managerUName.setText(contributorUName);
