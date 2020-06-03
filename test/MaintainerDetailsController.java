@@ -27,6 +27,7 @@ public class MaintainerDetailsController {
             BorderPane root = loader.load();
             ManagerController cont = loader.getController();
             cont.initialize(contributorUName);
+            cont.showMaintainers();
             backButton.getScene().setRoot(root);
         }
         catch(IOException e) {
