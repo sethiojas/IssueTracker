@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -50,6 +51,18 @@ public class ManagerController extends MaintainerController implements Contribut
             Button btn = new Button(p.getProjectName());
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+            btn.setOnAction(e -> {
+                try{
+                    Project project = me.getProjectByTitle(btn.getText());
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
+                    BorderPane root = loader.load();
+                    ProjectController cont = loader.getController();
+                    cont.initialize(project, contributorUName, "manager.fxml");
+                    btn.getScene().setRoot(root);
+                }catch(IOException excep) {
+                    excep.printStackTrace();
+                }
+            });
             centerVbox.getChildren().add(btn);
         }
     }
