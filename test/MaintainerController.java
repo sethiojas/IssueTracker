@@ -62,7 +62,7 @@ public class MaintainerController implements Contributor {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
-                    cont.initialize(proj, me.getUName());
+                    cont.initialize(proj, me.getUName(), "maintainer.fxml");
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
