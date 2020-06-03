@@ -28,10 +28,11 @@ public class BugController {
     @FXML
     private Button closeBugButton;
 
-    public void initialize(Bug bug, Project proj, String uname){
-        this.project = proj;
-        this.contributorUName = uname;
-        this.thisBugId = bug.getId();
+    public void initialize(Bug bug, Project proj, String uname, String parentOfProject){
+        project = proj;
+        contributorUName = uname;
+        thisBugId = bug.getId();
+        this.parentOfProject = parentOfProject;
         bugTitle.setText(bug.getTitle());
         bugId.setText("Issue id #" + thisBugId);
         bugDescription.setText(bug.getDescription());
