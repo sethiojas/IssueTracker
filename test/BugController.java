@@ -10,9 +10,10 @@ import javafx.geometry.Pos;
 import com.issue_tracker.*;
 
 public class BugController {
-    Project project;
-    String contributorUName;
-    int thisBugId;
+    private Project project;
+    private String contributorUName;
+    private int thisBugId;
+    private String parentOfProject;
 
     @FXML
     private Label bugTitle;
