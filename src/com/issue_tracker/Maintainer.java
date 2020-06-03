@@ -23,7 +23,7 @@ public class Maintainer implements Serializable, Saveable{
     }
 
     public ArrayList<Project> getProjects(){
-        return new ArrayList(projects.values());
+        return new ArrayList<Project>(projects.values());
     }
 
     public Project getProjectByTitle(String title){
