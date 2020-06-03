@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import com.issue_tracker.*;
 
 
@@ -48,9 +49,9 @@ public class ProjectController {
     @FXML
     public void goBack(ActionEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("maintainer.fxml"));
-            GridPane root = loader.load();
-            MaintainerController cont = loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(parentFXML));
+            Parent root = loader.load();
+            Contributor cont = loader.getController();
             cont.initialize(contributorUName);
             cont.saveChangesToProject(project);
             backButton.getScene().setRoot(root);
