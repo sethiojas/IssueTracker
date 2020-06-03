@@ -43,7 +43,10 @@ public class SaveOrRetrieve<T extends Saveable>{
             return byteArrayObject;
         }
     }
-
+// https://stackoverflow.com/questions/509076/how-do-i-address-unchecked-cast-warnings
+// https://stackoverflow.com/questions/12886769/java-compiler-error-not-making-any-sense-identifier-expected
+// https://stackoverflow.com/questions/39366263/does-the-placement-of-suppresswarningsunchecked-matter
+    @SuppressWarnings("unchecked")
     public T getJavaObject(byte[] conversionObj){
         T javaObject = null;
         try{
