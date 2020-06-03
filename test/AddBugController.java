@@ -11,6 +11,7 @@ import com.issue_tracker.*;
 public class AddBugController {
     private Project project;
     private String contributorUName;
+    private String parentOfProject;
 
     @FXML
     private TextField bugTitle;
@@ -28,7 +29,7 @@ public class AddBugController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
-            cont.initialize(project, contributorUName);
+            cont.initialize(project, contributorUName, parentOfProject);
             submitButton.getScene().setRoot(root);
         }
         catch(IOException e){
@@ -36,8 +37,9 @@ public class AddBugController {
         }
     }
 
-    public void initialize(Project proj, String uname){
+    public void initialize(Project proj, String uname, String parentOfProject){
         project = proj;
         contributorUName = uname;
+        this.parentOfProject = parentOfProject;
     }
 }
