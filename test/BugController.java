@@ -51,7 +51,7 @@ public class BugController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
-            cont.initialize(project, contributorUName);
+            cont.initialize(project, contributorUName, parentOfProject);
             backButton.getScene().setRoot(root);
         }
         catch(IOException excep){
