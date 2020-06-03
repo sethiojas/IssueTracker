@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane;
 import com.issue_tracker.*;
 import java.io.IOException;
 
-public class MaintainerController {
+public class MaintainerController implements Contributor {
     private SaveOrRetrieve<Maintainer> sr = new SaveOrRetrieve<>();
     private Maintainer me;
 
