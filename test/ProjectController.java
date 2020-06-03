@@ -14,6 +14,7 @@ public class ProjectController {
 
     private String contributorUName;
     private Project project;
+    private String parentFXML;
 
     @FXML
     private Label projectTitle;
@@ -36,7 +37,7 @@ public class ProjectController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("add_bug.fxml"));
             GridPane root = loader.load();
             AddBugController cont = loader.getController();
-            cont.initialize(project, contributorUName);
+            cont.initialize(project, contributorUName, parentFXML);
             newBugButton.getScene().setRoot(root);
         }
         catch(IOException e){
@@ -59,9 +60,10 @@ public class ProjectController {
         }
     }
 
-    public void initialize(Project proj, String uname){
+    public void initialize(Project proj, String uname, String parentFXML){
         project = proj;
         contributorUName = uname;
+        this.parentFXML = parentFXML;
         projectTitle.setText(project.getProjectName());
 
         for (String _name: project.getMaintainers()){
@@ -85,7 +87,7 @@ public class ProjectController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("bug.fxml"));
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
-                    cont.initialize(thisBug, project, contributorUName);
+                    cont.initialize(thisBug, project, contributorUName, parentFXML);
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
