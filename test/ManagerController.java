@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import java.io.IOException;
 import com.issue_tracker.*;
 
-public class ManagerController extends MaintainerController {
+public class ManagerController extends MaintainerController implements Contributor {
     private String contributorUName;
     private Manager me;
     private SaveOrRetrieve<Manager> sr = new SaveOrRetrieve<>();
