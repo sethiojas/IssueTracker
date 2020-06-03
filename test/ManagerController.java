@@ -33,6 +33,12 @@ public class ManagerController extends MaintainerController implements Contribut
     @FXML
     private VBox centerVbox;
 
+    @Override
+    public void saveChangesToProject(Project proj) {
+        me.updateProject(proj);
+        sr.updateThisObject(me);
+    }
+
     @FXML
     public void showProjects(){
         centerVbox.getChildren().clear();
