@@ -16,6 +16,10 @@ public class Manager extends Maintainer implements Serializable, Saveable{
         super(_uName);
     }
 
+    public Project getProjectByTitle(String title){
+        return projects.get(title);
+    }
+
     public void createProject(String title){
         projects.put(title, new Project(title));
     }
