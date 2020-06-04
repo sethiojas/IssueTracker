@@ -89,7 +89,7 @@ public class Project implements Serializable{
     }
 
     public static void insertProject(Project project){
-        String insert = "insert into project values(?, ?, ?)";
+        String insert = "insert into projects values(?, ?, ?)";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(insert);
@@ -110,7 +110,7 @@ public class Project implements Serializable{
     }
 
     public static void updateProject(Project project){
-        String update = "update project set project_object=? where project_id=? and project_name=?";
+        String update = "update projects set project_object=? where project_id=? and project_name=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(update);
@@ -131,7 +131,7 @@ public class Project implements Serializable{
     }
 
     public static Project getProject(int id){
-        String getProject = "select project_object from project where project_id=?";
+        String getProject = "select project_object from projects where project_id=?";
         Project p = null;
         try{
             Connection conn = DriverManager.getConnection(dbPath);
