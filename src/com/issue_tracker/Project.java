@@ -8,21 +8,21 @@ import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Project implements Serializable{
     private static final long serialVersionUID = 6529685098267757694L;
     private static final String dbPath = "jdbc:sqlite:../issueTracker.db";
-    private int projectId;
+    private static int projectId;
     final private String projectName;
     private int bugId = 0;
     private HashMap<Integer, Bug> bugs = new HashMap<>();
     protected HashSet<String> maintainers = new HashSet<>();
 
-    public Project(String projectName, int projectId){
+    public Project(String projectName){
         this.projectName = projectName;
-        this.projectId = projectId;
         insertProject(this);
     }
 
@@ -99,6 +99,9 @@ public class Project implements Serializable{
             if (arr == null) throw new Exception("Byte array is null");
             pstm.setBytes(3, arr);
             pstm.executeUpdate();
+            Statement stm = conn.createStatement();
+            ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID() FROM projects");
+            projectId = res.getInt(1);
             conn.close();
         }
         catch(SQLException e){
