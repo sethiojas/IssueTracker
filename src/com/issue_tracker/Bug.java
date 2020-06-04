@@ -1,6 +1,12 @@
 package com.issue_tracker;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.DriverManager;
 
 public class Bug implements Serializable{
     private static final long serialVersionUID = 6529685098267757695L;
