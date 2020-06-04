@@ -108,5 +108,24 @@ public class Project implements Serializable{
         }
     }
 
-    public static void updateProject(Project project){}
+    public static void updateProject(Project project){
+        String update = "update project set project_object=? where project_id=? and project_name=?";
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(update);
+            byte[] arr = ConvertObject.<Project>getByteArrayObject(project);
+            if (arr == null) throw new Exception("Byte array is null");
+            pstm.setBytes(1, arr);
+            pstm.setInt(2, project.getProjectId());
+            pstm.setString(3, project.getProjectName());
+            pstm.executeUpdate();
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
