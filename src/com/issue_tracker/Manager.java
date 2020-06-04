@@ -21,7 +21,9 @@ public class Manager extends Maintainer implements Serializable, Saveable{
     }
 
     public void createProject(String title){
-        projects.put(title, new Project(title));
+        Project proj = new Project(title);
+        projects.put(title, proj);
+        proj.addMaintainer(uName);
     }
 
     public void updateProject(Project project) {
@@ -31,8 +33,6 @@ public class Manager extends Maintainer implements Serializable, Saveable{
     public void addMaintainersToProject(String title, ArrayList<String> uNameList){
         Project proj = projects.get(title);
         proj.addMaintainers(uNameList);
-        proj.addMaintainer(uName);
-        
         for (String item : uNameList){
             maintainer.get(item).addProject(proj);
         }
