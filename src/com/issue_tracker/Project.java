@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Project implements Serializable{
@@ -126,6 +127,30 @@ public class Project implements Serializable{
         }
         catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public static Project getProject(int id){
+        String getProject = "select project_object from project where project_id=?";
+        Project p = null;
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(getProject);
+            pstm.setInt(1, id);
+            ResultSet res = pstm.executeQuery();
+            byte[] arr = res.getBytes("project_object");
+            p = ConvertObject.<Project>getJavaObject(arr);
+            if (p == null) throw new Exception("Error while deserializing object");
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            return p;
         }
     }
 }
