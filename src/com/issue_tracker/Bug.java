@@ -8,10 +8,10 @@ public class Bug implements Serializable{
     final private String description;
     final private int bugId;
 
-    public Bug(String _title, String _desc, int _id){
+    public Bug(String _title, String _desc){
         title = _title;
         description = _desc;
-        bugId = _id;
+        // bugId = _id;
     }
 
     public String getTitle(){
