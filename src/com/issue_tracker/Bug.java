@@ -60,4 +60,17 @@ public class Bug implements Serializable{
         }
     }
 
+    public static void closeBug(int bugId){
+        String close = "delete from bugs where bug_id=?";
+        try{
+            Connection conn = DriverManager.getConnection();
+            PreparedStatement pstm = conn.prepareStatement();
+            pstm.setInt(1, bugId);
+            pstm.executeUpdate();
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
