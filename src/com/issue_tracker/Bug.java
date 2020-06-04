@@ -13,13 +13,15 @@ public class Bug implements Serializable{
     private final String title;
     private final String description;
     private final int bugId;
+    private final int project_id;
     private final String dbPath = "jdbc:sqlite:../test.db";
     
 
-    public Bug(String _title, String _desc){
+    public Bug(String _title, String _desc, int _project_id){
         title = _title;
         description = _desc;
-        // bugId = _id;
+        project_id = _project_id;
+        saveBug();
     }
 
     public String getTitle(){
@@ -37,6 +39,25 @@ public class Bug implements Serializable{
     @Override
     public String toString(){
         return "(" + bugId + "," + title + ")";
+    }
+
+    public void saveBug(){
+        String insert = "INSERT INTO bugs(bug_title, bug_desc, project_id) VALUES(?, ?, ?)";
+        try{
+            Connection conn = DriverManager.getConenction(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(insert);
+            pstm.setString(1, title);
+            pstm.setString(2, description);
+            pstm.setInt(3, project_id);
+            pstm.executeUpdate();
+            Statement stm = conn.createStatement();
+            ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID() FROM bugs");
+            bugId = res.getInt(1);
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
 }
