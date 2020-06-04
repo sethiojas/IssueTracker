@@ -13,14 +13,14 @@ public class Bug implements Serializable{
     private final String title;
     private final String description;
     private final int bugId;
-    private final int project_id;
+    private final int projectId;
     private final String dbPath = "jdbc:sqlite:../test.db";
     
 
-    public Bug(String _title, String _desc, int _project_id){
+    public Bug(String _title, String _desc, int _projectId){
         title = _title;
         description = _desc;
-        project_id = _project_id;
+        projectId = _projectId;
         saveBug();
     }
 
@@ -48,7 +48,7 @@ public class Bug implements Serializable{
             PreparedStatement pstm = conn.prepareStatement(insert);
             pstm.setString(1, title);
             pstm.setString(2, description);
-            pstm.setInt(3, project_id);
+            pstm.setInt(3, projectId);
             pstm.executeUpdate();
             Statement stm = conn.createStatement();
             ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID() FROM bugs");
