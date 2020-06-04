@@ -12,7 +12,7 @@ public class Bug implements Serializable{
     private static final long serialVersionUID = 6529685098267757695L;
     private final String title;
     private final String description;
-    private final int bugId;
+    private int bugId;
     private final int projectId;
     private final String dbPath = "jdbc:sqlite:../test.db";
     
