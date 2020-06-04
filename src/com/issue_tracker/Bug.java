@@ -26,14 +26,6 @@ public class Bug implements Serializable{
         return bugId;
     }
 
-    public boolean isResolved(){
-        return isClosed;
-    }
-
-    public void resolved(){
-        isClosed = true;
-    }
-
     @Override
     public String toString(){
         return "(" + bugId + "," + title + ")";
