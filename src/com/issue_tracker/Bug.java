@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 public class Bug implements Serializable{
     private static final long serialVersionUID = 6529685098267757695L;
-    final private String title;
-    final private String description;
-    final private int bugId;
+    private final String title;
+    private final String description;
+    private final int bugId;
+    private final String dbPath = "jdbc:sqlite:../test.db";
+    
 
     public Bug(String _title, String _desc){
         title = _title;
