@@ -8,7 +8,8 @@ import java.io.Serializable;
 
 public class Project implements Serializable{
     private static final long serialVersionUID = 6529685098267757694L;
-    private int bugId = 0;
+    private static final String dbPath = "jdbc:sqlite:../issueTracker.db";
+    private int projectId;
     final private String projectName;
     private HashMap<Integer, Bug> bugs = new HashMap<>();
     protected HashSet<String> maintainers = new HashSet<>();
