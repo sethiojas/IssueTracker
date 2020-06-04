@@ -21,7 +21,7 @@ public class SaveOrRetrieve<T extends Saveable>{
 // Saveable interface is implemented so that the generic variable T can extend from
 // it, instead of Object class, and have a getUName() implementation.
 
-    private String dbPath = "jdbc:sqlite:test.db";
+    private String dbPath = "jdbc:sqlite:../test.db";
 
     public byte[] getByteArrayObject(T obj){
         byte[] byteArrayObject = null;
