@@ -23,6 +23,7 @@ public class Project implements Serializable{
     public int createNewBug(String title, String desc){
         bugId += 1;
         bugs.put(bugId, new Bug(title, desc, bugId));
+        updateProject(this);
         return bugId;
     }
     
