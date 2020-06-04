@@ -14,7 +14,7 @@ public class Bug implements Serializable{
     private final String description;
     private int bugId;
     private final int projectId;
-    private final String dbPath = "jdbc:sqlite:../test.db";
+    private static final String dbPath = "jdbc:sqlite:../test.db";
     
 
     public Bug(String _title, String _desc, int _projectId){
