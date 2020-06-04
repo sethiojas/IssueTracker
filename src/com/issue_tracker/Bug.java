@@ -44,7 +44,7 @@ public class Bug implements Serializable{
     public void saveBug(){
         String insert = "INSERT INTO bugs(bug_title, bug_desc, project_id) VALUES(?, ?, ?)";
         try{
-            Connection conn = DriverManager.getConenction(dbPath);
+            Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(insert);
             pstm.setString(1, title);
             pstm.setString(2, description);
@@ -63,8 +63,8 @@ public class Bug implements Serializable{
     public static void closeBug(int bugId){
         String close = "delete from bugs where bug_id=?";
         try{
-            Connection conn = DriverManager.getConnection();
-            PreparedStatement pstm = conn.prepareStatement();
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(close);
             pstm.setInt(1, bugId);
             pstm.executeUpdate();
             conn.close();
