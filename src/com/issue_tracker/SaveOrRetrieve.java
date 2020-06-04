@@ -1,19 +1,11 @@
 package com.issue_tracker;
 
-import java.io.Serializable;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
-// SOURCE http://burnignorance.com/java-web-development-tips/store-java-class-object-in-database/
-// https://www.tutorialspoint.com/How-to-convert-Byte-Array-to-BLOB-in-java
-// https://www.sqlitetutorial.net/sqlite-java/jdbc-read-write-blob/
 // https://stackoverflow.com/questions/31477421/error-cannot-find-symbol-when-calling-a-method-defined-using-generics
 // https://www.java2novice.com/java-generics/implements-interface/
 
@@ -23,47 +15,6 @@ public class SaveOrRetrieve<T extends Saveable>{
 
     private String dbPath = "jdbc:sqlite:../issueTracker.db";
 
-    public byte[] getByteArrayObject(T obj){
-        byte[] byteArrayObject = null;
-        
-        try{
-            ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
-            ObjectOutputStream objOut  = new ObjectOutputStream(byteArr);
-
-            objOut.writeObject(obj);
-            
-            byteArrayObject = byteArr.toByteArray();
-            objOut.close();
-            byteArr.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        finally{
-            return byteArrayObject;
-        }
-    }
-// https://stackoverflow.com/questions/509076/how-do-i-address-unchecked-cast-warnings
-// https://stackoverflow.com/questions/12886769/java-compiler-error-not-making-any-sense-identifier-expected
-// https://stackoverflow.com/questions/39366263/does-the-placement-of-suppresswarningsunchecked-matter
-    @SuppressWarnings("unchecked")
-    public T getJavaObject(byte[] conversionObj){
-        T javaObject = null;
-        try{
-            ByteArrayInputStream byteArr = new ByteArrayInputStream(conversionObj);
-            ObjectInputStream objIn = new ObjectInputStream(byteArr);
-            javaObject = (T)objIn.readObject();
-            objIn.close();
-            byteArr.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        finally{
-            return javaObject;
-        }
-    }
-
     public void saveThisObject(T saveObj, String onBench){
         try{
             String uname = saveObj.getUName();
@@ -72,7 +23,7 @@ public class SaveOrRetrieve<T extends Saveable>{
             PreparedStatement pstm = conn.prepareStatement(save);
             pstm.setString(1, uname);
 
-            byte[] arr = getByteArrayObject(saveObj);
+            byte[] arr = ConvertObject.<T>getByteArrayObject(saveObj);
             if(arr == null) throw new Exception("Cannot get ByteArray");
             
             pstm.setBytes(2, arr);
@@ -103,7 +54,7 @@ public class SaveOrRetrieve<T extends Saveable>{
             ResultSet s = pstm.executeQuery();
             
             byte[] arr = s.getBytes("obj");
-            a = getJavaObject(arr);
+            a = ConvertObject.<T>getJavaObject(arr);
             conn.close();
         }
         catch(SQLException e){
@@ -134,7 +85,7 @@ public class SaveOrRetrieve<T extends Saveable>{
                 pstm = conn.prepareStatement(updateObject);
                 pstm.setString(2, uname);
             }
-            byte[] arr = getByteArrayObject(obj);
+            byte[] arr = ConvertObject.<T>getByteArrayObject(obj);
             if (arr == null) throw new Exception("Cannot get ByteArray");
 
             pstm.setBytes(1, arr);
