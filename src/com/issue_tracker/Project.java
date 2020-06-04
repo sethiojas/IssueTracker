@@ -5,12 +5,17 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.Serializable;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Project implements Serializable{
     private static final long serialVersionUID = 6529685098267757694L;
     private static final String dbPath = "jdbc:sqlite:../issueTracker.db";
     private int projectId;
     final private String projectName;
+    private int bugId = 0;
     private HashMap<Integer, Bug> bugs = new HashMap<>();
     protected HashSet<String> maintainers = new HashSet<>();
 
