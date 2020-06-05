@@ -88,6 +88,27 @@ public class Maintainer extends Contributor implements Serializable {
         }
     }
 
+    public static Maintainer getMaintainer(String uname){
+        String getMaintainer = "SELECT object FROM contributors WHERE uname=?";
+        Maintainer m = null;
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(getMaintainer);
+            pstm.setString(1, uname);
+            ResultSet res = pstm.executeQuery();
+            byte[] arr = res.getBytes("object");
+            m = ConvertObject.<Maintainer>getJavaObject(arr);
+            if (m == null) throw new Exception("Unable to Deserialize object");
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            return m;
+        }
+    }
+
     @Override
     public String toString(){
         return "Maintainer: " + uName;
