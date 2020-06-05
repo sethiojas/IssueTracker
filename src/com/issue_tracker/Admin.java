@@ -132,7 +132,7 @@ public class Admin implements Serializable {
 
     @Override
     public String toString(){
-        return "Admin: " + adminUName;
+        return "Admin";
     }
 
     void removeCredential(String uName){
