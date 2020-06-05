@@ -2,7 +2,6 @@ package com.issue_tracker;
 
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.Connection;
