@@ -6,8 +6,7 @@ import java.io.Serializable;
 
 public class Manager extends Contributor implements Serializable {
     
-    private HashMap<String, Maintainer> maintainer = new HashMap<>();
-    private HashMap<String, Project> projects = new HashMap<>();
+    private ArrayList<String> maintainers = new ArrayList<>();
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757691L;
