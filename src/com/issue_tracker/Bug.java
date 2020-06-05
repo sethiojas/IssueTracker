@@ -12,7 +12,6 @@ public class Bug implements Serializable{
     private static final long serialVersionUID = 6529685098267757695L;
     private final String title;
     private final String description;
-    private int bugId;
     private final int projectId;
     private static final String dbPath = "jdbc:sqlite:../issueTracker.db";
     
@@ -32,13 +31,9 @@ public class Bug implements Serializable{
         return description;
     }
 
-    public int getId(){
-        return bugId;
-    }
-
     @Override
     public String toString(){
-        return "(" + bugId + "," + title + ")";
+        return "(Bug: " + title + ")";
     }
 
     public void saveBug(){
@@ -50,9 +45,6 @@ public class Bug implements Serializable{
             pstm.setString(2, description);
             pstm.setInt(3, projectId);
             pstm.executeUpdate();
-            Statement stm = conn.createStatement();
-            ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID()");
-            bugId = res.getInt(1);
             conn.close();
         }
         catch(SQLException e){
