@@ -11,21 +11,11 @@ import java.io.Serializable;
 
 public class Admin implements Serializable {
     // all static and transient variables are null after deserialization
-
-    private final String adminUName;
-
     // https://www.baeldung.com/java-jdbc
     private String dbPath = "jdbc:sqlite:test.db";
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757690L;
-
-    Admin(String _name, String passwd){
-        adminUName = _name;
-        insertNewCredentials(_name, passwd, "admin");
-        SaveOrRetrieve<Admin> saver = new SaveOrRetrieve<>();
-        saver.saveThisObject(this, "false");
-    }
 
     void createNewManager(String uName, String passwd){
         insertNewCredentials(uName, passwd, "manager");
