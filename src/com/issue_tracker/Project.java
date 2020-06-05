@@ -119,15 +119,14 @@ public class Project implements Serializable{
     }
 
     public static void insertProject(Project project){
-        String insert = "insert into projects values(?, ?, ?)";
+        String insert = "INSERT INTO projects(project_name, project_object) VALUES(?, ?)";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(insert);
-            pstm.setInt(1, project.getProjectId());
-            pstm.setString(2, project.getProjectName());
+            pstm.setString(1, project.getProjectName());
             byte[] arr = ConvertObject.<Project>getByteArrayObject(project);
             if (arr == null) throw new Exception("Byte array is null");
-            pstm.setBytes(3, arr);
+            pstm.setBytes(2, arr);
             pstm.executeUpdate();
             Statement stm = conn.createStatement();
             ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID() FROM projects");
