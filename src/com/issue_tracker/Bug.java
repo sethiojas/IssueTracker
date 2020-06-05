@@ -73,4 +73,17 @@ public class Bug implements Serializable{
             e.printStackTrace();
         }
     }
+
+    public static void removeAllBugsOfProject(int projectId){
+        String removeAll = "delete from bugs where project_id=?";
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(removeAll);
+            pstm.setInt(1, projectId);
+            pstm.executeUpdate();
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
