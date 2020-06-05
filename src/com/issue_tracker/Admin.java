@@ -32,7 +32,7 @@ public class Admin implements Serializable {
         Manager manager = (Manager) Contributor.getContributor(uNameManager);
         Maintainer maintainer = (Maintainer) Contributor.getContributor(uNameMaintainer);
         maintainer.setManager(uNameManager);
-        manager.addMaintainer(maintainer);
+        manager.addMaintainer(uNameMaintainer);
 
         Contributor.setOnBench(uNameMaintainer, "false");
     }
