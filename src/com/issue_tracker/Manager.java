@@ -58,6 +58,11 @@ public class Manager extends Contributor implements Serializable {
         updateContributor();
     }
 
+    public void removeMaintainer(String uname){
+        maintainers.remove(uname);
+        updateContributor();
+    }
+
     public ArrayList<String> getMaintainers(){
         return maintainers;
     }
