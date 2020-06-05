@@ -179,4 +179,18 @@ public class Project implements Serializable{
             return p;
         }
     }
+
+    public static void removeProject(int projectId){
+        Bug.removeAllBugsOfProject(projectId);
+        String removeProject = "delete from projects where project_id=?";
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(removeProject);
+            pstm.setInt(1, projectId);
+            pstm.executeUpdate();
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
