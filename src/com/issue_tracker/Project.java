@@ -92,11 +92,6 @@ public class Project implements Serializable{
         return projectName.equals(proj.getProjectId());
     }
 
-    public void addMaintainer(String uName){
-        maintainers.add(uName);
-        updateProject(this);
-    }
-
     public void addMaintainers(ArrayList<String> uNameList){
         maintainers.addAll(uNameList);
         updateProject(this);
