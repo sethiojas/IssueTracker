@@ -14,14 +14,14 @@ import java.sql.SQLException;
 public class Project implements Serializable{
     private static final long serialVersionUID = 6529685098267757694L;
     private static final String dbPath = "jdbc:sqlite:../issueTracker.db";
-    private static int projectId;
+    private int projectId;
     final private String projectName;
     private int bugId = 0;
     protected ArrayList<String> maintainers = new ArrayList<>();
 
     public Project(String projectName){
         this.projectName = projectName;
-        insertProject(this);
+        insertProject();
     }
 
     public void createNewBug(String title, String desc){
@@ -107,13 +107,13 @@ public class Project implements Serializable{
         return "Project: " + projectName;
     }
 
-    public static void insertProject(Project project){
+    public void insertProject(){
         String insert = "INSERT INTO projects(project_name, project_object) VALUES(?, ?)";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(insert);
-            pstm.setString(1, project.getProjectName());
-            byte[] arr = ConvertObject.<Project>getByteArrayObject(project);
+            pstm.setString(1, projectName);
+            byte[] arr = ConvertObject.<Project>getByteArrayObject(this);
             if (arr == null) throw new Exception("Byte array is null");
             pstm.setBytes(2, arr);
             pstm.executeUpdate();
@@ -175,13 +175,13 @@ public class Project implements Serializable{
         }
     }
 
-    public static void removeProject(int projectId){
-        Bug.removeAllBugsOfProject(projectId);
+    public static void removeProject(int projectID){
+        Bug.removeAllBugsOfProject(projectID);
         String removeProject = "delete from projects where project_id=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(removeProject);
-            pstm.setInt(1, projectId);
+            pstm.setInt(1, projectID);
             pstm.executeUpdate();
             conn.close();
         }catch(SQLException e){
