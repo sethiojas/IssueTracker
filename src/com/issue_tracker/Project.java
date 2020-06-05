@@ -142,7 +142,7 @@ public class Project implements Serializable{
     }
 
     public static void updateProject(Project project){
-        String update = "update projects set project_object=? where project_id=? and project_name=?";
+        String update = "UPDATE projects SET project_object=? WHERE project_id=? AND project_name=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(update);
@@ -163,7 +163,7 @@ public class Project implements Serializable{
     }
 
     public static Project getProject(int id){
-        String getProject = "select project_object from projects where project_id=?";
+        String getProject = "SELECT project_object FROM projects WHERE project_id=?";
         Project p = null;
         try{
             Connection conn = DriverManager.getConnection(dbPath);
