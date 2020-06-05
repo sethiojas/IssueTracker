@@ -18,7 +18,7 @@ public class Project implements Serializable{
     private static int projectId;
     final private String projectName;
     private int bugId = 0;
-    protected HashSet<String> maintainers = new HashSet<>();
+    protected ArrayList<String> maintainers = new ArrayList<>();
 
     public Project(String projectName){
         this.projectName = projectName;
@@ -86,12 +86,7 @@ public class Project implements Serializable{
     }
 
     public ArrayList<String> getMaintainers(){
-        ArrayList<String> list = new ArrayList<>();
-        Iterator<String> iterMaintainers = maintainers.iterator();
-        while(iterMaintainers.hasNext()){
-            list.add(iterMaintainers.next());
-        }
-        return list;
+        return maintainers;
     }
 
     public boolean equals(Project proj){
