@@ -1,7 +1,6 @@
 package com.issue_tracker;
 
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -9,11 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Maintainer implements Serializable, Saveable{
-    
-    protected String uName;
-    private HashMap<String, Integer> projects = new HashMap<>();
-    private static String dbPath = "jdbc:sqlite:../issueTracker.db";
+public class Maintainer extends Contributor implements Serializable {
     private String manager;
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
@@ -22,19 +17,6 @@ public class Maintainer implements Serializable, Saveable{
     public Maintainer(String _uName){
         uName = _uName;
         saveMaintainer();
-    }
-
-    @Override
-    public String getUName(){
-        return uName;
-    }
-
-    public HashMap<String, Integer> getProjects(){
-        return projects;
-    }
-
-    public int getProjectID(String projectTitle){
-        return projects.get(projectTitle);
     }
 
     public void addProject(String title, int id){
