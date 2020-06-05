@@ -110,6 +110,7 @@ public class Project implements Serializable{
 
     public void removeMaintainer(String uname){
         maintainers.remove(uname);
+        updateProject(this);
     }
 
     @Override
