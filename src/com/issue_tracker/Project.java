@@ -33,12 +33,9 @@ public class Project implements Serializable{
         return projectName;
     }
 
-    public boolean closeBug(int bugId){
-        if(bugs.containsKey(bugId)){
-            bugs.remove(bugId);
-            updateProject(this);
-            return true;
-        }
+    public void closeBug(int bugId){
+       Bug.closeBug(bugId);
+    }
         return false;
     }
 
