@@ -51,7 +51,7 @@ public class Bug implements Serializable{
             pstm.setInt(3, projectId);
             pstm.executeUpdate();
             Statement stm = conn.createStatement();
-            ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID() FROM bugs");
+            ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID()");
             bugId = res.getInt(1);
             conn.close();
         }

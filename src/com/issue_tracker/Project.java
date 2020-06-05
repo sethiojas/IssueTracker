@@ -118,7 +118,7 @@ public class Project implements Serializable{
             pstm.setBytes(2, arr);
             pstm.executeUpdate();
             Statement stm = conn.createStatement();
-            ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID() FROM projects");
+            ResultSet res = stm.executeQuery("SELECT LAST_INSERT_ROWID()");
             projectId = res.getInt(1);
             conn.close();
         }
