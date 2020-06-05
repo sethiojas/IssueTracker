@@ -16,10 +16,6 @@ public class Manager extends Contributor implements Serializable {
         saveContributor();
     }
 
-    public Project getProjectByTitle(String title){
-        return projects.get(title);
-    }
-
     public void createProject(String title){
         Project proj = new Project(title);
         projects.put(title, proj);
@@ -57,16 +53,17 @@ public class Manager extends Contributor implements Serializable {
         maintainer.put(addMe.getUName(), addMe);
     }
 
-    public ArrayList<Maintainer> getAllMaintainers(){
-        return new ArrayList<Maintainer>(maintainer.values());
+    public void addMaintainer(String uname){
+        maintainers.add(uname);
+        updateContributor();
     }
 
-    public ArrayList<Project> getAllProjects(){
-        return new ArrayList<Project>(projects.values());
+    public ArrayList<String> getMaintainers(){
+        return maintainers;
     }
 
-    public Maintainer getMaintainer(String uname) {
-        return maintainer.get(uname);
+    public HashMap<String, Integer> getProjects(){
+        return projects;
     }
 
     @Override
