@@ -51,8 +51,22 @@ public class Maintainer implements Serializable, Saveable{
         projects.clear();
     }
 
-    public void setManager(String uNameManager){
-        manager = uNameManager;
+    public void updateMaintainer(){
+        String update = "UPDATE contributors SET object=? WHERE uname=?";
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(update);
+            pstm.setString(2, uName);
+            byte[] arr = ConvertObject.<Maintainer>getByteArrayObject(this);
+            if (arr == null) throw new Exception("Unable to Serialize object");
+            pstm.setBytes(1, arr);
+            pstm.executeUpdate();
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void removeMaintainer(String uname){
