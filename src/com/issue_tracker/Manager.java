@@ -27,6 +27,14 @@ public class Manager extends Contributor implements Serializable {
     }
 
     public void removeProject(String title){
+        int projectID = projects.get(title);
+        Project.removeProject(projectID);
+
+        for (String maintainerUname: maintainers){
+            Maintainer m = (Maintainer) Contributor.getContributor(maintainerUname);
+            m.removeProject(title);
+        }
+
         projects.remove(title);
         updateContributor();
     }
