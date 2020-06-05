@@ -32,6 +32,17 @@ public class Maintainer extends Contributor implements Serializable {
         return manager;
     }
 
+    public void putOnBench(){
+        for (int id: projects.values()){
+            Project p = Project.getProject(id);
+            p.removeMaintainer(uName);
+        }
+        projects.clear();
+        setManager("");
+        updateContributor();
+        setOnBench(uName, "true");
+    }
+
     @Override
     public String toString(){
         return "Maintainer: " + uName;
