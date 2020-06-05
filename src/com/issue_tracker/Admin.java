@@ -37,15 +37,6 @@ public class Admin implements Serializable {
         insertNewCredentials(uName, passwd, "maintainer");
         new Maintainer(uName);
     }
-
-    void promoteToManager(String uName){
-        SaveOrRetrieve<Maintainer> srMaintainer = new SaveOrRetrieve<>();
-        SaveOrRetrieve<Manager> srManager = new SaveOrRetrieve<>();
-        Maintainer thisMaintainer = srMaintainer.retrieveThisObject(uName);
-        updateRole(uName, "manager");
-        Manager promoted = new Manager(thisMaintainer.getUName());
-        srManager.updateThisObject(promoted, "false");
-    }
     
     void assignManager(String uNameManager, String uNameMaintainer){
         Manager manager = (Manager) Contributor.getContributor(uNameManager);
