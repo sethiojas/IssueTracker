@@ -125,9 +125,25 @@ public class Admin implements Serializable {
         }
     }
 
-    @Override
-    public String getUName(){
-        return adminUName;
+    ArrayList<String> getAllAssigned(){
+        ArrayList<String> listAssigned = new ArrayList<>();
+
+        try{
+            String getAssigned = "SELECT uname FROM contributors WHERE on_bench=\"false\"";
+            Connection conn = DriverManager.getConnection(dbPath);
+            Statement stm = conn.createStatement();
+            ResultSet res = stm.executeQuery(getAssigned);
+            while(res.next()){
+                listAssigned.add(res.getString("uname"));
+            }
+            conn.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            return listAssigned;
+        }
     }
 
     @Override
