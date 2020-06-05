@@ -39,14 +39,17 @@ public class Maintainer implements Serializable, Saveable{
 
     public void addProject(String title, int id){
         projects.put(title, id);
+        updateMaintainer();
     }
 
     public void removeProject(String title){
         projects.remove(title);
+        updateMaintainer();
     }
 
     public void setManager(String uNameManager){
         manager = uNameManager;
+        updateMaintainer();
     }
 
     public String getManager(){
