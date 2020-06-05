@@ -55,8 +55,17 @@ public class Maintainer implements Serializable, Saveable{
         manager = uNameManager;
     }
 
-    public String getManager(){
-        return manager;
+    public static void removeMaintainer(String uname){
+        String delete = "DELETE FROM contributors WHERE uname=?";
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(delete);
+            pstm.setString(1, uname);
+            pstm.executeUpdate();
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
