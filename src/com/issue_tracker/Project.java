@@ -36,11 +36,25 @@ public class Project implements Serializable{
     public void closeBug(int bugId){
        Bug.closeBug(bugId);
     }
-        return false;
-    }
 
-    public Bug getBug(int bugId){
-        return bugs.get(bugId);
+    public HashMap<String, String> getBug(int bugId){
+        // return bugs.get(bugId);
+        HashMap<String, String> bug = new HashMap<>();
+        String getBug = "SELECT bug_title, bug_desc FROM bugs WHERE bug_id=? AND project_id=?";
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(getBug);
+            pstm.setInt(1, bugId);
+            pstm.setInt(2, projectId);
+            ResultSet res = pstm.executeQuery();
+            bug.put("title", res.getString("bug_title"));
+            bug.put("desc", res.getString("bug_desc"));
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            return bug;
+        }
     }
 
     public int getProjectId(){
