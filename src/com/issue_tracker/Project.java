@@ -61,8 +61,28 @@ public class Project implements Serializable{
         return projectId;
     }
     
-    public ArrayList<Bug> getAllBugs(){
-        return new ArrayList<Bug>(bugs.values());
+    public ArrayList<HashMap<String, String>> getAllBugs(){
+        ArrayList<HashMap<String, String>> bugs = new ArrayList<>();
+        String allBugsQuery = "SELECT bug_id, bug_title, bug_desc FROM bugs WHERE project_id=?";
+        try{
+            Connection conn = DriverManager.getConnection(dbPath);
+            PreparedStatement pstm = conn.prepareStatement(allBugsQuery);
+            pstm.setInt(1, projectId);
+            ResultSet res = pstm.executeQuery();
+            while(res.next()){
+                HashMap<String, String> bug = new HashMap<>();
+                bug.put("id", Integer.toString(res.getInt("bug_id")));
+                bug.put("title", res.getString("bug_title"));
+                bug.put("desc", res.getString("bug_desc"));
+
+                bugs.add(bug);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            return bugs;
+        }
     }
 
     public ArrayList<String> getMaintainers(){
