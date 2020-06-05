@@ -104,7 +104,7 @@ public class Project implements Serializable{
 
     @Override
     public String toString(){
-        return "Project: " + projectName;
+        return "Project: " + projectName + " #" + projectId;
     }
 
     public void insertProject(){
@@ -127,6 +127,9 @@ public class Project implements Serializable{
         }
         catch(Exception e){
             e.printStackTrace();
+        }
+        finally{
+            updateProject(this);
         }
     }
 
