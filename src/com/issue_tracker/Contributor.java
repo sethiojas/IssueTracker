@@ -1,9 +1,10 @@
 package com.issue_tracker;
 
 import java.util.HashMap;
+import java.io.Serializable;
 
-abstract class Contributor {
-
+abstract class Contributor implements Serializable{
+    private static final long serialVersionUID = 6529685098267757696L;
     protected String uName;
     protected HashMap<String, Integer> projects = new HashMap<>();
     protected static String dbPath = "jdbc:sqlite:../issueTracker.db";
