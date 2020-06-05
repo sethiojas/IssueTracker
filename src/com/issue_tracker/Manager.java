@@ -12,7 +12,8 @@ public class Manager extends Contributor implements Serializable {
     private static final long serialVersionUID = 6529685098267757691L;
 
     public Manager(String _uName){
-        super(_uName);
+        uName = _uName;
+        saveContributor();
     }
 
     public Project getProjectByTitle(String title){
