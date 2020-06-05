@@ -95,7 +95,7 @@ public class Project implements Serializable{
     }
 
     public boolean equals(Project proj){
-        return projectName.equals(proj.getProjectName());
+        return projectName.equals(proj.getProjectId());
     }
 
     public boolean addMaintainer(String uName){
