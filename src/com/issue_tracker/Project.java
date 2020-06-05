@@ -25,11 +25,8 @@ public class Project implements Serializable{
         insertProject(this);
     }
 
-    public int createNewBug(String title, String desc){
-        bugId += 1;
-        bugs.put(bugId, new Bug(title, desc, bugId));
-        updateProject(this);
-        return bugId;
+    public void createNewBug(String title, String desc){
+        new Bug(title, desc, projectId);
     }
     
     public String getProjectName(){
