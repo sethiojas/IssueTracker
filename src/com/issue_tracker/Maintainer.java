@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class Maintainer implements Serializable, Saveable{
     
     protected String uName;
+    private HashMap<String, Integer> projects = new HashMap<>();
     private static String dbPath = "jdbc:sqlite:../issueTracker.db";
     private String manager;
 
@@ -28,26 +29,28 @@ public class Maintainer implements Serializable, Saveable{
         return uName;
     }
 
-    public ArrayList<Project> getProjects(){
-        return new ArrayList<Project>(projects.values());
+    public HashMap<String, Integer> getProjects(){
+        return projects;
     }
 
-    public Project getProjectByTitle(String title){
-        return projects.get(title);
+    public int getProjectID(String projectTitle){
+        return projects.get(projectTitle);
     }
 
-    public void addProject(Project proj){
-        projects.put(proj.getProjectName(), proj);
+    public void addProject(String title, int id){
+        projects.put(title, id);
     }
 
-    public boolean removeProject(Project proj){
-        Project isRemoved = projects.remove(proj.getProjectName());
-        if(proj.equals(isRemoved)) return true;
-        return false;
+    public void removeProject(String title){
+        projects.remove(title);
     }
 
-    public void updateProject(Project proj){
-        projects.replace(proj.getProjectName(), proj);
+    public void setManager(String uNameManager){
+        manager = uNameManager;
+    }
+
+    public String getManager(){
+        return manager;
     }
 
     public void saveMaintainer(){
@@ -67,7 +70,6 @@ public class Maintainer implements Serializable, Saveable{
         }catch(Exception e){
             e.printStackTrace();
         }
-        projects.clear();
     }
 
     public void updateMaintainer(){
