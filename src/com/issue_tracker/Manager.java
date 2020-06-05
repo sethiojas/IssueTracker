@@ -18,39 +18,39 @@ public class Manager extends Contributor implements Serializable {
 
     public void createProject(String title){
         Project proj = new Project(title);
-        projects.put(title, proj);
-        proj.addMaintainer(uName);
+        addProject(proj.getProjectName(), proj.getProjectId());
     }
 
-    public void updateProject(Project project) {
-        projects.replace(project.getProjectName(), project);
+    public void addProject(String title, int id){
+        projects.put(title, id);
+        updateContributor();
     }
 
+    public void removeProject(String title){
+        projects.remove(title);
+        updateContributor();
+    }
+    
     public void addMaintainersToProject(String title, ArrayList<String> uNameList){
-        Project proj = projects.get(title);
+        int projectID = projects.get(title);
+        Project proj = Project.getProject(projectID);
+
         proj.addMaintainers(uNameList);
-        for (String item : uNameList){
-            maintainer.get(item).addProject(proj);
+
+        for (String _maintainer : uNameList) {
+            Contributor c = Contributor.getContributor(_maintainer);
+            c.addProject(proj.getProjectName(), proj.getProjectId());
+        }        
+    }
+
+    public void removeMaintainersFromProject(String projTitle, ArrayList<String> uNameList) {
+        int projectID = projects.get(projTitle);
+        Project p = Project.getProject(projectID);
+        for (String _maintainer: uNameList){
+            p.removeMaintainer(_maintainer);
+            Contributor c = Contributor.getContributor(_maintainer);
+            c.removeProject(projTitle);
         }
-    }
-
-    public Maintainer removeMaintainer(String uName){
-        Maintainer removedMaintainer = maintainer.get(uName);
-        removedMaintainer.removeAllProjects();
-        removedMaintainer.setManager(""); 
-        maintainer.remove(uName);
-        return removedMaintainer;
-    }
-
-    public void removeMaintainerFromProject(String uName, String projTitle){
-        Maintainer removedMaintainer = maintainer.get(uName);
-        Project thisProj = removedMaintainer.getProjectByTitle(projTitle);
-        thisProj.removeMaintainer(uName);
-        removedMaintainer.removeProject(thisProj);
-    }
-
-    public void addMaintainer(Maintainer addMe){
-        maintainer.put(addMe.getUName(), addMe);
     }
 
     public void addMaintainer(String uname){
