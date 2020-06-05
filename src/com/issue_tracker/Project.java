@@ -18,7 +18,6 @@ public class Project implements Serializable{
     private static int projectId;
     final private String projectName;
     private int bugId = 0;
-    private HashMap<Integer, Bug> bugs = new HashMap<>();
     protected HashSet<String> maintainers = new HashSet<>();
 
     public Project(String projectName){
