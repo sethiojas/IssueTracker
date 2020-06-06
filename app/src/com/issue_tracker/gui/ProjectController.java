@@ -89,7 +89,7 @@ public class ProjectController {
                     FXMLLoader loader = new FXMLLoader(new File("../../fxml/bug.fxml").toURI().toURL());
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
-                    cont.initialize(bug.get("bug_id"), bug.get("bug_title"),
+                    cont.initialize(Integer.parseInt(bug.get("bug_id")), bug.get("bug_title"),
                                     bug.get("bug_desc"), projectID, contributorUName, parentFXML);
                     btn.getScene().setRoot(root);
                 }
