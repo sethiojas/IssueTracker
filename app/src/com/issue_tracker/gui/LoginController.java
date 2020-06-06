@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Window;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
+import java.io.File;
 
 public class LoginController {
     // https://stackoverflow.com/questions/44010909/using-initialize-method-in-a-controller-in-fxml
@@ -39,29 +40,28 @@ public class LoginController {
                                     "Please check the entered Username and Password");
             return;
         }
-        System.out.println(res);
-        // switch(res){
-        //     // case "admin":
-        //     case "manager": {
-        //         FXMLLoader loader = new FXMLLoader(getClass().getResource("manager.fxml"));
-        //         BorderPane root = loader.load();
-        //         ManagerController cont = loader.getController();
-        //         cont.initialize(uname);
-        //         loginButton.getScene().setRoot(root);
-        //         break;
-        //     }
+        switch(res){
+            // case "admin":
+            // case "manager": {
+            //     FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
+            //     BorderPane root = loader.load();
+            //     ManagerController cont = loader.getController();
+            //     cont.initialize(uname);
+            //     loginButton.getScene().setRoot(root);
+            //     break;
+            // }
 
-        //     case "maintainer":{ 
-        //         FXMLLoader loader = new FXMLLoader(getClass().getResource("maintainer.fxml"));
-        //         GridPane root = loader.load();
-        //         // https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
-        //         MaintainerController cont = loader.getController();
-        //         cont.initialize(uname);
-        //         // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
-        //         // https://stackoverflow.com/questions/39985414/change-scene-without-resize-window-in-javafx
-        //         loginButton.getScene().setRoot(root);
-        //         break;
-        //     }
-        // }        
+            case "maintainer":{ 
+                FXMLLoader loader = new FXMLLoader(new File("../../fxml/maintainer.fxml").toURI().toURL());
+                GridPane root = loader.load();
+                // https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
+                MaintainerController cont = loader.getController();
+                cont.initialize(uname);
+                // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
+                // https://stackoverflow.com/questions/39985414/change-scene-without-resize-window-in-javafx
+                loginButton.getScene().setRoot(root);
+                break;
+            }
+        }        
     }
 }
