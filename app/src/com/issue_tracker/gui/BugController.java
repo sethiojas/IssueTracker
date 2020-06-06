@@ -1,3 +1,5 @@
+package com.issue_tracker.gui;
+
 import javafx.fxml.FXML;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,7 @@ public class BugController {
         this.contributorUName = contributorUName;
         this.parentOfProject = parentOfProject;
 
-        bugTitle.setText(bugTitle);
+        this.bugTitle.setText(bugTitle);
         bugId.setText("Issue id #" + bugID);
         bugDescription.setText(bugDesc);
     }
