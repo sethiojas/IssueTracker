@@ -9,13 +9,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
-import com.issue_tracker.*;
 import java.io.IOException;
+import java.io.File;
+import com.issue_tracker.Maintainer;
+import com.issue_tracker.Contributor;
+import java.util.Map;
+import java.util.HashMap;
 
-public class MaintainerController implements Contributor {
-    private SaveOrRetrieve<Maintainer> sr = new SaveOrRetrieve<>();
-    private Maintainer me;
-
+public class MaintainerController {
+    
     @FXML
     private Label uNameLabel;
     
@@ -31,7 +33,7 @@ public class MaintainerController implements Contributor {
     @FXML
     public void logout(ActionEvent event){
         try{
-            GridPane root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            GridPane root = FXMLLoader.load(new File("../../fxml/login.fxml").toURI().toURL());
             logoutButton.getScene().setRoot(root);
         }
         catch(IOException excep){
@@ -39,32 +41,23 @@ public class MaintainerController implements Contributor {
         }
     }
 
-    @Override
-    public void saveChangesToProject(Project project){
-        me.updateProject(project);
-        sr.updateThisObject(me);
-    }
-
-    @Override
     public void initialize(String uname){
-        me = sr.retrieveThisObject(uname);
+        Maintainer me = (Maintainer) Contributor.getContributor(uname);
 
         uNameLabel.setText(uname);
         managerLabel.setText("Manager: " + me.getManager());
 
-        for (Project p: me.getProjects()){
-            Button btn = new Button(p.getProjectName());
+        for (Map.Entry<String, Integer> entry: me.getProjects().entrySet()){
+            Button btn = new Button(entry.getKey());
             btn.setAlignment(Pos.BASELINE_LEFT);
             //or btn.setStyle("-fx-alignment: LEFT;");
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setOnAction(e -> {
                 try{
-                    String projTitle = btn.getText();
-                    Project proj = me.getProjectByTitle(projTitle);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
+                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/project.fxml").toURI().toURL());
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
-                    cont.initialize(proj, me.getUName(), "maintainer.fxml");
+                    cont.initialize(entry.getValue(), uname, "maintainer.fxml");
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
