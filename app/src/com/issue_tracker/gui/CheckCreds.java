@@ -1,3 +1,5 @@
+package com.issue_tracker.gui;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,15 +10,15 @@ class CheckCreds{
     public static String check(String uname, String passwd){
         String retrievedPass = "";
         String retrievedRole = "";
-        String dbPath = "jdbc:sqlite:../test.db";
-        String getCreds = "select pass, role from test where uname=?";
+        String dbPath = "jdbc:sqlite:../../issueTracker.db";
+        String getCreds = "SELECT password, role FROM credentials WHERE uname=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
             PreparedStatement pstm = conn.prepareStatement(getCreds);
             pstm.setString(1, uname);
             ResultSet res = pstm.executeQuery();
             if(res.next()){
-                retrievedPass = res.getString("pass");
+                retrievedPass = res.getString("password");
                 retrievedRole = res.getString("role");
             }
             conn.close();
