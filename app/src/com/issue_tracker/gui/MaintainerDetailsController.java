@@ -13,9 +13,12 @@ import javafx.scene.layout.Priority;
 import java.io.File;
 import com.issue_tracker.Maintainer;
 import com.issue_tracker.Contributor;
+import com.issue_tracker.Manager;
+import java.util.ArrayList;
 
 public class MaintainerDetailsController {
-    private String contributorUName;
+    private String managerUname;
+    private String unameMaintainer;
     
     @FXML
     private Label maintainerUname;
@@ -32,7 +35,7 @@ public class MaintainerDetailsController {
             FXMLLoader loader = new FXMLLoader(new File("manager.fxml").toURI().toURL());
             BorderPane root = loader.load();
             ManagerController cont = loader.getController();
-            cont.initialize(contributorUName);
+            cont.initialize(managerUname);
             cont.showMaintainers();
             backButton.getScene().setRoot(root);
         }
@@ -42,9 +45,13 @@ public class MaintainerDetailsController {
     }
 
     public void initialize(String unameMaintainer, String uname) {
-        contributorUName = uname;
+        managerUname = uname;
+        this.unameMaintainer = unameMaintainer;
         maintainerUname.setText(unameMaintainer);
+        showAssignedProjects();        
+    }
 
+    public void showAssignedProjects(){
         Maintainer maintainer = (Maintainer) Contributor.getContributor(unameMaintainer);
         for (String projectName : maintainer.getProjects().keySet()) {
             HBox row = assignedProjectsMenuRow(projectName);
@@ -67,9 +74,13 @@ public class MaintainerDetailsController {
         HBox.setHgrow(btn, Priority.ALWAYS);
 
         Button remove = new Button("-");
-        // remove.setOnAction(e ->{
-
-        // });
+        remove.setOnAction(e ->{
+            Manager manager = (Manager) Contributor.getContributor(managerUname);
+            ArrayList<String> maintainersToRemove = new ArrayList<>();
+            maintainersToRemove.add(unameMaintainer);
+            manager.removeMaintainersFromProject(projectName ,maintainersToRemove);
+            showAssignedProjects();
+        });
         root.getChildren().addAll(btn, remove);
         return root;
     }
