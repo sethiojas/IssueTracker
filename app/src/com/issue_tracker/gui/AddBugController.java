@@ -6,10 +6,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import com.issue_tracker.*;
+import java.io.File;
+import com.issue_tracker.Bug;
 
 public class AddBugController {
-    private Project project;
+    private int projectID;
     private String contributorUName;
     private String parentOfProject;
 
@@ -24,12 +25,12 @@ public class AddBugController {
 
     @FXML
     public void submit(ActionEvent event){
-        project.createNewBug(bugTitle.getText(), bugDescription.getText());
+        new Bug(bugTitle.getText(), bugDescription.getText(), projectID);
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
+            FXMLLoader loader = new FXMLLoader(new File("../../fxml/project.fxml").toURI().toURL());
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
-            cont.initialize(project, contributorUName, parentOfProject);
+            cont.initialize(projectID, contributorUName, parentOfProject);
             submitButton.getScene().setRoot(root);
         }
         catch(IOException e){
@@ -37,9 +38,9 @@ public class AddBugController {
         }
     }
 
-    public void initialize(Project proj, String uname, String parentOfProject){
-        project = proj;
-        contributorUName = uname;
+    public void initialize(int projectID, String contributorUName, String parentOfProject){
+        this.projectID = projectID;
+        this.contributorUName = contributorUName;
         this.parentOfProject = parentOfProject;
     }
 }
