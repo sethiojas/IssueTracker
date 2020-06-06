@@ -57,7 +57,7 @@ public class MaintainerController {
                     FXMLLoader loader = new FXMLLoader(new File("../../fxml/project.fxml").toURI().toURL());
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
-                    cont.initialize(entry.getValue(), uname, "maintainer.fxml");
+                    cont.initialize(entry.getValue(), uname, "../../fxml/maintainer.fxml");
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
