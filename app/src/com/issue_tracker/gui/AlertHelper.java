@@ -1,3 +1,5 @@
+package com.issue_tracker.gui;
+
 import javafx.scene.control.Alert;
 import javafx.stage.Window;
 
