@@ -30,7 +30,7 @@ public class AdminController {
         Button addManager = new Button("+");
         addManager.setOnAction(e -> {
             try{
-                Parent root = FXMLLoader.load(new File("../../fxml/add_manager.fxml").toURI().toURL());
+                Parent root = FXMLLoader.load(new File("../../fxml/add_contributor.fxml").toURI().toURL());
                 addManager.getScene().setRoot(root);
             }catch(IOException excep){
                 excep.printStackTrace();
@@ -63,7 +63,7 @@ public class AdminController {
         Button addMaintainer = new Button("+");
         addMaintainer.setOnAction(e -> {
             try{
-                Parent root = FXMLLoader.load(new File("../../fxml/add_maintainer.fxml").toURI().toURL());
+                Parent root = FXMLLoader.load(new File("../../fxml/add_contributor.fxml").toURI().toURL());
                 addMaintainer.getScene().setRoot(root);
             }catch(IOException excep){
                 excep.printStackTrace();
