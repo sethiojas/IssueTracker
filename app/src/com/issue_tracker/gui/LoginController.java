@@ -41,7 +41,14 @@ public class LoginController {
             return;
         }
         switch(res){
-            // case "admin":
+            case "admin": {
+                FXMLLoader loader = new FXMLLoader(new File("../../fxml/admin.fxml").toURI().toURL());
+                BorderPane root = loader.load();
+                AdminController cont = loader.getController();
+                cont.initialize(uname);
+                loginButton.getScene().setRoot(root);
+                break;
+            }
             case "manager": {
                 FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
                 BorderPane root = loader.load();
