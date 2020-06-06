@@ -1,3 +1,5 @@
+package com.issue_tracker.gui;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -8,7 +10,9 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import com.issue_tracker.*;
+import java.io.File;
+import com.issue_tracker.Maintainer;
+import com.issue_tracker.Contributor;
 
 public class MaintainerDetailsController {
     private String contributorUName;
@@ -25,7 +29,7 @@ public class MaintainerDetailsController {
     @FXML
     public void goBack() {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("manager.fxml"));
+            FXMLLoader loader = new FXMLLoader(new File("manager.fxml").toURI().toURL());
             BorderPane root = loader.load();
             ManagerController cont = loader.getController();
             cont.initialize(contributorUName);
@@ -37,23 +41,25 @@ public class MaintainerDetailsController {
         }
     }
 
-    public void initialize(Maintainer maintainer, String uname) {
+    public void initialize(String unameMaintainer, String uname) {
         contributorUName = uname;
-        maintainerUname.setText(maintainer.getUName());
-        for (Project p : maintainer.getProjects()) {
-            HBox row = assignedProjectsMenuRow(p);
+        maintainerUname.setText(unameMaintainer);
+
+        Maintainer maintainer = (Maintainer) Contributor.getContributor(unameMaintainer);
+        for (String projectName : maintainer.getProjects().keySet()) {
+            HBox row = assignedProjectsMenuRow(projectName);
             projectsVbox.getChildren().add(row);
         }
     }
 
-    private HBox assignedProjectsMenuRow(Project p){
+    private HBox assignedProjectsMenuRow(String projectName){
         HBox root = new HBox();
         root.setSpacing(10);
         root.setMaxHeight(27);
         root.setMaxWidth(Double.MAX_VALUE);
         
         // https://stackoverflow.com/questions/19325351/how-to-set-hgrow-property-dynamically
-        Button btn = new Button(p.getProjectName());
+        Button btn = new Button(projectName);
         btn.setMaxWidth(Double.MAX_VALUE);
         btn.setMaxHeight(Double.MAX_VALUE);
         btn.setAlignment(Pos.BASELINE_LEFT);
