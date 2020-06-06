@@ -16,7 +16,7 @@ import com.issue_tracker.Contributor;
 import java.util.Map;
 import java.util.HashMap;
 
-public class MaintainerController {
+public class MaintainerController implements HasProjects{
     
     @FXML
     private Label uNameLabel;
@@ -41,6 +41,7 @@ public class MaintainerController {
         }
     }
 
+    @Override
     public void initialize(String uname){
         Maintainer me = (Maintainer) Contributor.getContributor(uname);
 
