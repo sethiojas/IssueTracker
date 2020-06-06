@@ -17,18 +17,18 @@ public class Admin implements Serializable {
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757690L;
 
-    void createNewManager(String uName, String passwd){
+    public void createNewManager(String uName, String passwd){
         insertNewCredentials(uName, passwd, "manager");
         new Manager(uName);
         Contributor.setOnBench(uName, "false");
     }
 
-    void createNewMaintainer(String uName, String passwd){
+    public void createNewMaintainer(String uName, String passwd){
         insertNewCredentials(uName, passwd, "maintainer");
         new Maintainer(uName);
     }
     
-    void assignManager(String uNameManager, String uNameMaintainer){
+    public void assignManager(String uNameManager, String uNameMaintainer){
         Manager manager = (Manager) Contributor.getContributor(uNameManager);
         Maintainer maintainer = (Maintainer) Contributor.getContributor(uNameMaintainer);
         maintainer.setManager(uNameManager);
@@ -37,7 +37,7 @@ public class Admin implements Serializable {
         Contributor.setOnBench(uNameMaintainer, "false");
     }
 
-    void putMaintainerOnBench(String uNameManager, String uNameMaintainer){
+    public void putMaintainerOnBench(String uNameManager, String uNameMaintainer){
         Manager manager = (Manager) Contributor.getContributor(uNameManager);
         Maintainer benchMaintainer = (Maintainer) Contributor.getContributor(uNameMaintainer);
 
@@ -45,7 +45,7 @@ public class Admin implements Serializable {
         benchMaintainer.putOnBench();
     }
 
-    void removeManager(String uName){
+    public void removeManager(String uName){
         removeCredential(uName);
         Manager rManager = (Manager) Contributor.getContributor(uName);
         for (String maintainerUname: rManager.getMaintainers()){
@@ -58,13 +58,13 @@ public class Admin implements Serializable {
         Contributor.removeContributor(uName);
     }
     
-    void removeMaintainer(String uName, String ManagerUname){
+    public void removeMaintainer(String uName, String ManagerUname){
         removeCredential(uName);
         putMaintainerOnBench(ManagerUname, uName);
         Contributor.removeContributor(uName);
     }
 
-    ArrayList<String> getAllManagers(){
+    public ArrayList<String> getAllManagers(){
         ArrayList<String> listManagers = new ArrayList<>();
 
         try{
@@ -85,7 +85,7 @@ public class Admin implements Serializable {
         }
     }
 
-    ArrayList<String> getAllOnBench(){
+    public ArrayList<String> getAllOnBench(){
         ArrayList<String> listOnBench = new ArrayList<>();
 
         try{
@@ -106,7 +106,7 @@ public class Admin implements Serializable {
         }
     }
 
-    ArrayList<String> getAllAssigned(){
+    public ArrayList<String> getAllAssigned(){
         ArrayList<String> listAssigned = new ArrayList<>();
 
         try{
