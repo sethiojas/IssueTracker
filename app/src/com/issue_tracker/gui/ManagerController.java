@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import java.io.IOException;
@@ -45,6 +46,20 @@ public class ManagerController extends MaintainerController implements HasProjec
         label.setMaxWidth(Double.MAX_VALUE);
         label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
         centerVbox.getChildren().add(label);
+
+        // Button addProject = new Button("+");
+        // addProject.setOnAction(e -> {
+        //     try{
+        //         FXMLLoader loader = new FXMLLoader(new File("../../fxml/new_project.fxml").toURI().toURL());
+        //         AnchorPane root = loader.load();
+        //         AddProjectController cont = loader.getController();
+        //         cont.initialize(contributorUName);
+        //         addProject.getScene().setRoot(root);
+        //     }catch(IOException excep){
+        //         excep.printStackTrace();
+        //     }
+        // });
+        // centerVbox.getChildren().add(addProject);
        
         for (Map.Entry<String, Integer> entry : me.getProjects().entrySet()) {
             Button btn = new Button(entry.getKey());
