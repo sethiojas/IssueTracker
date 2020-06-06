@@ -42,14 +42,14 @@ public class LoginController {
         }
         switch(res){
             // case "admin":
-            // case "manager": {
-            //     FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
-            //     BorderPane root = loader.load();
-            //     ManagerController cont = loader.getController();
-            //     cont.initialize(uname);
-            //     loginButton.getScene().setRoot(root);
-            //     break;
-            // }
+            case "manager": {
+                FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
+                BorderPane root = loader.load();
+                ManagerController cont = loader.getController();
+                cont.initialize(uname);
+                loginButton.getScene().setRoot(root);
+                break;
+            }
 
             case "maintainer":{ 
                 FXMLLoader loader = new FXMLLoader(new File("../../fxml/maintainer.fxml").toURI().toURL());
