@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Admin implements Serializable {
     // all static and transient variables are null after deserialization
     // https://www.baeldung.com/java-jdbc
-    private String dbPath = "jdbc:sqlite:test.db";
+    private String dbPath = "jdbc:sqlite:../../issueTracker.db";
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757690L;
