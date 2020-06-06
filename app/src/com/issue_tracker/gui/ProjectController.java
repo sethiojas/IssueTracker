@@ -10,13 +10,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import com.issue_tracker.*;
+import java.io.File;
+import com.issue_tracker.Project;
+import java.util.HashMap;
 
 
 public class ProjectController {
 
     private String contributorUName;
-    private Project project;
+    private int projectID;
     private String parentFXML;
 
     @FXML
@@ -37,10 +39,10 @@ public class ProjectController {
     @FXML
     public void addBug(ActionEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("add_bug.fxml"));
+            FXMLLoader loader = new FXMLLoader(new File("../../fxml/add_bug.fxml").toURI().toURL());
             GridPane root = loader.load();
             AddBugController cont = loader.getController();
-            cont.initialize(project, contributorUName, parentFXML);
+            cont.initialize(projectID, contributorUName, parentFXML);
             newBugButton.getScene().setRoot(root);
         }
         catch(IOException e){
@@ -51,11 +53,10 @@ public class ProjectController {
     @FXML
     public void goBack(ActionEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(parentFXML));
+            FXMLLoader loader = new FXMLLoader(new File(parentFXML).toURI().toURL());
             Parent root = loader.load();
-            Contributor cont = loader.getController();
+            HasProjects cont = loader.getController();
             cont.initialize(contributorUName);
-            cont.saveChangesToProject(project);
             backButton.getScene().setRoot(root);
         }
         catch(IOException excep){
@@ -63,10 +64,12 @@ public class ProjectController {
         }
     }
 
-    public void initialize(Project proj, String uname, String parentFXML){
-        project = proj;
-        contributorUName = uname;
+    public void initialize(int projectID, String uname, String parentFXML){
+        this.projectID = projectID;
         this.parentFXML = parentFXML;
+        contributorUName = uname;
+
+        Project project = Project.getProject(projectID);
         projectTitle.setText(project.getProjectName());
 
         for (String _name: project.getMaintainers()){
@@ -76,21 +79,17 @@ public class ProjectController {
             maintainerVbox.getChildren().add(name);
         }
 
-        for (Bug bug: project.getAllBugs()){
-            Button btn = new Button("#" + bug.getId() + " " + bug.getTitle());
+        for (HashMap<String, String> bug: project.getAllBugs()){
+            Button btn = new Button("#" + bug.get("bug_id") + " " + bug.get("bug_title"));
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
 
             btn.setOnAction(e -> {
                 try{
-                    String IdNum = btn.getText().split("\\s",2)[0];
-                    int bugId = Integer.parseInt(IdNum.substring(1));
-                    Bug thisBug = project.getBug(bugId);
-
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("bug.fxml"));
+                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/bug.fxml").toURI().toURL());
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
-                    cont.initialize(thisBug, project, contributorUName, parentFXML);
+                    cont.initialize(bug.get("bug_id"), projectID, contributorUName, parentFXML);
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
