@@ -7,12 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
-import com.issue_tracker.*;
+import com.issue_tracker.Bug;
 
 public class BugController {
-    private Project project;
+    private int bugID;
+    private int projectID;
     private String contributorUName;
-    private int thisBugId;
     private String parentOfProject;
 
     @FXML
@@ -28,21 +28,22 @@ public class BugController {
     @FXML
     private Button closeBugButton;
 
-    public void initialize(Bug bug, Project proj, String uname, String parentOfProject){
-        project = proj;
-        contributorUName = uname;
-        thisBugId = bug.getId();
+    public void initialize(int bugID, String bugTitle, String bugDesc,int projectID, String contributorUName, String parentOfProject){
+        this.bugID = bugID;
+        this.projectID = projectID;
+        this.contributorUName = contributorUName;
         this.parentOfProject = parentOfProject;
-        bugTitle.setText(bug.getTitle());
-        bugId.setText("Issue id #" + thisBugId);
-        bugDescription.setText(bug.getDescription());
+
+        bugTitle.setText(bugTitle);
+        bugId.setText("Issue id #" + bugID);
+        bugDescription.setText(bugDesc);
     }
 
     @FXML
     public void closeBug(ActionEvent event){
         bugStatus.setText("Closed");
         closeBugButton.setDisable(true);
-        project.closeBug(thisBugId);
+        Bug.closeBug(bugID);
     }
 
     @FXML
