@@ -28,7 +28,8 @@ public class BugController {
     @FXML
     private Button closeBugButton;
 
-    public void initialize(int bugID, String bugTitle, String bugDesc,int projectID, String contributorUName, String parentOfProject){
+    public void initialize(int bugID, String bugTitle, String bugDesc,
+                           int projectID, String contributorUName, String parentOfProject){
         this.bugID = bugID;
         this.projectID = projectID;
         this.contributorUName = contributorUName;
@@ -52,7 +53,7 @@ public class BugController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
-            cont.initialize(project, contributorUName, parentOfProject);
+            cont.initialize(projectID, contributorUName, parentOfProject);
             backButton.getScene().setRoot(root);
         }
         catch(IOException excep){
