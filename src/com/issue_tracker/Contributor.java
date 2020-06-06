@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-abstract class Contributor implements Serializable{
+public abstract class Contributor implements Serializable{
     private static final long serialVersionUID = 6529685098267757696L;
     protected String uName;
     protected HashMap<String, Integer> projects = new HashMap<>();
