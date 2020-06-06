@@ -10,6 +10,7 @@ import javafx.stage.Window;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
 import java.io.File;
+import java.io.IOException;
 
 public class LoginController {
     // https://stackoverflow.com/questions/44010909/using-initialize-method-in-a-controller-in-fxml
@@ -29,7 +30,7 @@ public class LoginController {
     public void initialize(){}
 
     @FXML
-    void checkCredentials(ActionEvent event) throws Exception{
+    void checkCredentials(ActionEvent event) {
         String uname = username.getText();
         String passwd = password.getText();
 
@@ -40,35 +41,39 @@ public class LoginController {
                                     "Please check the entered Username and Password");
             return;
         }
-        switch(res){
-            case "admin": {
-                FXMLLoader loader = new FXMLLoader(new File("../../fxml/admin.fxml").toURI().toURL());
-                BorderPane root = loader.load();
-                AdminController cont = loader.getController();
-                cont.initialize(uname);
-                loginButton.getScene().setRoot(root);
-                break;
-            }
-            case "manager": {
-                FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
-                BorderPane root = loader.load();
-                ManagerController cont = loader.getController();
-                cont.initialize(uname);
-                loginButton.getScene().setRoot(root);
-                break;
-            }
+        try{
+            switch(res){
+                case "admin": {
+                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/admin.fxml").toURI().toURL());
+                    BorderPane root = loader.load();
+                    AdminController cont = loader.getController();
+                    cont.initialize(uname);
+                    loginButton.getScene().setRoot(root);
+                    break;
+                }
+                case "manager": {
+                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
+                    BorderPane root = loader.load();
+                    ManagerController cont = loader.getController();
+                    cont.initialize(uname);
+                    loginButton.getScene().setRoot(root);
+                    break;
+                }
 
-            case "maintainer":{ 
-                FXMLLoader loader = new FXMLLoader(new File("../../fxml/maintainer.fxml").toURI().toURL());
-                GridPane root = loader.load();
-                // https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
-                MaintainerController cont = loader.getController();
-                cont.initialize(uname);
-                // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
-                // https://stackoverflow.com/questions/39985414/change-scene-without-resize-window-in-javafx
-                loginButton.getScene().setRoot(root);
-                break;
-            }
-        }        
+                case "maintainer":{ 
+                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/maintainer.fxml").toURI().toURL());
+                    GridPane root = loader.load();
+                    // https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
+                    MaintainerController cont = loader.getController();
+                    cont.initialize(uname);
+                    // https://stackoverflow.com/questions/12804664/how-to-swap-screens-in-a-javafx-application-in-the-controller-class
+                    // https://stackoverflow.com/questions/39985414/change-scene-without-resize-window-in-javafx
+                    loginButton.getScene().setRoot(root);
+                    break;
+                }
+            } 
+        }catch(IOException e){
+            e.printStackTrace();
+        }       
     }
 }
