@@ -1,3 +1,5 @@
+package com.issue_tracker.gui;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,13 +11,15 @@ import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import java.io.IOException;
-import com.issue_tracker.*;
+import java.io.File;
+import com.issue_tracker.Manager;
+import com.issue_tracker.Contributor;
+import java.util.Map;
 
-public class ManagerController extends MaintainerController implements Contributor {
+public class ManagerController extends MaintainerController implements HasProjects {
     private String contributorUName;
     private Manager me;
-    private SaveOrRetrieve<Manager> sr = new SaveOrRetrieve<>();
-
+    
     @FXML
     private Label managerUName;
     
@@ -34,12 +38,6 @@ public class ManagerController extends MaintainerController implements Contribut
     @FXML
     private VBox centerVbox;
 
-    @Override
-    public void saveChangesToProject(Project proj) {
-        me.updateProject(proj);
-        sr.updateThisObject(me);
-    }
-
     @FXML
     public void showProjects(){
         centerVbox.getChildren().clear();
@@ -47,17 +45,18 @@ public class ManagerController extends MaintainerController implements Contribut
         label.setMaxWidth(Double.MAX_VALUE);
         label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
         centerVbox.getChildren().add(label);
-        for (Project p : me.getAllProjects()) {
-            Button btn = new Button(p.getProjectName());
+       
+        for (Map.Entry<String, Integer> entry : me.getProjects().entrySet()) {
+            Button btn = new Button(entry.getKey());
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+            
             btn.setOnAction(e -> {
                 try{
-                    Project project = me.getProjectByTitle(btn.getText());
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("project.fxml"));
+                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/project.fxml").toURI().toURL());
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
-                    cont.initialize(project, contributorUName, "manager.fxml");
+                    cont.initialize(entry.getValue(), contributorUName, "../../fxml/manager.fxml");
                     btn.getScene().setRoot(root);
                 }catch(IOException excep) {
                     excep.printStackTrace();
@@ -74,20 +73,20 @@ public class ManagerController extends MaintainerController implements Contribut
         label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
         centerVbox.getChildren().add(label);
 
-        for (Maintainer m : me.getAllMaintainers()) {
-            Button btn = new Button(m.getUName());
+        for (String maintainerUname : me.getMaintainers()) {
+            Button btn = new Button(maintainerUname);
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
             btn.setOnAction(e -> {
                 try{
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    FXMLLoader loader = new FXMLLoader(new File(
                         // https://stackoverflow.com/questions/17228487/javafx-location-is-not-set-error-message
-                        "manager_selection_maintainers.fxml"
-                        )
+                        "../../fxml/manager_selection_maintainers.fxml"
+                        ).toURI().toURL()
                     );
                     GridPane root = loader.load();
                     MaintainerDetailsController cont = loader.getController();
-                    cont.initialize(me.getMaintainer(btn.getText()), contributorUName);
+                    cont.initialize(maintainerUname, contributorUName);
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep) {
@@ -102,7 +101,7 @@ public class ManagerController extends MaintainerController implements Contribut
     public void initialize(String uname) {
         contributorUName = uname;
         managerUName.setText(contributorUName);
-        me = sr.retrieveThisObject(contributorUName);
+        me = (Manager) Contributor.getContributor(uname);
         showProjects();
     }
 }
