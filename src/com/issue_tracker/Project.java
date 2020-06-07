@@ -19,24 +19,36 @@ public class Project implements Serializable{
     protected ArrayList<String> maintainers = new ArrayList<>();
 
     public Project(String projectName){
+        /**Create a Project object 
+        */
         this.projectName = projectName;
         insertProject();
     }
 
     public void createNewBug(String title, String desc){
+        /**Create new bug
+        *@param title   title of bug
+        *@param desc    description of bug 
+        */
         new Bug(title, desc, projectId);
     }
     
     public String getProjectName(){
+        /**@returns Name/title of project 
+        */
         return projectName;
     }
 
     public void closeBug(int bugId){
+        /**Close a bug
+        *@param bugId id of the bug which is to be close 
+        */
        Bug.closeBug(bugId);
     }
 
     public HashMap<String, String> getBug(int bugId){
-        // return bugs.get(bugId);
+        /**@returns bug having the provided bug id associated with given project 
+        */
         HashMap<String, String> bug = new HashMap<>();
         String getBug = "SELECT bug_title, bug_desc FROM bugs WHERE bug_id=? AND project_id=?";
         try{
@@ -56,10 +68,14 @@ public class Project implements Serializable{
     }
 
     public int getProjectId(){
+        /**@returns project id of project 
+        */
         return projectId;
     }
     
     public ArrayList<HashMap<String, String>> getAllBugs(){
+        /**@returns all bugs associated with a project 
+        */
         ArrayList<HashMap<String, String>> bugs = new ArrayList<>();
         String allBugsQuery = "SELECT bug_id, bug_title, bug_desc FROM bugs WHERE project_id=?";
         try{
@@ -84,24 +100,41 @@ public class Project implements Serializable{
     }
 
     public ArrayList<String> getMaintainers(){
+        /**@returns ArrayList of Contributors which have been assigned to this 
+        *project
+        */
         return maintainers;
     }
 
     public boolean equals(Project proj){
+        /**Compares if two project objects are equal or not
+        *@param proj    project object to compare with
+        *@returns       boolean based on equality of projects
+        */
         return projectName.equals(proj.getProjectId());
     }
 
     public void addMaintainers(ArrayList<String> uNameList){
+        /**Add all Contributors in given uname list to list of maintainers
+        *of project
+        *@param uNameList list of contributors uname*/
         maintainers.addAll(uNameList);
         updateProject(this);
     }
 
     public void addMaintainer(String uname){
+        /**Added the given contributor uname to list of maintainers
+        *of project
+        @param uname    uname of contributor
+        */
         maintainers.add(uname);
         updateProject(this);
     }
 
     public void removeMaintainer(String uname){
+        /**Remove a contributor from list of maintainers
+        *@param uname   uname of contributor to remove
+        */
         maintainers.remove(uname);
         updateProject(this);
     }
@@ -112,6 +145,8 @@ public class Project implements Serializable{
     }
 
     public void insertProject(){
+        /**Save project object into database 
+        */
         String insert = "INSERT INTO projects(project_name, project_object) VALUES(?, ?)";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -138,6 +173,8 @@ public class Project implements Serializable{
     }
 
     public static void updateProject(Project project){
+        /**Update project object stored in database 
+        */
         String update = "UPDATE projects SET project_object=? WHERE project_id=? AND project_name=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -159,6 +196,9 @@ public class Project implements Serializable{
     }
 
     public static Project getProject(int id){
+        /**Retrieve project object from database
+        *@returns Project object 
+        */
         String getProject = "SELECT project_object FROM projects WHERE project_id=?";
         Project p = null;
         try{
@@ -183,6 +223,8 @@ public class Project implements Serializable{
     }
 
     public static void removeProject(int projectID){
+        /**Delete project object from database 
+        */
         Bug.removeAllBugsOfProject(projectID);
         String removeProject = "delete from projects where project_id=?";
         try{

@@ -10,6 +10,10 @@ import java.sql.DriverManager;
 import java.io.Serializable;
 import java.lang.StringBuilder;
 
+/**Has API for actions that can be
+*performed via admin 
+*/
+
 public class Admin implements Serializable {
     // all static and transient variables are null after deserialization
     // https://www.baeldung.com/java-jdbc
@@ -19,17 +23,30 @@ public class Admin implements Serializable {
     private static final long serialVersionUID = 6529685098267757690L;
 
     public void createNewManager(String uName, String passwd){
+        /**Create a new manager account
+        *@param uName   uname of new manager account
+        *@param passwd  password of new manager account 
+        */
         insertNewCredentials(uName, passwd, "manager");
         new Manager(uName);
         Contributor.setOnBench(uName, "false");
     }
 
     public void createNewMaintainer(String uName, String passwd){
+        /**Create new Maintainer Account
+        *@param uName   Uname of new Maintainer account
+        *@param passwd  Password of new Maintainer account 
+        */
         insertNewCredentials(uName, passwd, "maintainer");
         new Maintainer(uName);
     }
     
     public void assignManager(String uNameManager, String uNameMaintainer){
+        /**Assign a manager to an on-bench maintainer
+        *@param uNameManager    Uname of manager to which maintainer is
+        *                       to be assigned
+        *@param uNameMaintainer Uname of on-bench maintainer 
+        */
         Manager manager = (Manager) Contributor.getContributor(uNameManager);
         Maintainer maintainer = (Maintainer) Contributor.getContributor(uNameMaintainer);
         maintainer.setManager(uNameManager);
@@ -39,6 +56,10 @@ public class Admin implements Serializable {
     }
 
     public void putMaintainerOnBench(String uNameManager, String uNameMaintainer){
+        /**Put assigned maintainer on bench
+        *@param uNameManager    uname of Manager to which maintainer is assigned
+        *@param uNameMaintainer uname ofMaintainer which is to be put on bench 
+        */
         Manager manager = (Manager) Contributor.getContributor(uNameManager);
         Maintainer benchMaintainer = (Maintainer) Contributor.getContributor(uNameMaintainer);
 
@@ -47,6 +68,9 @@ public class Admin implements Serializable {
     }
 
     public void removeManager(String uName){
+        /**Removed Manager account
+        *@param uname   Uname of manager whose account has to be removed 
+        */
         removeCredential(uName);
         Manager rManager = (Manager) Contributor.getContributor(uName);
         for (String maintainerUname: rManager.getMaintainers()){
@@ -60,16 +84,29 @@ public class Admin implements Serializable {
     }
     
     public void removeMaintainer(String uName, String ManagerUname){
+        /**Remove accout of maintainer
+        *@param uName        uname of maintainer whose account has to be removed
+        *@param ManagerUname uname of manager to which maintainer is assigned
+        *                    NOTE: it can be null in case of on-bench maintainer 
+        */
         removeCredential(uName);
         if (ManagerUname != null) putMaintainerOnBench(ManagerUname, uName);
         Contributor.removeContributor(uName);
     }
 
     public void removeMaintainer(String uname){
+        /**Remove account of an on-bench maintainer, therefore provide
+        *pass null to ManagerUname 
+        *@param uname   Uname of on-bench maintainer whose account
+        *               has to be removed
+        */
         this.removeMaintainer(uname, null);
     }
 
     public ArrayList<String> getAllManagers(){
+        /**Get all managers with registered accounts
+        *@returns   ArrayList of uname of all managers 
+        */
         ArrayList<String> listManagers = new ArrayList<>();
 
         try{
@@ -91,6 +128,9 @@ public class Admin implements Serializable {
     }
 
     public ArrayList<String> getAllOnBench(){
+        /**Get all on-bench maintainers with registered accounts
+        *@returns ArrayList of uname of all on-bench maintainers 
+        */
         ArrayList<String> listOnBench = new ArrayList<>();
 
         try{
@@ -112,6 +152,10 @@ public class Admin implements Serializable {
     }
 
     public ArrayList<String> getAllAssigned(){
+        /**Get unames of all maintainers who are assigned to
+        *some manager
+        *@returns ArrayList of uname of assigned maintainers 
+        */
         ArrayList<String> listAssigned = new ArrayList<>();
 
         try{
@@ -145,6 +189,10 @@ public class Admin implements Serializable {
     }
 
     void removeCredential(String uName){
+        /**Remove credentials of an account from database
+        *@param uName   Uname of Contributor whose credentials
+        *               have to be deleted 
+        */
         try{
             String deleteContributor = "DELETE FROM credentials WHERE uname=?";
             Connection conn = DriverManager.getConnection(dbPath);
@@ -159,6 +207,11 @@ public class Admin implements Serializable {
     }
 
     void insertNewCredentials(String uName, String passwd, String role){
+        /**Insert new credentials into database
+        *@param uName      uName of new account
+        *@param passwd     Password associated with new account
+        *@param role       Role associated with new account 
+        */
         try{
             String insertNew = "INSERT INTO credentials VALUES(?, ?, ?)";
             Connection conn = DriverManager.getConnection(dbPath);

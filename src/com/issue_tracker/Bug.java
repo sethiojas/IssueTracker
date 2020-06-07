@@ -17,6 +17,11 @@ public class Bug implements Serializable{
     
 
     public Bug(String _title, String _desc, int _projectId){
+        /**Constructor to create a new bug
+        *@param _title      title of new bug
+        *@param _desc       description od new bug
+        *@param _projectID  ID of project to which the bug belongs
+        */
         title = _title;
         description = _desc;
         projectId = _projectId;
@@ -24,10 +29,14 @@ public class Bug implements Serializable{
     }
 
     public String getTitle(){
+        /**@returns Title of bug 
+        */
         return title;
     }
 
     public String getDescription(){
+        /**@returns description of bug
+        */
         return description;
     }
 
@@ -37,6 +46,8 @@ public class Bug implements Serializable{
     }
 
     public void saveBug(){
+        /**Save the bug into database 
+        */
         String insert = "INSERT INTO bugs(bug_title, bug_desc, project_id) VALUES(?, ?, ?)";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -53,6 +64,8 @@ public class Bug implements Serializable{
     }
 
     public static void closeBug(int bugId){
+        /**Delete the bug from database
+        */
         String close = "delete from bugs where bug_id=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -67,6 +80,10 @@ public class Bug implements Serializable{
     }
 
     public static void removeAllBugsOfProject(int projectId){
+        /**Removes all bug associated with a project from
+        *database
+        *@param projectId   ID of project whose bugs have to be removed
+        */
         String removeAll = "delete from bugs where project_id=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);

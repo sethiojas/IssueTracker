@@ -12,22 +12,35 @@ public class Manager extends Contributor implements Serializable {
     private static final long serialVersionUID = 6529685098267757691L;
 
     public Manager(String _uName){
+        /**Create a manager object 
+        */
         uName = _uName;
         saveContributor();
     }
 
     public void createProject(String title){
+        /**Create a project
+        *@param title   title of project to create 
+        */
         Project proj = new Project(title);
         proj.addMaintainer(this.uName);
         addProject(proj.getProjectName(), proj.getProjectId());
     }
 
     public void addProject(String title, int id){
+        /**Add project to Managers project HashMap
+        *@param title   title of project
+        *@param id      id of project 
+        */
         projects.put(title, id);
         updateContributor();
     }
 
     public void removeProject(String title){
+        /**Remove every maintainer assigned to project
+        *and then remove the project from you project HashMap 
+        *@param title   title of project to remove
+        */
         int projectID = projects.get(title);
         Project.removeProject(projectID);
 
@@ -41,6 +54,10 @@ public class Manager extends Contributor implements Serializable {
     }
     
     public void addMaintainersToProject(String title, ArrayList<String> uNameList){
+        /**Assign given project to the given list of maintainers 
+        *@param title       title of project to which to assign maintainers
+        *@param uNameList   list of maintainer uname which have to be assigned to a project
+        */
         int projectID = projects.get(title);
         Project proj = Project.getProject(projectID);
 
@@ -53,6 +70,10 @@ public class Manager extends Contributor implements Serializable {
     }
 
     public void removeMaintainersFromProject(String projTitle, ArrayList<String> uNameList) {
+        /**Remove maintainers from given project 
+        *@param title       title of project from which to remove maintainers from
+        *@param uNameList   list of maintainer uname which have to be removed from a project
+        */
         int projectID = projects.get(projTitle);
         Project p = Project.getProject(projectID);
         for (String _maintainer: uNameList){
@@ -63,20 +84,30 @@ public class Manager extends Contributor implements Serializable {
     }
 
     public void addMaintainer(String uname){
+        /**Add a maintainer to Manager's list of maintainer
+        *@param uname   uname of maintainer which is to be added 
+        */
         maintainers.add(uname);
         updateContributor();
     }
 
     public void removeMaintainer(String uname){
+        /**Remove a maintainer from Manager's list of maintainer
+        *@param uname   uname of maintainer which is to be removed 
+        */
         maintainers.remove(uname);
         updateContributor();
     }
 
     public ArrayList<String> getMaintainers(){
+        /**@returns list of all maintainers in manager's maintainer list 
+        */
         return maintainers;
     }
 
     public HashMap<String, Integer> getProjects(){
+        /**@returns hashmap of all projects in manager's project hashmap 
+        */
         return projects;
     }
 

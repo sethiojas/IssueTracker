@@ -8,6 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**Abstract class defining common features of contributors
+*Contributor is extended by two classes Maintainer and Manager 
+*/
+
 public abstract class Contributor implements Serializable{
     private static final long serialVersionUID = 6529685098267757696L;
     protected String uName;
@@ -15,22 +19,32 @@ public abstract class Contributor implements Serializable{
     protected static String dbPath = "jdbc:sqlite:../issueTracker.db";
     
     public String getUname(){
+        /**@returns uname of contributor 
+        */
         return uName;
     }
 
     public HashMap<String, Integer> getProjects(){
+        /**@returns all project contributor has 
+        */
         return projects;
     }
 
     public int getProjectID(String projectTitle){
+        /**@returns project id associated with a project
+        *           that a contributor has 
+        */
         return projects.get(projectTitle);
     }
 
+    // Add project to a contributor's project list
     public abstract void addProject(String title, int id);
-    
+    // remove project from project list of a contributor
     public abstract void removeProject(String title);
 
     public void saveContributor(){
+        /**Save the contributor into database 
+        */
         String saveContributor = "INSERT INTO contributors VALUES(?, ?, ?)";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -50,6 +64,8 @@ public abstract class Contributor implements Serializable{
     }
 
     public void updateContributor(){
+        /**Update the contributor's entry in database 
+        */
         String update = "UPDATE contributors SET object=? WHERE uname=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -68,6 +84,8 @@ public abstract class Contributor implements Serializable{
     }
 
     public static void removeContributor(String uname){
+        /**Delete contributor from database 
+        */
         String delete = "DELETE FROM contributors WHERE uname=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -81,6 +99,8 @@ public abstract class Contributor implements Serializable{
     }
 
     public static Contributor getContributor(String uname){
+        /**Retrieve a contributor from database 
+        */
         String getContributor = "SELECT object FROM contributors WHERE uname=?";
         Contributor m = null;
         try{
@@ -102,6 +122,8 @@ public abstract class Contributor implements Serializable{
     }
 
     public static void setOnBench(String uname, String value){
+        /**Change the on-bench value associated with contributor
+        */
         String onBench = "UPDATE contributors SET on_bench=? WHERE uname=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
