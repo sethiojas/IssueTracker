@@ -10,7 +10,7 @@ class CheckCreds{
     public static String check(String uname, String passwd){
         String retrievedPass = "";
         String retrievedRole = "";
-        String dbPath = "jdbc:sqlite:../../issueTracker.db";
+        String dbPath = "jdbc:sqlite:../issueTracker";
         String getCreds = "SELECT password, role FROM credentials WHERE uname=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
