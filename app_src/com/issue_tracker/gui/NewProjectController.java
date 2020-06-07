@@ -20,7 +20,7 @@ import com.issue_tracker.Manager;
 public class NewProjectController {
     private String managerUname;
     private Manager me;
-    private ArrayList<String> maintainers;
+    private ArrayList<String> maintainers = new ArrayList<>();;
 
     @FXML
     private TextField titleField;
