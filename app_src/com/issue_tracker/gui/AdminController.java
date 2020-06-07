@@ -45,6 +45,7 @@ public class AdminController {
             Button btn = new Button(manager);
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+            displayVbox.getChildren().add(btn);
         }
     }
 
@@ -56,6 +57,7 @@ public class AdminController {
             Button btn = new Button(maintainer);
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+            displayVbox.getChildren().add(btn);
         }
     }
 
@@ -81,6 +83,7 @@ public class AdminController {
             Button btn = new Button(maintainer);
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+            displayVbox.getChildren().add(btn);
         }
     }
 
