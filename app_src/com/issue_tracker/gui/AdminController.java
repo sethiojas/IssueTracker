@@ -97,6 +97,13 @@ public class AdminController {
 
         HBox.setHgrow(btn, Priority.ALWAYS);
 
+        Button benchMaintainer = new Button("Bench");
+        benchMaintainer.setOnAction(e -> {
+            Maintainer m = (Maintainer) Contributor.getContributor(maintainer);
+            admin.putMaintainerOnBench(m.getManager(), maintainer);
+            showMaintainers();
+        });
+
         Button remove = new Button("Remove");
         remove.setOnAction(e -> {
             Maintainer m = (Maintainer) Contributor.getContributor(maintainer);
@@ -104,7 +111,7 @@ public class AdminController {
             showMaintainers();
         });
 
-        root.getChildren().addAll(btn, remove);
+        root.getChildren().addAll(btn, benchMaintainer, remove);
         return root;
     }
 
