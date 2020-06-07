@@ -12,6 +12,12 @@ import javafx.scene.layout.BorderPane;
 import java.io.File;
 import java.io.IOException;
 
+/**Controller for login.fxml 
+*Retrieves credentials from users and upon
+*successful authentication open appropriate
+*screen according to role associated with account 
+*/
+
 public class LoginController {
     // https://stackoverflow.com/questions/44010909/using-initialize-method-in-a-controller-in-fxml
     // https://stackoverflow.com/a/35300880 <- URL, ResourceBundle
@@ -27,10 +33,11 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
-    public void initialize(){}
-
-    @FXML
     void checkCredentials(ActionEvent event) {
+        /**Authenticates entered credentials.
+        *Upon successful authentication load
+        *the corresponding scene.
+        */
         String uname = username.getText();
         String passwd = password.getText();
 

@@ -17,6 +17,10 @@ import java.util.ArrayList;
 import com.issue_tracker.Contributor;
 import com.issue_tracker.Manager;
 
+/**Class handles creation of new project 
+*Controller for new_project.fxml
+*/
+
 public class NewProjectController {
     private String managerUname;
     private Manager me;
@@ -36,13 +40,20 @@ public class NewProjectController {
 
     @FXML
     public void submit() {
+        /**Submit details, create project and go back
+        *to previous screen 
+        */
         me.createProject(titleField.getText());
         me.addMaintainersToProject(titleField.getText(), maintainers);
+        // to go back to previous screen
         cancel();
     }
 
     @FXML
     public void cancel(){
+        /**Go back to previous scene without making
+        *any changes 
+        */
         try{
             FXMLLoader loader = new FXMLLoader(new File("../fxml/manager.fxml").toURI().toURL());
             Parent root = loader.load();
@@ -55,6 +66,10 @@ public class NewProjectController {
     }
 
     public void displayMaintainers(){
+        /**Display all maintainer assigned to manager
+        *so that they can be added to project as per
+        *manager's choice 
+        */
         for (String name : me.getMaintainers()) {
             HBox row = maintainerRow(name);
             displayVbox.getChildren().add(row);
@@ -62,6 +77,12 @@ public class NewProjectController {
     }
 
     public HBox maintainerRow(String name) {
+        /**Row contain maintainer name and buttons to either assign
+        *or remove maintainer from the list of Maintainer of that
+        *project 
+        *@param name    Uname of maintainer
+        *@return        HBox containg buttons
+        */
         HBox root = new HBox();
         root.setSpacing(5);
         root.setMaxHeight(27);
@@ -91,6 +112,9 @@ public class NewProjectController {
     }
 
     public String ArrayListToString(){
+        /**Turn the list of currently selected maintainers into
+        *a single string 
+        */
         StringBuilder sb = new StringBuilder();
         for (String item: maintainers){
             sb.append(item);
@@ -100,6 +124,9 @@ public class NewProjectController {
     }
 
     public void initialize(String uname) {
+        /**Initialize class members and display maintainers 
+        *which can be added to project
+        */
         managerUname = uname;
         me = (Manager) Contributor.getContributor(managerUname);
         displayMaintainers();

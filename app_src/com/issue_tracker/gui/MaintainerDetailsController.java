@@ -16,6 +16,10 @@ import com.issue_tracker.Contributor;
 import com.issue_tracker.Manager;
 import java.util.ArrayList;
 
+/**Show Details about the maintainer which is assigned
+*to manager
+*/
+
 public class MaintainerDetailsController {
     private String managerUname;
     private String unameMaintainer;
@@ -31,6 +35,8 @@ public class MaintainerDetailsController {
 
     @FXML
     public void goBack() {
+        /**Go back to previous screen 
+        */
         try{
             FXMLLoader loader = new FXMLLoader(new File("../fxml/manager.fxml").toURI().toURL());
             BorderPane root = loader.load();
@@ -45,6 +51,11 @@ public class MaintainerDetailsController {
     }
 
     public void initialize(String unameMaintainer, String uname) {
+        /**Initialize class members and
+        *show all the projects assigned to maintainer(default)
+        *@param unameMaintainer    Uname of maintainer whose details are to be shown
+        *@param uname              Uname of manager 
+        */
         managerUname = uname;
         this.unameMaintainer = unameMaintainer;
         maintainerUname.setText(unameMaintainer);
@@ -52,6 +63,8 @@ public class MaintainerDetailsController {
     }
 
     public void showAssignedProjects(){
+        /**Show projects assigned to a maintainer 
+        */
         Maintainer maintainer = (Maintainer) Contributor.getContributor(unameMaintainer);
         for (String projectName : maintainer.getProjects().keySet()) {
             HBox row = assignedProjectsMenuRow(projectName);
@@ -60,6 +73,10 @@ public class MaintainerDetailsController {
     }
 
     private HBox assignedProjectsMenuRow(String projectName){
+        /**Return a row consisting of a project and buttons corresponding
+        *to actions which can be performed on that project by the manager 
+        *@param projectName     Name/title of the project
+        */
         HBox root = new HBox();
         root.setSpacing(10);
         root.setMaxHeight(27);
@@ -73,6 +90,7 @@ public class MaintainerDetailsController {
 
         HBox.setHgrow(btn, Priority.ALWAYS);
 
+        // Button to remove maintainer from project
         Button remove = new Button("-");
         remove.setOnAction(e ->{
             Manager manager = (Manager) Contributor.getContributor(managerUname);

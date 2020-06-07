@@ -11,7 +11,22 @@ import javafx.event.ActionEvent;
 import java.io.File;
 import com.issue_tracker.Bug;
 
+/**Controller Class for  add_bug.fxml
+*Class handles creation of bugs
+*Bugs can be created by Contributors i.e. Manager and Maintainers
+*Class members
+*projectID        : Project id of the project to which bug belongs.
+*contributorUName : Uname of the contributor.
+*parentOfProject  : FXML file whose controler invoked the ProjectController.
+*
+*FXML member
+*bugTitle       : Displays title of bug.
+*bugDescription : Shows description of bug.
+*submitButton   : Button to submit new bug
+*/
+
 public class AddBugController {
+    
     private int projectID;
     private String contributorUName;
     private String parentOfProject;
@@ -27,6 +42,10 @@ public class AddBugController {
 
     @FXML
     public void submit(ActionEvent event){
+        /**Event handler of submitButton
+        *Creates a new bug and switches the Scene back to Project
+        *@param event ActionEvent type
+        */
         new Bug(bugTitle.getText(), bugDescription.getText(), projectID);
         try{
             FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
@@ -41,6 +60,12 @@ public class AddBugController {
     }
 
     public void initialize(int projectID, String contributorUName, String parentOfProject){
+        /**Initializes the class members
+        *
+        *@param projectID           The project id of project
+        *@param contributorUName    The name of the contributor which is creating the bug
+        *@param parentOfProject     Path of FXML file whose controller invoked the ProjectController
+        */
         this.projectID = projectID;
         this.contributorUName = contributorUName;
         this.parentOfProject = parentOfProject;

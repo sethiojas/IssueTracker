@@ -16,6 +16,9 @@ import com.issue_tracker.Contributor;
 import java.util.Map;
 import java.util.HashMap;
 
+/**Controller class for maintainer.fxml 
+*/
+
 public class MaintainerController implements HasProjects{
     
     @FXML
@@ -32,6 +35,9 @@ public class MaintainerController implements HasProjects{
 
     @FXML
     public void logout(ActionEvent event){
+        /**Log out of current account.
+        *Screen is changed to login screen upon logout 
+        */
         try{
             GridPane root = FXMLLoader.load(new File("../fxml/login.fxml").toURI().toURL());
             logoutButton.getScene().setRoot(root);
@@ -43,11 +49,19 @@ public class MaintainerController implements HasProjects{
 
     @Override
     public void initialize(String uname){
+        /**Initialise the view of Maintainer panel
+        *Every project assigned to maintainer along
+        *with the uname of manager to which maintainer
+        *is assigned is displayed on this screen
+        *@param uname   Uname of maintainer 
+        */
         Maintainer me = (Maintainer) Contributor.getContributor(uname);
 
+        // Show uname of manager to which maintainer is assigned
         uNameLabel.setText(uname);
         managerLabel.setText("Manager: " + me.getManager());
 
+        // show every assigned project
         for (Map.Entry<String, Integer> entry: me.getProjects().entrySet()){
             Button btn = new Button(entry.getKey());
             btn.setAlignment(Pos.BASELINE_LEFT);

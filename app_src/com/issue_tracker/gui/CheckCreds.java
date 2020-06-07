@@ -6,8 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**Class cross-checks credentials with those stored
+*in the database 
+*/
+
 class CheckCreds{
     public static String check(String uname, String passwd){
+        /**Check credentials with those stored in database
+        *@param uname   Entered uname
+        *@param passwd  Entered password
+        *@returns       Role associated with account if authentication
+        *               was successful, null otherwise 
+        */
         String retrievedPass = "";
         String retrievedRole = "";
         String dbPath = "jdbc:sqlite:../issueTracker.db";

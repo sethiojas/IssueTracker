@@ -19,6 +19,9 @@ import com.issue_tracker.Manager;
 import com.issue_tracker.Contributor;
 import java.util.Map;
 
+/**Controller associated with manager.fxml 
+*/
+
 public class ManagerController extends MaintainerController implements HasProjects {
     private String contributorUName;
     private Manager me;
@@ -43,12 +46,15 @@ public class ManagerController extends MaintainerController implements HasProjec
 
     @FXML
     public void showProjects(){
+        /**Show all the projects manager has. 
+        */
         centerVbox.getChildren().clear();
         Label label = new Label("Projects");
         label.setMaxWidth(Double.MAX_VALUE);
         label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
         centerVbox.getChildren().add(label);
 
+        // Button to create a new project
         Button addProject = new Button("+");
         addProject.setOnAction(e -> {
             try{
@@ -62,7 +68,8 @@ public class ManagerController extends MaintainerController implements HasProjec
             }
         });
         centerVbox.getChildren().add(addProject);
-       
+
+        // Key is project title and value is project id
         for (Map.Entry<String, Integer> entry : me.getProjects().entrySet()) {
             HBox root = projectRow(entry);
             centerVbox.getChildren().add(root);
@@ -70,6 +77,9 @@ public class ManagerController extends MaintainerController implements HasProjec
     }
 
     public HBox projectRow(Map.Entry<String, Integer> entry){
+        /**Return a row consisting of project and buttons of actions
+        *which can be performed on that project 
+        */
         HBox root = new HBox();
         root.setSpacing(5);
         root.setMaxHeight(27);
@@ -81,6 +91,7 @@ public class ManagerController extends MaintainerController implements HasProjec
         
         HBox.setHgrow(btn, Priority.ALWAYS);
 
+        // On click, show project info
         btn.setOnAction(e -> {
             try{
                 FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
@@ -93,6 +104,7 @@ public class ManagerController extends MaintainerController implements HasProjec
             }
         });
 
+        // button to delete project
         Button remove = new Button("Remove");
         remove.setOnAction(e -> {
             me.removeProject(entry.getKey());
@@ -104,6 +116,8 @@ public class ManagerController extends MaintainerController implements HasProjec
     }
 
     public void showMaintainers() {
+        /**Show all maintainers assigned to manager 
+        */
         centerVbox.getChildren().clear();
         Label label = new Label("Maintainers");
         label.setMaxWidth(Double.MAX_VALUE);
@@ -114,6 +128,7 @@ public class ManagerController extends MaintainerController implements HasProjec
             Button btn = new Button(maintainerUname);
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
+            // on click, show info about maintainer
             btn.setOnAction(e -> {
                 try{
                     FXMLLoader loader = new FXMLLoader(new File(
@@ -136,6 +151,9 @@ public class ManagerController extends MaintainerController implements HasProjec
 
     @Override
     public void initialize(String uname) {
+        /**Initialize class members and show all projects
+        *which manager has (default view) 
+        */
         contributorUName = uname;
         managerUName.setText(contributorUName);
         me = (Manager) Contributor.getContributor(uname);

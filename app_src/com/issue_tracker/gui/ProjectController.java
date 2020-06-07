@@ -14,6 +14,8 @@ import java.io.File;
 import com.issue_tracker.Project;
 import java.util.HashMap;
 
+/**Controller class for project.fxml 
+*/
 
 public class ProjectController {
 
@@ -38,6 +40,9 @@ public class ProjectController {
 
     @FXML
     public void addBug(ActionEvent event){
+        /**Create a new bug issue for currently selected
+        *project 
+        */
         try{
             FXMLLoader loader = new FXMLLoader(new File("../fxml/add_bug.fxml").toURI().toURL());
             GridPane root = loader.load();
@@ -52,6 +57,8 @@ public class ProjectController {
 
     @FXML
     public void goBack(ActionEvent event){
+        /**Go back to previous screen 
+        */
         try{
             FXMLLoader loader = new FXMLLoader(new File(parentFXML).toURI().toURL());
             Parent root = loader.load();
@@ -65,6 +72,8 @@ public class ProjectController {
     }
 
     public void initialize(int projectID, String uname, String parentFXML){
+        /**Initialize class members Display all the bugs associated with project 
+        */
         this.projectID = projectID;
         this.parentFXML = parentFXML;
         contributorUName = uname;

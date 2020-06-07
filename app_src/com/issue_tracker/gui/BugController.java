@@ -11,6 +11,9 @@ import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 import com.issue_tracker.Bug;
 
+/**Show an individual bug 
+*/
+
 public class BugController {
     private int bugID;
     private int projectID;
@@ -32,6 +35,14 @@ public class BugController {
 
     public void initialize(int bugID, String bugTitle, String bugDesc,
                            int projectID, String contributorUName, String parentOfProject){
+        /**Initialize class members
+        *@param bugID               bug's unique id
+        *@param bugTitle            Title of bug
+        *@param bugDesc             Description of/Steps to reproduce bug
+        *@param projectID           Unique id of project to which bug belongs
+        *@param contributorUname    Uname of contributor
+        *@param parentOfProject     Path of fxml file which invoked ProjectController 
+        */
         this.bugID = bugID;
         this.projectID = projectID;
         this.contributorUName = contributorUName;
@@ -44,6 +55,9 @@ public class BugController {
 
     @FXML
     public void closeBug(ActionEvent event){
+        /**Close a bug  
+        *Equivalent to marking it as resolved
+        */
         bugStatus.setText("Closed");
         closeBugButton.setDisable(true);
         Bug.closeBug(bugID);
@@ -51,6 +65,8 @@ public class BugController {
 
     @FXML
     public void goBack(ActionEvent event){
+        /**Go back to previous Screen 
+        */
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/project.fxml"));
             BorderPane root = loader.load();

@@ -17,6 +17,13 @@ import com.issue_tracker.Admin;
 import com.issue_tracker.Contributor;
 import com.issue_tracker.Maintainer;
 
+/**Controller class for admin.fxml
+*Admins can
+*   remove/create Contributors
+*   Assign Manager to On Bench Maintainers
+*   Put assigned maintainers on bench
+*/
+
 public class AdminController {
     private Admin admin = new Admin();
     
@@ -31,8 +38,12 @@ public class AdminController {
 
     @FXML
     public void showManagers(){
+        /**Displays a list of all managers
+        *Managers can be removed or added via this panel
+        */
         displayVbox.getChildren().clear();
 
+        // create new manager button
         Button addManager = new Button("+");
         addManager.setOnAction(e -> {
             try{
@@ -54,6 +65,11 @@ public class AdminController {
     }
 
     public HBox managerRow(String manager){
+        /**Creates a row for single manager along with buttons corresponding
+        *to actions that can be performed on that manager.
+        *@param manager  Uname of manager
+        *@returns        HBox containg buttons
+        */
         HBox root = new HBox();
         root.setSpacing(5);
         root.setMaxHeight(27);
@@ -65,6 +81,7 @@ public class AdminController {
 
         HBox.setHgrow(btn, Priority.ALWAYS);
 
+        // remove manager account button
         Button remove = new Button("Remove");
         remove.setOnAction(e -> {
             admin.removeManager(manager);
@@ -77,6 +94,9 @@ public class AdminController {
 
     @FXML
     public void showMaintainers(){
+        /**Displays all maintainers in database which are assigned
+        *to some manager
+        */
         displayVbox.getChildren().clear();
 
         for (String maintainer: admin.getAllAssigned()){
@@ -86,6 +106,11 @@ public class AdminController {
     }
 
     public HBox maintainerRow(String maintainer){
+        /**Creates a row given maintainer along with buttons corresponding
+        *to actions which can be performed on that maintainer
+        *@param maintainer  Uname of maintainer
+        *@returns           HBox containing buttons
+        */
         HBox root = new HBox();
         root.setSpacing(5);
         root.setMaxHeight(27);
@@ -97,6 +122,7 @@ public class AdminController {
 
         HBox.setHgrow(btn, Priority.ALWAYS);
 
+        //Put maintainer on bench button
         Button benchMaintainer = new Button("Bench");
         benchMaintainer.setOnAction(e -> {
             Maintainer m = (Maintainer) Contributor.getContributor(maintainer);
@@ -104,6 +130,7 @@ public class AdminController {
             showMaintainers();
         });
 
+        // remove maintainer button
         Button remove = new Button("Remove");
         remove.setOnAction(e -> {
             Maintainer m = (Maintainer) Contributor.getContributor(maintainer);
@@ -117,8 +144,12 @@ public class AdminController {
 
     @FXML
     public void showOnBench(){
+        /**Shows all Maintainers currently on bench 
+        *New maintainers can also be created via this panel 
+        */
         displayVbox.getChildren().clear();
 
+        // create new maintainer button
         Button addMaintainer = new Button("+");
         addMaintainer.setOnAction(e -> {
             try{
@@ -140,6 +171,11 @@ public class AdminController {
     }
 
     public HBox onBenchRow(String name) {
+        /**Creates a row for an On-Bench maintainer along with buttons
+        *corresponding to actions which can be performed on that maintainer 
+        *@param name    Uname of on-bench maintainer
+        *@returns       HBox containing buttons
+        */
         HBox root = new HBox();
         root.setSpacing(5);
         root.setMaxHeight(27);
@@ -152,6 +188,7 @@ public class AdminController {
 
         HBox.setHgrow(maintainer, Priority.ALWAYS);
 
+        // assign manager to an on-bench maintainer button
         Button assign = new Button("Assign");
         assign.setOnAction(e -> {
             try{
@@ -172,6 +209,7 @@ public class AdminController {
             }
         });
 
+        // remove on-bench maintainer account button
         Button remove = new Button("Remove");
         remove.setOnAction(e -> {
             admin.removeMaintainer(name);
@@ -184,6 +222,9 @@ public class AdminController {
 
     @FXML
     public void logout(){
+        /**Logout from current account
+        *Takes user back to Login screen 
+        */
         try{
             Parent root = FXMLLoader.load(new File("../fxml/login.fxml").toURI().toURL());
             logoutButton.getScene().setRoot(root);
@@ -194,6 +235,8 @@ public class AdminController {
     }
 
     public void initialize(String uname) {
+        /**Set text of unameLabel and call show managers (default panel)
+        */
         unameLabel.setText(uname);
         showManagers();
     }
