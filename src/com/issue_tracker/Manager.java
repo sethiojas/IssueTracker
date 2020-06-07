@@ -18,6 +18,7 @@ public class Manager extends Contributor implements Serializable {
 
     public void createProject(String title){
         Project proj = new Project(title);
+        proj.addMaintainer(this.uName);
         addProject(proj.getProjectName(), proj.getProjectId());
     }
 
