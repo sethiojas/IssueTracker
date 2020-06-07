@@ -96,6 +96,11 @@ public class Project implements Serializable{
         updateProject(this);
     }
 
+    public void addMaintainer(String uname){
+        maintainers.add(uname);
+        updateProject(this);
+    }
+
     public void removeMaintainer(String uname){
         maintainers.remove(uname);
         updateProject(this);
