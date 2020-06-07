@@ -155,6 +155,10 @@ public class AdminController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(view));
                 stage.setTitle("Issue Tracker");
+                stage.setResizable(false);
+                stage.setOnHidden(event -> {
+                    showOnBench();
+                });
                 stage.show();
             }catch(IOException excep){
                 excep.printStackTrace();
