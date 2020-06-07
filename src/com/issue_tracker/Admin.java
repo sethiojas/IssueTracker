@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.io.Serializable;
+import java.lang.StringBuilder;
 
 public class Admin implements Serializable {
     // all static and transient variables are null after deserialization
@@ -110,7 +111,14 @@ public class Admin implements Serializable {
         ArrayList<String> listAssigned = new ArrayList<>();
 
         try{
-            String getAssigned = "SELECT uname FROM contributors WHERE on_bench=\"false\"";
+            String getAssigned = new StringBuilder()
+                                .append("SELECT con.uname ")
+                                .append("FROM contributors con ")
+                                .append("INNER JOIN credentials cred ON ")
+                                .append("con.uname=cred.uname ")
+                                .append("WHERE con.on_bench=\"false\" AND ")
+                                .append("cred.role=\"maintainer\"")
+                                .toString();
             Connection conn = DriverManager.getConnection(dbPath);
             Statement stm = conn.createStatement();
             ResultSet res = stm.executeQuery(getAssigned);
