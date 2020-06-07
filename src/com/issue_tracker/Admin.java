@@ -61,8 +61,12 @@ public class Admin implements Serializable {
     
     public void removeMaintainer(String uName, String ManagerUname){
         removeCredential(uName);
-        putMaintainerOnBench(ManagerUname, uName);
+        if (ManagerUname != null) putMaintainerOnBench(ManagerUname, uName);
         Contributor.removeContributor(uName);
+    }
+
+    public void removeMaintainer(String uname){
+        this.removeMaintainer(uname, null);
     }
 
     public ArrayList<String> getAllManagers(){
