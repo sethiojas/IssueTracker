@@ -39,7 +39,7 @@ public class ProjectController {
     @FXML
     public void addBug(ActionEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(new File("../../fxml/add_bug.fxml").toURI().toURL());
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/add_bug.fxml").toURI().toURL());
             GridPane root = loader.load();
             AddBugController cont = loader.getController();
             cont.initialize(projectID, contributorUName, parentFXML);
@@ -86,7 +86,7 @@ public class ProjectController {
 
             btn.setOnAction(e -> {
                 try{
-                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/bug.fxml").toURI().toURL());
+                    FXMLLoader loader = new FXMLLoader(new File("../fxml/bug.fxml").toURI().toURL());
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
                     cont.initialize(Integer.parseInt(bug.get("bug_id")), bug.get("bug_title"),

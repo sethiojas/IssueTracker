@@ -44,7 +44,7 @@ public class LoginController {
         try{
             switch(res){
                 case "admin": {
-                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/admin.fxml").toURI().toURL());
+                    FXMLLoader loader = new FXMLLoader(new File("../fxml/admin.fxml").toURI().toURL());
                     BorderPane root = loader.load();
                     AdminController cont = loader.getController();
                     cont.initialize(uname);
@@ -52,7 +52,7 @@ public class LoginController {
                     break;
                 }
                 case "manager": {
-                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
+                    FXMLLoader loader = new FXMLLoader(new File("../fxml/manager.fxml").toURI().toURL());
                     BorderPane root = loader.load();
                     ManagerController cont = loader.getController();
                     cont.initialize(uname);
@@ -61,7 +61,7 @@ public class LoginController {
                 }
 
                 case "maintainer":{ 
-                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/maintainer.fxml").toURI().toURL());
+                    FXMLLoader loader = new FXMLLoader(new File("../fxml/maintainer.fxml").toURI().toURL());
                     GridPane root = loader.load();
                     // https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
                     MaintainerController cont = loader.getController();

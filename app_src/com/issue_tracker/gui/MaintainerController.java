@@ -33,7 +33,7 @@ public class MaintainerController implements HasProjects{
     @FXML
     public void logout(ActionEvent event){
         try{
-            GridPane root = FXMLLoader.load(new File("../../fxml/login.fxml").toURI().toURL());
+            GridPane root = FXMLLoader.load(new File("../fxml/login.fxml").toURI().toURL());
             logoutButton.getScene().setRoot(root);
         }
         catch(IOException excep){
@@ -55,10 +55,10 @@ public class MaintainerController implements HasProjects{
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setOnAction(e -> {
                 try{
-                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/project.fxml").toURI().toURL());
+                    FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
-                    cont.initialize(entry.getValue(), uname, "../../fxml/maintainer.fxml");
+                    cont.initialize(entry.getValue(), uname, "../fxml/maintainer.fxml");
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){

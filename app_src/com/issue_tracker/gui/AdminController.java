@@ -30,7 +30,7 @@ public class AdminController {
         Button addManager = new Button("+");
         addManager.setOnAction(e -> {
             try{
-                FXMLLoader loader = new FXMLLoader(new File("../../fxml/add_contributor.fxml").toURI().toURL());
+                FXMLLoader loader = new FXMLLoader(new File("../fxml/add_contributor.fxml").toURI().toURL());
                 Parent root = loader.load();
                 AddContributorController cont = loader.getController();
                 cont.initialize(unameLabel.getText(), "manager");
@@ -66,7 +66,7 @@ public class AdminController {
         Button addMaintainer = new Button("+");
         addMaintainer.setOnAction(e -> {
             try{
-                FXMLLoader loader = new FXMLLoader(new File("../../fxml/add_contributor.fxml").toURI().toURL());
+                FXMLLoader loader = new FXMLLoader(new File("../fxml/add_contributor.fxml").toURI().toURL());
                 Parent root = loader.load();
                 AddContributorController cont = loader.getController();
                 cont.initialize(unameLabel.getText(), "maintainer");
@@ -87,7 +87,7 @@ public class AdminController {
     @FXML
     public void logout(){
         try{
-            Parent root = FXMLLoader.load(new File("../../fxml/login.fxml").toURI().toURL());
+            Parent root = FXMLLoader.load(new File("../fxml/login.fxml").toURI().toURL());
             logoutButton.getScene().setRoot(root);
         }
         catch(IOException excep){

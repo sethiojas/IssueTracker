@@ -52,7 +52,7 @@ public class BugController {
     @FXML
     public void goBack(ActionEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/project.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/project.fxml"));
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
             cont.initialize(projectID, contributorUName, parentOfProject);

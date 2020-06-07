@@ -50,7 +50,7 @@ public class ManagerController extends MaintainerController implements HasProjec
         Button addProject = new Button("+");
         addProject.setOnAction(e -> {
             try{
-                FXMLLoader loader = new FXMLLoader(new File("../../fxml/new_project.fxml").toURI().toURL());
+                FXMLLoader loader = new FXMLLoader(new File("../fxml/new_project.fxml").toURI().toURL());
                 AnchorPane root = loader.load();
                 NewProjectController cont = loader.getController();
                 cont.initialize(contributorUName);
@@ -68,10 +68,10 @@ public class ManagerController extends MaintainerController implements HasProjec
             
             btn.setOnAction(e -> {
                 try{
-                    FXMLLoader loader = new FXMLLoader(new File("../../fxml/project.fxml").toURI().toURL());
+                    FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
                     BorderPane root = loader.load();
                     ProjectController cont = loader.getController();
-                    cont.initialize(entry.getValue(), contributorUName, "../../fxml/manager.fxml");
+                    cont.initialize(entry.getValue(), contributorUName, "../fxml/manager.fxml");
                     btn.getScene().setRoot(root);
                 }catch(IOException excep) {
                     excep.printStackTrace();
@@ -96,7 +96,7 @@ public class ManagerController extends MaintainerController implements HasProjec
                 try{
                     FXMLLoader loader = new FXMLLoader(new File(
                         // https://stackoverflow.com/questions/17228487/javafx-location-is-not-set-error-message
-                        "../../fxml/manager_selection_maintainers.fxml"
+                        "../fxml/manager_selection_maintainers.fxml"
                         ).toURI().toURL()
                     );
                     GridPane root = loader.load();

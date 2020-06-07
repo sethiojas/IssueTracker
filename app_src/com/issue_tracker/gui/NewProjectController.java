@@ -44,7 +44,7 @@ public class NewProjectController {
     @FXML
     public void cancel(){
         try{
-            FXMLLoader loader = new FXMLLoader(new File("../../fxml/manager.fxml").toURI().toURL());
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/manager.fxml").toURI().toURL());
             Parent root = loader.load();
             ManagerController cont = loader.getController();
             cont.initialize(managerUname);

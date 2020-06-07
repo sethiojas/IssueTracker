@@ -37,7 +37,7 @@ public class AddContributorController {
     @FXML
     public void cancel() {
         try{
-            FXMLLoader loader = new FXMLLoader(new File("../../fxml/admin.fxml").toURI().toURL());
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/admin.fxml").toURI().toURL());
             Parent root = loader.load();
             AdminController cont = loader.getController();
             cont.initialize(uname);

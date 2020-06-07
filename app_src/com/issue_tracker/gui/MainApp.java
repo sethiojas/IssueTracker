@@ -12,7 +12,7 @@ public class MainApp extends Application {
       
     @Override
     public void start(Stage primaryStage) throws Exception{
-        GridPane root = FXMLLoader.load(new File("../../fxml/login.fxml").toURI().toURL());
+        GridPane root = FXMLLoader.load(new File("../fxml/login.fxml").toURI().toURL());
         primaryStage.setTitle("IssueTracker Login");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

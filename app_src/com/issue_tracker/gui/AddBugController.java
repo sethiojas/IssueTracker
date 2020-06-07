@@ -29,7 +29,7 @@ public class AddBugController {
     public void submit(ActionEvent event){
         new Bug(bugTitle.getText(), bugDescription.getText(), projectID);
         try{
-            FXMLLoader loader = new FXMLLoader(new File("../../fxml/project.fxml").toURI().toURL());
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
             cont.initialize(projectID, contributorUName, parentOfProject);
