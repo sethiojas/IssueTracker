@@ -32,7 +32,7 @@ public class MaintainerDetailsController {
     @FXML
     public void goBack() {
         try{
-            FXMLLoader loader = new FXMLLoader(new File("manager.fxml").toURI().toURL());
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/manager.fxml").toURI().toURL());
             BorderPane root = loader.load();
             ManagerController cont = loader.getController();
             cont.initialize(managerUname);
