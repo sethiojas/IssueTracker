@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
@@ -62,23 +64,43 @@ public class ManagerController extends MaintainerController implements HasProjec
         centerVbox.getChildren().add(addProject);
        
         for (Map.Entry<String, Integer> entry : me.getProjects().entrySet()) {
-            Button btn = new Button(entry.getKey());
-            btn.setMaxWidth(Double.MAX_VALUE);
-            btn.setAlignment(Pos.BASELINE_LEFT);
-            
-            btn.setOnAction(e -> {
-                try{
-                    FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
-                    BorderPane root = loader.load();
-                    ProjectController cont = loader.getController();
-                    cont.initialize(entry.getValue(), contributorUName, "../fxml/manager.fxml");
-                    btn.getScene().setRoot(root);
-                }catch(IOException excep) {
-                    excep.printStackTrace();
-                }
-            });
-            centerVbox.getChildren().add(btn);
+            HBox root = projectRow(entry);
+            centerVbox.getChildren().add(root);
         }
+    }
+
+    public HBox projectRow(Map.Entry<String, Integer> entry){
+        HBox root = new HBox();
+        root.setSpacing(5);
+        root.setMaxHeight(27);
+        root.setMaxWidth(Double.MAX_VALUE);
+
+        Button btn = new Button(entry.getKey());
+        btn.setMaxWidth(Double.MAX_VALUE);
+        btn.setAlignment(Pos.BASELINE_LEFT);
+        
+        HBox.setHgrow(btn, Priority.ALWAYS);
+
+        btn.setOnAction(e -> {
+            try{
+                FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
+                BorderPane view = loader.load();
+                ProjectController cont = loader.getController();
+                cont.initialize(entry.getValue(), contributorUName, "../fxml/manager.fxml");
+                btn.getScene().setRoot(view);
+            }catch(IOException excep) {
+                excep.printStackTrace();
+            }
+        });
+
+        Button remove = new Button("Remove");
+        remove.setOnAction(e -> {
+            me.removeProject(entry.getKey());
+            showProjects();
+        });
+
+        root.getChildren().addAll(btn, remove);
+        return root;
     }
 
     public void showMaintainers() {
