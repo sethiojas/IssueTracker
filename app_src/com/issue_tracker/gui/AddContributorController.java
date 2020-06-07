@@ -41,6 +41,9 @@ public class AddContributorController {
             Parent root = loader.load();
             AdminController cont = loader.getController();
             cont.initialize(uname);
+            if(role.equals("maintainer")){
+                cont.showOnBench();
+            }
             cancelButton.getScene().setRoot(root);
         }catch(IOException e){
             e.printStackTrace();
