@@ -14,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.geometry.Pos;
 import java.io.IOException;
 import com.issue_tracker.Admin;
+import com.issue_tracker.Contributor;
+import com.issue_tracker.Maintainer;
 
 public class AdminController {
     private Admin admin = new Admin();
@@ -46,11 +48,31 @@ public class AdminController {
         displayVbox.getChildren().add(addManager);
 
         for (String manager: admin.getAllManagers()){
-            Button btn = new Button(manager);
-            btn.setMaxWidth(Double.MAX_VALUE);
-            btn.setAlignment(Pos.BASELINE_LEFT);
-            displayVbox.getChildren().add(btn);
+            HBox root = managerRow(manager);
+            displayVbox.getChildren().add(root);
         }
+    }
+
+    public HBox managerRow(String manager){
+        HBox root = new HBox();
+        root.setSpacing(5);
+        root.setMaxHeight(27);
+        root.setMaxWidth(Double.MAX_VALUE);
+        
+        Button btn = new Button(manager);
+        btn.setMaxWidth(Double.MAX_VALUE);
+        btn.setAlignment(Pos.BASELINE_LEFT);
+
+        HBox.setHgrow(btn, Priority.ALWAYS);
+
+        Button remove = new Button("Remove");
+        remove.setOnAction(e -> {
+            admin.removeManager(manager);
+            showManagers();
+        });
+
+        root.getChildren().addAll(btn, remove);
+        return root;
     }
 
     @FXML
@@ -58,11 +80,32 @@ public class AdminController {
         displayVbox.getChildren().clear();
 
         for (String maintainer: admin.getAllAssigned()){
-            Button btn = new Button(maintainer);
-            btn.setMaxWidth(Double.MAX_VALUE);
-            btn.setAlignment(Pos.BASELINE_LEFT);
-            displayVbox.getChildren().add(btn);
+            HBox root = maintainerRow(maintainer);
+            displayVbox.getChildren().add(root);
         }
+    }
+
+    public HBox maintainerRow(String maintainer){
+        HBox root = new HBox();
+        root.setSpacing(5);
+        root.setMaxHeight(27);
+        root.setMaxWidth(Double.MAX_VALUE);
+        
+        Button btn = new Button(maintainer);
+        btn.setMaxWidth(Double.MAX_VALUE);
+        btn.setAlignment(Pos.BASELINE_LEFT);
+
+        HBox.setHgrow(btn, Priority.ALWAYS);
+
+        Button remove = new Button("Remove");
+        remove.setOnAction(e -> {
+            Maintainer m = (Maintainer) Contributor.getContributor(maintainer);
+            admin.removeMaintainer(maintainer, m.getManager());
+            showMaintainers();
+        });
+
+        root.getChildren().addAll(btn, remove);
+        return root;
     }
 
     @FXML
@@ -118,7 +161,13 @@ public class AdminController {
             }
         });
 
-        root.getChildren().addAll(maintainer, assign);
+        Button remove = new Button("Remove");
+        remove.setOnAction(e -> {
+            admin.removeMaintainer(name);
+            showOnBench();
+        });
+
+        root.getChildren().addAll(maintainer, assign, remove);
         return root;
     }
 
