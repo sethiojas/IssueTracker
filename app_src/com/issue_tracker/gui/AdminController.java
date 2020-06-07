@@ -6,6 +6,10 @@ import java.io.File;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.geometry.Pos;
 import java.io.IOException;
@@ -78,13 +82,44 @@ public class AdminController {
             }
         });
         displayVbox.getChildren().add(addMaintainer);
-
-        for (String maintainer: admin.getAllOnBench()){
-            Button btn = new Button(maintainer);
-            btn.setMaxWidth(Double.MAX_VALUE);
-            btn.setAlignment(Pos.BASELINE_LEFT);
-            displayVbox.getChildren().add(btn);
+        
+        for (String name: admin.getAllOnBench()) {
+            HBox root = onBenchRow(name);
+            displayVbox.getChildren().add(root);
         }
+    }
+
+    public HBox onBenchRow(String name) {
+        HBox root = new HBox();
+        root.setSpacing(5);
+        root.setMaxHeight(27);
+        root.setMaxWidth(Double.MAX_VALUE);
+
+        Button maintainer = new Button(name);
+        maintainer.setMaxWidth(Double.MAX_VALUE);
+        maintainer.setMaxHeight(Double.MAX_VALUE);
+        maintainer.setAlignment(Pos.BASELINE_LEFT);
+
+        HBox.setHgrow(maintainer, Priority.ALWAYS);
+
+        Button assign = new Button("Assign");
+        assign.setOnAction(e -> {
+            try{
+                FXMLLoader loader = new FXMLLoader(new File("../fxml/assign_manager.fxml").toURI().toURL());
+                Parent view = loader.load();
+                AssignManagerController cont = loader.getController();
+                cont.initialize(unameLabel.getText(), name);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(view));
+                stage.setTitle("Issue Tracker");
+                stage.show();
+            }catch(IOException excep){
+                excep.printStackTrace();
+            }
+        });
+
+        root.getChildren().addAll(maintainer, assign);
+        return root;
     }
 
     @FXML
