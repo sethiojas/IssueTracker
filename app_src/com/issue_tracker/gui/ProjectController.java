@@ -89,7 +89,7 @@ public class ProjectController {
         }
 
         for (HashMap<String, String> bug: project.getAllBugs()){
-            Button btn = new Button("#" + bug.get("bug_id") + " " + bug.get("bug_title"));
+            Button btn = new Button("#" + bug.get("id") + " " + bug.get("title"));
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.BASELINE_LEFT);
 
@@ -98,8 +98,8 @@ public class ProjectController {
                     FXMLLoader loader = new FXMLLoader(new File("../fxml/bug.fxml").toURI().toURL());
                     GridPane root = loader.load();
                     BugController cont = loader.getController();
-                    cont.initialize(Integer.parseInt(bug.get("bug_id")), bug.get("bug_title"),
-                                    bug.get("bug_desc"), projectID, contributorUName, parentFXML);
+                    cont.initialize(Integer.parseInt(bug.get("id")), bug.get("title"),
+                                    bug.get("desc"), projectID, contributorUName, parentFXML);
                     btn.getScene().setRoot(root);
                 }
                 catch(IOException excep){
