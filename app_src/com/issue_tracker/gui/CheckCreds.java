@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import com.issue_tracker.HashString;
 
 /**Class cross-checks credentials with those stored
 *in the database 
@@ -18,6 +19,7 @@ class CheckCreds{
         *@returns       Role associated with account if authentication
         *               was successful, null otherwise 
         */
+        String password = HashString.hash(passwd);
         String retrievedPass = "";
         String retrievedRole = "";
         String dbPath = "jdbc:sqlite:../issueTracker.db";
@@ -37,7 +39,7 @@ class CheckCreds{
             e.printStackTrace();
         }
         finally{
-            if (passwd.equals(retrievedPass)) return retrievedRole;
+            if (password.equals(retrievedPass)) return retrievedRole;
             return null;
         }
     }
