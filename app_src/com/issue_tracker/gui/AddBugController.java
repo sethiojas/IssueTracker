@@ -65,6 +65,15 @@ public class AddBugController {
         }
         Project project = Project.getProject(projectID);
         project.createNewBug(title, description);
+
+        //to go back;
+        cancel();
+    }
+
+    @FXML
+    public void cancel(){
+        /**Go back to project screen 
+        */
         try{
             FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
             BorderPane root = loader.load();
