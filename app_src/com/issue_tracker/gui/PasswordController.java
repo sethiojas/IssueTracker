@@ -34,13 +34,18 @@ public class PasswordController {
 
         Stage stage = (Stage) okButton.getScene().getWindow();
 
+        String check = CheckCreds.check(uname, oldPassword);
         
-
         if (oldPassword.length() < 1 ||
             newPassword.length() < 1 ||
             reEnterPassword.length() < 1){
             AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
                                  "Required field(s) empty!");
+            return;
+        }
+        else if(check == null){
+            AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
+                                 "Password for account is incorrect!");
             return;
         }
         else if (oldPassword.equals(newPassword)){
