@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
+import java.io.File;
 import com.issue_tracker.Bug;
 
 /**Show an individual bug 
@@ -68,7 +69,7 @@ public class BugController {
         /**Go back to previous Screen 
         */
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/project.fxml"));
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
             BorderPane root = loader.load();
             ProjectController cont = loader.getController();
             cont.initialize(projectID, contributorUName, parentOfProject);
