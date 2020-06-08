@@ -28,6 +28,15 @@ public class PasswordController {
 
     @FXML
     public void okAction(){
+        /**Event handler for ok button
+        *Performs a series of check and then changes the password
+        *associated with the account
+        *checks include
+        *   -fields should be non empyt
+        *   -current password should be valid
+        *   -new password should not be equal to old password
+        *   -new password and re-entered password should match
+        */
         String oldPassword = oldPasswordField.getText();
         String newPassword = newPasswordField.getText();
         String reEnterPassword = reEnterPasswordField.getText();
