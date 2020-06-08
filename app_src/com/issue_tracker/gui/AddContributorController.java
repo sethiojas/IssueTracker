@@ -38,7 +38,7 @@ public class AddContributorController {
         String uname = username.getText();
         if(Contributor.getContributor(uname) != null){
             Window owner = username.getScene().getWindow();
-            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Username already taken",
+            AlertHelper.showAlert(Alert.AlertType.WARNING, owner, "Username already taken",
                                  "This Username is already taken!");
             return;
         }
