@@ -9,6 +9,9 @@ import javafx.scene.Parent;
 import java.io.IOException;
 import com.issue_tracker.Admin;
 import com.issue_tracker.HashString;
+import com.issue_tracker.Contributor;
+import javafx.scene.control.Alert;
+import javafx.stage.Window;
 
 /**Handles creation of Contributors (Manager/Maintainer) 
 */
@@ -31,6 +34,13 @@ public class AddContributorController {
         /**Event handler for submit button 
         *Creates new Maintainer or Manager depending upon the role
         */
+        String uname = username.getText();
+        if(Contributor.getContributor(uname) != null){
+            Window owner = username.getScene().getWindow();
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Username already taken",
+                                 "This Username is already taken!");
+            return;
+        }
         String passwordString = HashString.hash(password.getText());
         if (role.equals("manager")){
             new Admin().createNewManager(username.getText(), passwordString);
