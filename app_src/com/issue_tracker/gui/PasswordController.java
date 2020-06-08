@@ -34,7 +34,16 @@ public class PasswordController {
 
         Stage stage = (Stage) okButton.getScene().getWindow();
 
-        if (oldPassword.equals(newPassword)){
+        
+
+        if (oldPassword.length() < 1 ||
+            newPassword.length() < 1 ||
+            reEnterPassword.length() < 1){
+            AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
+                                 "Required field(s) empty!");
+            return;
+        }
+        else if (oldPassword.equals(newPassword)){
             AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
                                  "Old password can not be same as New Password!");
             return;
