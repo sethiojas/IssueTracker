@@ -100,6 +100,7 @@ public abstract class Contributor implements Serializable{
 
     public static Contributor getContributor(String uname){
         /**Retrieve a contributor from database 
+        *Returns null if there is no correspond data
         */
         String getContributor = "SELECT object FROM contributors WHERE uname=?";
         Contributor m = null;
@@ -108,9 +109,13 @@ public abstract class Contributor implements Serializable{
             PreparedStatement pstm = conn.prepareStatement(getContributor);
             pstm.setString(1, uname);
             ResultSet res = pstm.executeQuery();
-            byte[] arr = res.getBytes("object");
-            m = ConvertObject.<Contributor>getJavaObject(arr);
-            if (m == null) throw new Exception("Unable to Deserialize object");
+            byte[] arr;
+            // https://stackoverflow.com/questions/867194/java-resultset-how-to-check-if-there-are-any-results/6813771#6813771
+            if (res.isBeforeFirst()) {
+                arr = res.getBytes("object");
+                m = ConvertObject.<Contributor>getJavaObject(arr);
+                if (m == null) throw new Exception("Unable to Deserialize object");
+            }
             conn.close();
         }catch(SQLException e){
             e.printStackTrace();
