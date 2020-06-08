@@ -10,6 +10,8 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import java.io.File;
 import com.issue_tracker.Project;
+import javafx.stage.Window;
+import javafx.scene.control.Alert;
 
 /**Controller Class for  add_bug.fxml
 *Class handles creation of bugs
@@ -46,8 +48,23 @@ public class AddBugController {
         *Creates a new bug and switches the Scene back to Project
         *@param event ActionEvent type
         */
+        String title = bugTitle.getText();
+        String description = bugDescription.getText();
+
+        Window screen = submitButton.getScene().getWindow();
+        if(title.length() < 10){
+            AlertHelper.showAlert(Alert.AlertType.WARNING, screen, "Short Title",
+                                 "Title appears to be too short! Please make sure\n" + 
+                                 "title is atleast 10 characters long");
+            return;
+        }
+        else if (title.length() > 120) {
+            AlertHelper.showAlert(Alert.AlertType.WARNING, screen, "Short Title",
+                                 "Title is too long! Only 120 characters allowed");
+            return;
+        }
         Project project = Project.getProject(projectID);
-        project.createNewBug(bugTitle.getText(), bugDescription.getText());
+        project.createNewBug(title, description);
         try{
             FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
             BorderPane root = loader.load();
