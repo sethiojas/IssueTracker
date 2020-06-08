@@ -33,6 +33,7 @@ public class AddContributorController {
     public void submit(){
         /**Event handler for submit button 
         *Creates new Maintainer or Manager depending upon the role
+        *shows alert if username is already taken
         */
         String uname = username.getText();
         if(Contributor.getContributor(uname) != null){
