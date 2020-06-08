@@ -15,7 +15,7 @@ public class PasswordController {
     private String uname;
 
     @FXML
-    private TextField oldPasswordField;
+    private TextField currentPasswordField;
 
     @FXML
     private TextField newPasswordField;
@@ -37,15 +37,15 @@ public class PasswordController {
         *   -new password should not be equal to old password
         *   -new password and re-entered password should match
         */
-        String oldPassword = oldPasswordField.getText();
+        String currentPassword = currentPasswordField.getText();
         String newPassword = newPasswordField.getText();
         String reEnterPassword = reEnterPasswordField.getText();
 
         Stage stage = (Stage) okButton.getScene().getWindow();
 
-        String check = CheckCreds.check(uname, oldPassword);
+        String check = CheckCreds.check(uname, currentPassword);
         
-        if (oldPassword.length() < 1 ||
+        if (currentPassword.length() < 1 ||
             newPassword.length() < 1 ||
             reEnterPassword.length() < 1){
             AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
@@ -57,7 +57,7 @@ public class PasswordController {
                                  "Password for account is incorrect!");
             return;
         }
-        else if (oldPassword.equals(newPassword)){
+        else if (currentPassword.equals(newPassword)){
             AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
                                  "Old password can not be same as New Password!");
             return;
