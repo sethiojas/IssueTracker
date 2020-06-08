@@ -29,9 +29,9 @@
          </font>
       </Label>
       <TextArea fx:id="maintainersField" editable="false" layoutX="15.0" layoutY="188.0" minHeight="30.0" prefHeight="30.0" prefWidth="495.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="188.0" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="11.0" layoutY="234.0" prefHeight="119.0" prefWidth="502.0" AnchorPane.leftAnchor="11.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="11.0" layoutY="234.0" prefHeight="119.0" prefWidth="583.0" AnchorPane.leftAnchor="11.0">
          <content>
-            <VBox fx:id="displayVbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="117.0" prefWidth="500.0" spacing="5.0">
+            <VBox fx:id="displayVbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="117.0" prefWidth="553.0" spacing="5.0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
