@@ -37,6 +37,25 @@ public class AdminController {
     private VBox displayVbox;
 
     @FXML
+    public void changePassword() {
+        /**Change password of Manager 
+        */
+        try{
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/change_password.fxml").toURI().toURL());
+            Parent root = loader.load();
+            PasswordController cont = loader.getController();
+            cont.initialize(unameLabel.getText());
+            Stage stage = new Stage();
+            stage.setTitle("Change Password");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void showManagers(){
         /**Displays a list of all managers
         *Managers can be removed or added via this panel

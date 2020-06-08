@@ -6,8 +6,11 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import java.io.File;
@@ -32,6 +35,25 @@ public class MaintainerController implements HasProjects{
 
     @FXML
     private Button logoutButton;
+
+    @FXML
+    public void changePassword() {
+        /**Change password of Maintainer 
+        */
+        try{
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/change_password.fxml").toURI().toURL());
+            AnchorPane root = loader.load();
+            PasswordController cont = loader.getController();
+            cont.initialize(uNameLabel.getText());
+            Stage stage = new Stage();
+            stage.setTitle("Change Password");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void logout(ActionEvent event){

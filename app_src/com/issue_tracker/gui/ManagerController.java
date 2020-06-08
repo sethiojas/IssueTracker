@@ -11,6 +11,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import java.io.IOException;
@@ -43,6 +45,25 @@ public class ManagerController extends MaintainerController implements HasProjec
 
     @FXML
     private VBox centerVbox;
+
+    @FXML
+    public void changePassword() {
+        /**Change password of Manager 
+        */
+        try{
+            FXMLLoader loader = new FXMLLoader(new File("../fxml/change_password.fxml").toURI().toURL());
+            AnchorPane root = loader.load();
+            PasswordController cont = loader.getController();
+            cont.initialize(contributorUName);
+            Stage stage = new Stage();
+            stage.setTitle("Change Password");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void showProjects(){
