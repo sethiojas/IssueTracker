@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import java.io.File;
-import com.issue_tracker.Bug;
+import com.issue_tracker.Project;
 
 /**Controller Class for  add_bug.fxml
 *Class handles creation of bugs
@@ -46,7 +46,8 @@ public class AddBugController {
         *Creates a new bug and switches the Scene back to Project
         *@param event ActionEvent type
         */
-        new Bug(bugTitle.getText(), bugDescription.getText(), projectID);
+        Project project = Project.getProject(projectID);
+        project.createNewBug(bugTitle.getText(), bugDescription.getText());
         try{
             FXMLLoader loader = new FXMLLoader(new File("../fxml/project.fxml").toURI().toURL());
             BorderPane root = loader.load();
