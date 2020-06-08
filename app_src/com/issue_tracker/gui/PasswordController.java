@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import com.issue_tracker.ChangePassword;
+import com.issue_tracker.HashString;
 
 /**This class handles change of password 
 */
@@ -42,6 +43,7 @@ public class PasswordController {
                                  "Passwords do not match!");
             return;
         }
+        newPassword = HashString.hash(newPassword);
         ChangePassword.change(uname, newPassword);
         stage.close();
     }
