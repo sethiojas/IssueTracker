@@ -62,6 +62,13 @@ public class AdminController {
         */
         displayVbox.getChildren().clear();
 
+        Label managerLabel = new Label("Managers");
+        managerLabel.setMaxWidth(Double.MAX_VALUE);
+        managerLabel.setMaxHeight(32);
+        managerLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold; "+
+                        "-fx-text-fill: white; -fx-background-color: #222831;");
+        displayVbox.getChildren().add(managerLabel);
+        
         // create new manager button
         Button addManager = new Button("+");
         addManager.setOnAction(e -> {
@@ -118,6 +125,13 @@ public class AdminController {
         */
         displayVbox.getChildren().clear();
 
+        Label maintainerLabel = new Label("Maintainers");
+        maintainerLabel.setMaxWidth(Double.MAX_VALUE);
+        maintainerLabel.setMaxHeight(32);
+        maintainerLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold; "+
+                        "-fx-text-fill: white; -fx-background-color: #222831;");
+        displayVbox.getChildren().add(maintainerLabel);
+
         for (String maintainer: admin.getAllAssigned()){
             HBox root = maintainerRow(maintainer);
             displayVbox.getChildren().add(root);
@@ -167,6 +181,13 @@ public class AdminController {
         *New maintainers can also be created via this panel 
         */
         displayVbox.getChildren().clear();
+
+        Label onBenchLabel = new Label("On-Bench");
+        onBenchLabel.setMaxWidth(Double.MAX_VALUE);
+        onBenchLabel.setMaxHeight(32);
+        onBenchLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold; "+
+                        "-fx-text-fill: white; -fx-background-color: #222831;");
+        displayVbox.getChildren().add(onBenchLabel);
 
         // create new maintainer button
         Button addMaintainer = new Button("+");
