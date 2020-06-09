@@ -60,7 +60,7 @@ public class AddBugController {
         }
         else if (title.length() > 120) {
             AlertHelper.showAlert(Alert.AlertType.WARNING, screen, "Short Title",
-                                 "Title is too long! Only 120 characters allowed");
+                                 "Title is too long! Only 120\ncharacters allowed");
             return;
         }
         Project project = Project.getProject(projectID);
