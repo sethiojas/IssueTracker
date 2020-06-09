@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Window;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
 import java.io.File;
 import java.io.IOException;
@@ -69,7 +68,7 @@ public class LoginController {
 
                 case "maintainer":{ 
                     FXMLLoader loader = new FXMLLoader(new File("../fxml/maintainer.fxml").toURI().toURL());
-                    GridPane root = loader.load();
+                    BorderPane root = loader.load();
                     // https://stackoverflow.com/questions/23461148/fxmlloader-getcontroller-returns-null
                     MaintainerController cont = loader.getController();
                     cont.initialize(uname);
