@@ -44,7 +44,7 @@ public class LoginController {
         if (res == null){
             Window owner = loginButton.getScene().getWindow();
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Wrong Credentials",
-                                    "Please check the entered Username and Password");
+                                    "Please check the entered Credentials");
             return;
         }
         try{
