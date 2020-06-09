@@ -81,7 +81,7 @@ public class MaintainerController implements HasProjects{
 
         // Show uname of manager to which maintainer is assigned
         uNameLabel.setText(uname);
-        managerLabel.setText("Manager: " + me.getManager());
+        managerLabel.setText(me.getManager());
 
         // show every assigned project
         for (Map.Entry<String, Integer> entry: me.getProjects().entrySet()){
