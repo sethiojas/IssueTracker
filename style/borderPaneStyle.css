@@ -1,0 +1,11 @@
+.sidebar{
+    -fx-background-color: #393e46;
+}
+
+.sidebar .label{
+    -fx-text-fill : #eeeeee;
+}
+
+.sidebar .button:hover{
+    -fx-background-color: white;
+}
