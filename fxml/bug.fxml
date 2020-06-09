@@ -76,7 +76,7 @@
             </TextArea>
          </content>
       </ScrollPane>
-      <SplitPane dividerPositions="0.5" focusTraversable="false" prefHeight="50.0" prefWidth="600.0" GridPane.rowIndex="5">
+      <SplitPane dividerPositions="0.5" focusTraversable="false" prefHeight="50.0" prefWidth="600.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css" GridPane.rowIndex="5">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
