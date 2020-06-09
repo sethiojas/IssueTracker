@@ -54,8 +54,8 @@ public class AddBugController {
         Window screen = submitButton.getScene().getWindow();
         if(title.length() < 10){
             AlertHelper.showAlert(Alert.AlertType.WARNING, screen, "Short Title",
-                                 "Title appears to be too short! Please make sure\n" + 
-                                 "title is atleast 10 characters long");
+                                 "Title appears to be too short!\nPlease make sure" + 
+                                 "title is atleast\n10 characters long");
             return;
         }
         else if (title.length() > 120) {
