@@ -70,7 +70,12 @@ public class NewProjectController {
         *so that they can be added to project as per
         *manager's choice 
         */
-        for (String name : me.getMaintainers()) {
+        ArrayList<String> maintainers = me.getMaintainers();
+        if (maintainers.size() == 0) {
+            maintainersField.setText("No maintainers to add");
+            return;
+        }    
+        for (String name : maintainers) {
             HBox row = maintainerRow(name);
             displayVbox.getChildren().add(row);
         }
