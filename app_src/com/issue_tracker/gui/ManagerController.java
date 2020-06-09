@@ -72,7 +72,9 @@ public class ManagerController extends MaintainerController implements HasProjec
         centerVbox.getChildren().clear();
         Label label = new Label("Projects");
         label.setMaxWidth(Double.MAX_VALUE);
-        label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
+        label.setMaxHeight(32);
+        label.setStyle("-fx-font-size: 18; -fx-font-weight: bold; "+
+                        "-fx-text-fill: white; -fx-background-color: #222831;");
         centerVbox.getChildren().add(label);
 
         // Button to create a new project
@@ -142,7 +144,9 @@ public class ManagerController extends MaintainerController implements HasProjec
         centerVbox.getChildren().clear();
         Label label = new Label("Maintainers");
         label.setMaxWidth(Double.MAX_VALUE);
-        label.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
+        label.setMaxHeight(32);
+        label.setStyle("-fx-font-size: 18; -fx-font-weight: bold; " + 
+                       "-fx-text-fill: white; -fx-background-color: #222831;");
         centerVbox.getChildren().add(label);
 
         for (String maintainerUname : me.getMaintainers()) {
