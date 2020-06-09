@@ -27,6 +27,7 @@ public class AssignManagerController {
         *@param maintainerName  Uname of maintainer
         */
         this.adminName = adminName;
+        this.maintainerName.setText(maintainerName);
         showManagers(maintainerName);
     }
 
