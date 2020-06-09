@@ -36,7 +36,7 @@
                   <Font name="System Bold" size="25.0" />
                </font>
                <padding>
-                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                </padding>
             </Label>
          </children>
