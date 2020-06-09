@@ -20,6 +20,8 @@ import java.io.File;
 import com.issue_tracker.Manager;
 import com.issue_tracker.Contributor;
 import java.util.Map;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style; 
 
 /**Controller associated with manager.fxml 
 */
@@ -56,8 +58,11 @@ public class ManagerController extends MaintainerController implements HasProjec
             PasswordController cont = loader.getController();
             cont.initialize(contributorUName);
             Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            JMetro jmetro = new JMetro(Style.LIGHT);
+            jmetro.setScene(scene);
             stage.setTitle("Change Password");
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
         }catch(IOException e){

@@ -18,6 +18,8 @@ import com.issue_tracker.Maintainer;
 import com.issue_tracker.Contributor;
 import java.util.Map;
 import java.util.HashMap;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 /**Controller class for maintainer.fxml 
 */
@@ -46,8 +48,11 @@ public class MaintainerController implements HasProjects{
             PasswordController cont = loader.getController();
             cont.initialize(uNameLabel.getText());
             Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            JMetro jmetro = new JMetro(Style.LIGHT);
+            jmetro.setScene(scene);
             stage.setTitle("Change Password");
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
         }catch(IOException e){

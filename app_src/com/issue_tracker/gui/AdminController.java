@@ -16,6 +16,8 @@ import java.io.IOException;
 import com.issue_tracker.Admin;
 import com.issue_tracker.Contributor;
 import com.issue_tracker.Maintainer;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 /**Controller class for admin.fxml
 *Admins can
@@ -46,8 +48,11 @@ public class AdminController {
             PasswordController cont = loader.getController();
             cont.initialize(unameLabel.getText());
             Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            JMetro jmetro = new JMetro(Style.LIGHT);
+            jmetro.setScene(scene);
             stage.setTitle("Change Password");
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
         }catch(IOException e){
