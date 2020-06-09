@@ -36,18 +36,26 @@ public class AddContributorController {
         *shows alert if username is already taken
         */
         String uname = username.getText();
-        if(Contributor.getContributor(uname) != null){
-            Window owner = username.getScene().getWindow();
+        String passwordString = password.getText();
+
+        Window owner = username.getScene().getWindow();
+        if(Contributor.getContributor(uname) != null || uname.equals("admin")){
             AlertHelper.showAlert(Alert.AlertType.WARNING, owner, "Username already taken",
                                  "This Username is already taken!");
             return;
+        }else if(uname.length() < 1 || passwordString.length() < 1){
+             AlertHelper.showAlert(Alert.AlertType.WARNING, owner, "Warning",
+                                 "Required Field(s) empty!");
+            return;
         }
-        String passwordString = HashString.hash(password.getText());
+        
+        passwordString = HashString.hash(passwordString);
+
         if (role.equals("manager")){
-            new Admin().createNewManager(username.getText(), passwordString);
+            new Admin().createNewManager(uname, passwordString);
         }
         else{
-            new Admin().createNewMaintainer(username.getText(), passwordString);
+            new Admin().createNewMaintainer(uname, passwordString);
         }
         // After creation go back to previous screen
         cancel();
