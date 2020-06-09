@@ -65,6 +65,7 @@ public class MaintainerDetailsController {
     public void showAssignedProjects(){
         /**Show projects assigned to a maintainer 
         */
+        projectsVbox.getChildren().clear();
         Maintainer maintainer = (Maintainer) Contributor.getContributor(unameMaintainer);
         for (String projectName : maintainer.getProjects().keySet()) {
             HBox row = assignedProjectsMenuRow(projectName);
