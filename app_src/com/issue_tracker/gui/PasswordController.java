@@ -59,7 +59,7 @@ public class PasswordController {
         }
         else if (currentPassword.equals(newPassword)){
             AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
-                                 "Old password can not be same as New Password!");
+                                 "Old password can not be same as\nNew Password!");
             return;
         }else if (!newPassword.equals(reEnterPassword)){
             AlertHelper.showAlert(Alert.AlertType.WARNING, stage, "Warning",
