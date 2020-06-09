@@ -5,6 +5,8 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -16,15 +18,15 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="2.0" prefWidth="140.0" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="300.0" minHeight="180.0" prefHeight="185.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="98.0" prefHeight="98.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="75.0" minHeight="5.0" prefHeight="75.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="5.0" prefHeight="75.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <TextField fx:id="username" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="300.0" promptText="Username" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
@@ -42,5 +44,10 @@
             <Tooltip text="Enter Password" />
          </tooltip></PasswordField>
       <Button fx:id="loginButton" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#checkCredentials" prefHeight="26.0" prefWidth="300.0" text="Login" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+      <ImageView fitHeight="101.0" fitWidth="363.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <image>
+            <Image url="@../Images/header.png" />
+         </image>
+      </ImageView>
    </children>
 </GridPane>
