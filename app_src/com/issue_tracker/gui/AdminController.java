@@ -242,7 +242,10 @@ public class AdminController {
                 AssignManagerController cont = loader.getController();
                 cont.initialize(unameLabel.getText(), name);
                 Stage stage = new Stage();
-                stage.setScene(new Scene(view));
+                Scene scene = new Scene(view);
+                JMetro jmetro = new JMetro(Style.LIGHT);
+                jmetro.setScene(scene);
+                stage.setScene(scene);
                 stage.setTitle("Issue Tracker");
                 stage.setResizable(false);
                 stage.setOnHidden(event -> {
