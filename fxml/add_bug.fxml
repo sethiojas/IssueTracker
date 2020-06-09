@@ -13,8 +13,8 @@
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.issue_tracker.gui.AddBugController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="203.0" prefWidth="203.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="322.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="300.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="75.0" prefWidth="97.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="-Infinity" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -51,7 +51,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TextArea>
-      <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submit" text="Submit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+      <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submit" prefHeight="26.0" prefWidth="83.0" text="Submit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
