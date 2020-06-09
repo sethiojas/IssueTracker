@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import java.io.File;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 /**Main JavaFX Application 
 */
@@ -19,8 +21,11 @@ public class MainApp extends Application {
         *@throws        Exception 
         */
         GridPane root = FXMLLoader.load(new File("../fxml/login.fxml").toURI().toURL());
+        JMetro jmetro = new JMetro(Style.LIGHT);
+        Scene scene = new Scene(root);
+        jmetro.setScene(scene);
         primaryStage.setTitle("IssueTracker");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
