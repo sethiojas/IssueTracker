@@ -2,6 +2,8 @@
 ![Issue Tracker Logo](https://github.com/sethiojas/IssueTracker/blob/master/Images/header.png "Icon")
 It is exactly what the name suggests. An issue tracker application made in Java utilizing JavaFx, SQLite and JMetro.
 
+![Login](https://github.com/sethiojas/readme_images/blob/master/Issue%20Tracker/login.gif "Login")
+
 ## Table of Contents
 * [Levels of Access](#levels-of-access)
     * [Admin](#admin)
@@ -14,6 +16,8 @@ It is exactly what the name suggests. An issue tracker application made in Java 
 Application provides 3 levels of segregation: Admin, Manager, Maintainer. Each access level has its own set of functions to perform.
 
 ### Admin
+![Admin panel](https://github.com/sethiojas/readme_images/blob/master/Issue%20Tracker/admin-panel.gif "Admin")
+
 Features of Admin Level Access
 *   Ability to create or remove Managers and Maintainers.
 *   Ability to assign Manager to a Maintainer who is on bench.
@@ -26,6 +30,8 @@ There isn't an option to create more Admins. A single Admin account with credent
 is provided in the database, the password for which **can be changed via Password tab**.
 
 ### Manager
+![Manager Panel](https://github.com/sethiojas/readme_images/blob/master/Issue%20Tracker/manager-panel.gif "Manager")
+
 Features of Manager Level Access
 *   View the list of maintainers assigned to you.
 *   Create or remove Projects
@@ -37,6 +43,8 @@ Managers have control over only those Maintainers which are assigned to them.
 Managers cannot create or remove Maintainers unlike Admin.
 
 ### Maintainer
+![Maintainer Panel](https://github.com/sethiojas/readme_images/blob/master/Issue%20Tracker/maintainer-panel.gif "Maintainer")
+
 Lowest in the Hierarchy, Maintainers can create/raise new Issues and close the already existing
 ones.
 
