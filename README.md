@@ -1,6 +1,6 @@
 # Issue Tracker
 ![Issue Tracker Logo](https://github.com/sethiojas/IssueTracker/blob/master/Images/header.png "Icon")
-It is exactly what the name suggests. An issue tracker application made in Java utilizing JavaFx, SQLite and JMetro.
+It is exactly what the name suggests. An issue tracker application made in Java utilizing JavaFx, SQLite, Gluon SceneBuilder and JMetro.
 
 ![Login](https://github.com/sethiojas/readme_images/blob/master/Issue%20Tracker/login.gif "Login")
 
