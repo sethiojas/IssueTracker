@@ -70,7 +70,7 @@ public class Manager extends Contributor implements Serializable {
         }        
     }
 
-    public void removeMaintainersFromProject(String projTitle, ArrayList<String> uNameList) {
+    public void removeMaintainersFromProject(String projTitle, List<String> uNameList) {
         /**Remove maintainers from given project 
         *@param title       title of project from which to remove maintainers from
         *@param uNameList   list of maintainer uname which have to be removed from a project
