@@ -101,7 +101,7 @@ public class Project implements Serializable{
     }
 
     public List<String> getMaintainers(){
-        /**@returns ArrayList of Contributors which have been assigned to this 
+        /**@returns List of Contributors which have been assigned to this 
         *project
         */
         return maintainers;
