@@ -71,7 +71,7 @@ public class NewProjectController {
         *so that they can be added to project as per
         *manager's choice 
         */
-        ArrayList<String> maintainers = me.getMaintainers();
+        List<String> maintainers = me.getMaintainers();
         if (maintainers.size() == 0) {
             maintainersField.setText("No maintainers to add");
             return;
@@ -104,20 +104,20 @@ public class NewProjectController {
         Button add = new Button("+");
         add.setOnAction(e -> {
             maintainers.add(name);
-            maintainersField.setText(ArrayListToString());
+            maintainersField.setText(ListToString());
         });
 
         Button remove = new Button("-");
         remove.setOnAction(e -> {
             maintainers.remove(name);
-            maintainersField.setText(ArrayListToString());
+            maintainersField.setText(ListToString());
         });
 
         root.getChildren().addAll(btn, add, remove);
         return root;
     }
 
-    public String ArrayListToString(){
+    public String ListToString(){
         /**Turn the list of currently selected maintainers into
         *a single string 
         */
