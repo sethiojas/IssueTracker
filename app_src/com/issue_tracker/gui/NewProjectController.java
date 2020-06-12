@@ -13,7 +13,8 @@ import javafx.geometry.Pos;
 import java.io.IOException;
 import java.io.File;
 import java.lang.StringBuilder;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedList;
 import com.issue_tracker.Contributor;
 import com.issue_tracker.Manager;
 
@@ -24,7 +25,7 @@ import com.issue_tracker.Manager;
 public class NewProjectController {
     private String managerUname;
     private Manager me;
-    private ArrayList<String> maintainers = new ArrayList<>();;
+    private List<String> maintainers = new LinkedList<>();
 
     @FXML
     private TextField titleField;
