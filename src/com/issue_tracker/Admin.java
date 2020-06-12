@@ -1,6 +1,7 @@
 package com.issue_tracker;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -103,11 +104,11 @@ public class Admin implements Serializable {
         this.removeMaintainer(uname, null);
     }
 
-    public ArrayList<String> getAllManagers(){
+    public List<String> getAllManagers(){
         /**Get all managers with registered accounts
-        *@returns   ArrayList of uname of all managers 
+        *@returns   List of uname of all managers 
         */
-        ArrayList<String> listManagers = new ArrayList<>();
+        List<String> listManagers = new LinkedList<>();
 
         try{
             String getManagers = "SELECT uname FROM credentials WHERE role=\"manager\"";
@@ -127,11 +128,11 @@ public class Admin implements Serializable {
         }
     }
 
-    public ArrayList<String> getAllOnBench(){
+    public List<String> getAllOnBench(){
         /**Get all on-bench maintainers with registered accounts
-        *@returns ArrayList of uname of all on-bench maintainers 
+        *@returns List of uname of all on-bench maintainers 
         */
-        ArrayList<String> listOnBench = new ArrayList<>();
+        List<String> listOnBench = new LinkedList<>();
 
         try{
             String getOnBench = "SELECT uname FROM contributors WHERE on_bench=\"true\"";
@@ -151,12 +152,12 @@ public class Admin implements Serializable {
         }
     }
 
-    public ArrayList<String> getAllAssigned(){
+    public List<String> getAllAssigned(){
         /**Get unames of all maintainers who are assigned to
         *some manager
-        *@returns ArrayList of uname of assigned maintainers 
+        *@returns List of uname of assigned maintainers 
         */
-        ArrayList<String> listAssigned = new ArrayList<>();
+        List<String> listAssigned = new LinkedList<>();
 
         try{
             String getAssigned = new StringBuilder()
