@@ -2,6 +2,7 @@ package com.issue_tracker;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -16,7 +17,7 @@ public class Project implements Serializable{
     private int projectId;
     final private String projectName;
     private int bugId = 0;
-    protected ArrayList<String> maintainers = new ArrayList<>();
+    protected List<String> maintainers = new ArrayList<>();
 
     public Project(String projectName){
         /**Create a Project object 
@@ -99,7 +100,7 @@ public class Project implements Serializable{
         }
     }
 
-    public ArrayList<String> getMaintainers(){
+    public List<String> getMaintainers(){
         /**@returns ArrayList of Contributors which have been assigned to this 
         *project
         */
@@ -114,7 +115,7 @@ public class Project implements Serializable{
         return projectName.equals(proj.getProjectId());
     }
 
-    public void addMaintainers(ArrayList<String> uNameList){
+    public void addMaintainers(List<String> uNameList){
         /**Add all Contributors in given uname list to list of maintainers
         *of project
         *@param uNameList list of contributors uname*/
