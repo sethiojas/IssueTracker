@@ -15,6 +15,7 @@ import com.issue_tracker.Maintainer;
 import com.issue_tracker.Contributor;
 import com.issue_tracker.Manager;
 import java.util.ArrayList;
+import java.util.List;
 
 /**Show Details about the maintainer which is assigned
 *to manager
@@ -95,7 +96,7 @@ public class MaintainerDetailsController {
         Button remove = new Button("-");
         remove.setOnAction(e ->{
             Manager manager = (Manager) Contributor.getContributor(managerUname);
-            ArrayList<String> maintainersToRemove = new ArrayList<>();
+            List<String> maintainersToRemove = new ArrayList<>();
             maintainersToRemove.add(unameMaintainer);
             manager.removeMaintainersFromProject(projectName ,maintainersToRemove);
             showAssignedProjects();
