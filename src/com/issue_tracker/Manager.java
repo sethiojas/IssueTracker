@@ -1,12 +1,13 @@
 package com.issue_tracker;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.Serializable;
 
 public class Manager extends Contributor implements Serializable {
     
-    private ArrayList<String> maintainers = new ArrayList<>();
+    private List<String> maintainers = new ArrayList<>();
 
     // https://stackoverflow.com/questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 6529685098267757691L;
@@ -53,7 +54,7 @@ public class Manager extends Contributor implements Serializable {
         updateContributor();
     }
     
-    public void addMaintainersToProject(String title, ArrayList<String> uNameList){
+    public void addMaintainersToProject(String title, List<String> uNameList){
         /**Assign given project to the given list of maintainers 
         *@param title       title of project to which to assign maintainers
         *@param uNameList   list of maintainer uname which have to be assigned to a project
@@ -99,7 +100,7 @@ public class Manager extends Contributor implements Serializable {
         updateContributor();
     }
 
-    public ArrayList<String> getMaintainers(){
+    public List<String> getMaintainers(){
         /**@returns list of all maintainers in manager's maintainer list 
         */
         return maintainers;
