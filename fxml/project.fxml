@@ -16,6 +16,9 @@
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </Label>
    </top>
    <center>
@@ -44,7 +47,7 @@
       </ScrollPane>
    </center>
    <left>
-      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="195.0" minWidth="80.0" prefHeight="306.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="195.0" minWidth="80.0" prefHeight="306.0" prefWidth="130.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="maintainerVbox" minWidth="80.0" prefHeight="286.0" prefWidth="128.0" spacing="3.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css">
                <children>
@@ -55,10 +58,13 @@
       </ScrollPane>
    </left>
    <bottom>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="524.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="524.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backButton" layoutX="29.0" layoutY="1.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="62.0" text="Back" />
+            <Button fx:id="backButton" layoutX="29.0" layoutY="1.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="62.0" text="Back" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="7.0" />
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </AnchorPane>
    </bottom>
 </BorderPane>
