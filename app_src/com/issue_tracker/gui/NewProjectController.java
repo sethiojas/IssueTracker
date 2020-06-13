@@ -105,12 +105,14 @@ public class NewProjectController {
         add.setOnAction(e -> {
             maintainers.add(name);
             maintainersField.setText(ListToString());
+            add.setDisable(true);
         });
 
         Button remove = new Button("-");
         remove.setOnAction(e -> {
             maintainers.remove(name);
             maintainersField.setText(ListToString());
+            add.setDisable(false);
         });
 
         root.getChildren().addAll(btn, add, remove);
