@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.LinkedList;
 import com.issue_tracker.Contributor;
 import com.issue_tracker.Manager;
+import javafx.scene.control.Alert;
 
 /**Class handles creation of new project 
 *Controller for new_project.fxml
@@ -44,8 +45,18 @@ public class NewProjectController {
         /**Submit details, create project and go back
         *to previous screen 
         */
-        me.createProject(titleField.getText());
-        me.addMaintainersToProject(titleField.getText(), maintainers);
+
+        // Show alert if title is blank
+        String title = titleField.getText();
+        if(title.length() < 1){
+            AlertHelper.showAlert(Alert.AlertType.WARNING, titleField.getScene().getWindow()
+                                , "Empty Title"
+                                , "Title cannot be empty!");
+            return;
+        }
+
+        me.createProject(title);
+        me.addMaintainersToProject(title, maintainers);
         // to go back to previous screen
         cancel();
     }
