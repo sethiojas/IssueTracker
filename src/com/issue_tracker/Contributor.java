@@ -17,6 +17,9 @@ import java.sql.SQLException;
 public abstract class Contributor implements Serializable{
     private static final long serialVersionUID = 6529685098267757696L;
     protected static String dbPath = "jdbc:sqlite:../issueTracker.db";
+
+    // For caching
+    private static HashMap<String, Contributor> contributors = new HashMap<>();
     
     // ********************************************************************************
     // Code between the star lines is only for the purpose of inheritance
@@ -56,6 +59,10 @@ public abstract class Contributor implements Serializable{
     public void saveContributor(){
         /**Save the contributor into database 
         */
+
+        // cache object
+        contributors.put(this.getUname(), this);
+        
         String saveContributor = "INSERT INTO contributors VALUES(?, ?, ?)";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -77,6 +84,10 @@ public abstract class Contributor implements Serializable{
     public void updateContributor(){
         /**Update the contributor's entry in database 
         */
+
+        // cache object
+        contributors.put(this.getUname(), this);
+
         String update = "UPDATE contributors SET object=? WHERE uname=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -97,6 +108,10 @@ public abstract class Contributor implements Serializable{
     public static void removeContributor(String uname){
         /**Delete contributor from database 
         */
+
+        // remove object from cache
+        contributors.remove(uname);
+
         String delete = "DELETE FROM contributors WHERE uname=?";
         try{
             Connection conn = DriverManager.getConnection(dbPath);
@@ -113,6 +128,10 @@ public abstract class Contributor implements Serializable{
         /**Retrieve a contributor from database 
         *Returns null if there is no correspond data
         */
+
+        // Return object from cache, if present
+        if(contributors.containsKey(uname)) return contributors.get(uname);
+
         String getContributor = "SELECT object FROM contributors WHERE uname=?";
         Contributor m = null;
         try{
