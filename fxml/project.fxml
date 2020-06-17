@@ -47,24 +47,23 @@
       </ScrollPane>
    </center>
    <left>
-      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="195.0" minWidth="80.0" prefHeight="306.0" prefWidth="130.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css" BorderPane.alignment="CENTER">
-         <content>
-            <VBox fx:id="maintainerVbox" minWidth="80.0" prefHeight="286.0" prefWidth="128.0" spacing="3.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="153.0" text="Maintainers" underline="true" />
-               </children>
-            </VBox>
-         </content>
-      </ScrollPane>
-   </left>
-   <bottom>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="524.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css" BorderPane.alignment="CENTER">
+      <VBox styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backButton" layoutX="29.0" layoutY="1.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="62.0" text="Back" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="7.0" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="195.0" minWidth="80.0" prefHeight="306.0" prefWidth="130.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css">
+               <content>
+                  <VBox fx:id="maintainerVbox" minWidth="80.0" prefHeight="286.0" prefWidth="128.0" spacing="3.0" styleClass="sidebar" stylesheets="@../style/borderPaneStyle.css">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="153.0" text="Maintainers" underline="true" />
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <AnchorPane prefHeight="107.0" prefWidth="7.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="62.0" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
+               </children>
+            </AnchorPane>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </AnchorPane>
-   </bottom>
+      </VBox>
+   </left>
 </BorderPane>
