@@ -9,15 +9,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**Abstract class defining common features of contributors
-*Contributor is extended by two classes Maintainer and Manager 
+*Contributor is extended by two classes Maintainer and Manager
+*This class mostly deals with database CRUD operations
+*performed upon Maintainer and Manager.
 */
 
 public abstract class Contributor implements Serializable{
     private static final long serialVersionUID = 6529685098267757696L;
-    protected String uName;
-    protected HashMap<String, Integer> projects = new HashMap<>();
     protected static String dbPath = "jdbc:sqlite:../issueTracker.db";
     
+    // ********************************************************************************
+    // Code between the star lines is only for the purpose of inheritance
+    // by the child classes. These have nothing to do with CRUD operations
+    // which this class performs
+
+    protected String uName;
+    protected HashMap<String, Integer> projects = new HashMap<>();
+       
     public String getUname(){
         /**@returns uname of contributor 
         */
@@ -41,6 +49,9 @@ public abstract class Contributor implements Serializable{
     public abstract void addProject(String title, int id);
     // remove project from project list of a contributor
     public abstract void removeProject(String title);
+
+    // ********************************************************************************
+   
 
     public void saveContributor(){
         /**Save the contributor into database 
