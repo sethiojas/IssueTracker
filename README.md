@@ -13,7 +13,7 @@ It is exactly what the name suggests. An issue tracker application made in Java 
 * [Directory Structure](#directory-structure)
 
 ## Levels Of Access
-Application provides 3 levels of segregation: Admin, Manager, Maintainer. Each access level has its own set of functions to perform.
+Application provides 3 levels of access: Admin, Manager, Maintainer. Each access level has its own set of functions to perform.
 
 ### Admin
 ![Admin panel](https://github.com/sethiojas/readme_images/blob/master/Issue%20Tracker/admin-panel.gif "Admin")
@@ -40,7 +40,7 @@ Features of Manager Level Access
     that maintainer from project.
 
 Managers have control over only those Maintainers which are assigned to them.
-Managers cannot create or remove Maintainers unlike Admin.
+Managers cannot create or remove Maintainers like Admin.
 
 ### Maintainer
 ![Maintainer Panel](https://github.com/sethiojas/readme_images/blob/master/Issue%20Tracker/maintainer-panel.gif "Maintainer")
