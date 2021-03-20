@@ -112,7 +112,7 @@ public class Project implements Serializable{
         *@param proj    project object to compare with
         *@returns       boolean based on equality of projects
         */
-        return projectName.equals(proj.getProjectId());
+        return projectId.equals(proj.getProjectId());
     }
 
     public void addMaintainers(List<String> uNameList){
