@@ -19,6 +19,7 @@ public abstract class Contributor implements Serializable{
     protected static String dbPath = "jdbc:sqlite:../issueTracker.db";
 
     // For caching
+    // HashMap<contributor uname, contributor object>
     private static HashMap<String, Contributor> contributors = new HashMap<>();
     
     // ********************************************************************************
@@ -27,6 +28,8 @@ public abstract class Contributor implements Serializable{
     // which this class performs
 
     protected String uName;
+    
+    //HashMap<project title, project ID>
     protected HashMap<String, Integer> projects = new HashMap<>();
        
     public String getUname(){
