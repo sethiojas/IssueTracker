@@ -85,7 +85,7 @@ public abstract class Contributor implements Serializable{
     }
 
     public void updateContributor(){
-        /**Update the contributor's entry in database 
+        /**Update the contributor object in database 
         */
 
         // cache object
@@ -160,7 +160,7 @@ public abstract class Contributor implements Serializable{
     }
 
     public static void setOnBench(String uname, String value){
-        /**Change the on-bench value associated with contributor
+        /**Change the on-bench value of a contributor in database
         */
         String onBench = "UPDATE contributors SET on_bench=? WHERE uname=?";
         try{
